@@ -1,0 +1,66 @@
+{
+  "name": "LongerLisCombat",
+  "version": "0.1",
+  "styleFileList": [],
+  "scriptFileList": [],
+  "tweeFileList": [
+    "LongerLisCombat_Widgets.twee"
+  ],
+  "imgFileList": [],
+  "additionFile": [
+    "readme.md"
+  ],
+  "addonPlugin": [
+    {
+      "modName": "TweeReplacer",
+      "addonName": "TweeReplacerAddon",
+      "modVersion": "1.0.0",
+      "params": [
+        {
+          "passage": "Widgets Settings",
+          "findString": "<div id=\"settingsPregnancy\">",
+          "replace": "<div id=\"settingsLongerCombat\"><<subsectionSettingsTabButton \"战斗AP设置\" \"longercombat\">></div>\n<div id=\"settingsPregnancy\">"
+        },
+        {
+          "passage": "Widgets Settings",
+          "findString": "<<pregnancySettings>><</replace>>",
+          "replace": "<<pregnancySettings>><</replace>><<case \"longercombatSettings\">><<set _subsection to \"longercombat\">><<replace #subsectionDiv>><<longercombatSettings>><</replace>>"
+        },
+        {
+          "passage": "Widgets NPCs",
+          "findString": "<<wetnessCalculate>>",
+          "replace": "<<wetnessCalculate>>\n<<longercombat_ApCulculate>>"
+        },
+        {
+          "passage": "Widgets Effects",
+          "findString": "<<if $newVersionData>>",
+          "replace": "<<longercombat_ApEdit>>\n<<if $newVersionData>>"
+        }
+      ]
+    },
+    {
+      "modName": "ReplacePatcher",
+      "addonName": "ReplacePatcherAddon",
+      "modVersion": "1.0.0",
+      "params": {
+        "js": [
+          {
+            "from": "if (V.kylarwatched) V.kylarwatchedtimer--;",
+            "to": "if(C.npc.Eden.init===1 && V.longercombat.Eden.hourlust !== undefined)fragment.append(wikifier(\"npcincr\", \"Eden\",\"lust\",V.longercombat.Eden.hourlust));\nif (V.kylarwatched) V.kylarwatchedtimer--;",
+            "fileName": "time.js"
+          }
+        ]
+      }
+    }
+  ],
+  "dependenceInfo": [
+    {
+      "modName": "TweeReplacer",
+      "version": ">=1.0.0"
+    },
+    {
+      "modName": "ReplacePatcher",
+      "version": ">=1.0.0"
+    }
+  ]
+}
