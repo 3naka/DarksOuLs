@@ -1,2 +1,3 @@
 # DarksOuLs
-我打不来包啊！！！
+不提供MOD使用教学
+Mod包在release中自取
