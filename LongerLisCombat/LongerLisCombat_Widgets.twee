@@ -146,6 +146,7 @@
 <<set $longercombat_finalAP to undefined>>
 <<set $longercombat_finalHP to undefined>>
 <<if $longercombat isnot undefined and $enemyno gt 0 and $npc.length gt 0>>
+	<<set _edit to false>>
 	<<set _resultAp to 0>>
 	<<set _resultHp to [0,0,0,0,0,0]>>
 	<<for _i to 0; _i lt $enemyno; _i++>>
@@ -175,12 +176,13 @@
 					<</if>>								
 					<<set _resultAp += _ap>>
 					<<set _resultAp -= 500>>
+					<<set _edit to true>>
 					<<break>>
 			<</if>>
 		<</for>>
 		<<set _resultAp += 500>>
 	<</for>>
-	<<if _resultAp gt $enemyarousalmax>>
+	<<if _edit and _resultAp gt $enemyarousalmax>>
 		<<set $longercombat_finalAP to _resultAp>>
 	<</if>>
 	<<for _i to 0; _i lt $enemyno; _i++>>
