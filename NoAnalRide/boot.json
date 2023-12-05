@@ -1,0 +1,66 @@
+{
+    "name": "NoAnalRide",
+    "version": "0.1",
+    "styleFileList": [
+    ],
+    "scriptFileList_earlyload": [
+    ],
+    "scriptFileList_inject_early": [
+    ],
+    "scriptFileList_preload": [
+    ],
+    "scriptFileList": [
+    ],
+    "tweeFileList": [
+      
+    ],
+    "imgFileList": [
+
+    ],
+    "additionFile": [
+     
+      "readme.md"
+     
+    ],
+    "addonPlugin": [
+      {
+        "modName": "TweeReplacer",
+        "addonName": "TweeReplacerAddon",
+        "modVersion": "1.0.0",
+        "params": [
+         
+          {
+            "passage": "Widgets Settings",
+            "findString": "<<checkbox \"$analdisable\"",
+            "replace": "<<checkbox \"$analdisablegiving\" \"t\" \"f\" autocheck>> 启用肛交-主动 </label><label><<checkbox \"$analdisable\""
+          },
+          {
+            "passage": "Widgets Combat Man-Combat",
+            "findString": "<<if $analdisable is \"f\" and $consensual is 1>>",
+            "replace": "<<if $analdisablegiving is \"f\" and $consensual is 1>>"
+          },
+          {
+            "passage": "Widgets Combat Man-Combat",
+            "findString": "$penisuse is 0 and $analdisable is",
+            "replace": "$penisuse is 0 and $analdisablegiving is"
+          },
+          {
+            "passage": "Widgets Cabin",
+            "findString": "$analdisable",
+            "replace": "$analdisablegiving"
+          },
+          {
+            "passage": "Eden Prey Sex Finish",
+            "findString": "$analdisable is \"f\")) and",
+            "replace": "$analdisablegiving is \"f\")) or"
+          }
+        ]
+      }
+    ],
+    "dependenceInfo": [
+      { 
+        "modName": "TweeReplacer",
+        "version": ">=1.0.0"
+      }
+    ]
+  }
