@@ -1,8 +1,10 @@
 {
   "name": "LongerLisCombat",
-  "version": "0.1",
+  "version": "0.2",
   "styleFileList": [],
-  "scriptFileList": [],
+  "scriptFileList": [
+    "LongerLisCombat_Functions.js"
+  ],
   "tweeFileList": [
     "LongerLisCombat_Widgets.twee"
   ],
@@ -19,22 +21,22 @@
         {
           "passage": "Widgets Settings",
           "findString": "<div id=\"settingsPregnancy\">",
-          "replace": "<div id=\"settingsLongerCombat\"><<subsectionSettingsTabButton \"战斗AP设置\" \"longercombat\">></div>\n<div id=\"settingsPregnancy\">"
+          "replace": "<div id=\"settingsLongerCombat\"><<subsectionSettingsTabButton \"战斗AP设置\" \"longerliscombat\">></div>\n<div id=\"settingsPregnancy\">"
         },
         {
           "passage": "Widgets Settings",
           "findString": "<<pregnancySettings>><</replace>>",
-          "replace": "<<pregnancySettings>><</replace>><<case \"longercombatSettings\">><<set _subsection to \"longercombat\">><<replace #subsectionDiv>><<longercombatSettings>><</replace>>"
+          "replace": "<<pregnancySettings>><</replace>><<case \"longerliscombatSettings\">><<set _subsection to \"longerliscombat\">><<replace #subsectionDiv>><<LongerLisCombatSettings>><</replace>>"
         },
         {
           "passage": "Widgets NPCs",
           "findString": "<<wetnessCalculate>>",
-          "replace": "<<wetnessCalculate>>\n<<longercombat_ApCulculate>>"
+          "replace": "<<wetnessCalculate>>\n<<LongerLisCombat_StateCulculate>>"
         },
         {
-          "passage": "Widgets Effects",
-          "findString": "<<if $newVersionData>>",
-          "replace": "<<longercombat_ApEdit>>\n<<if $newVersionData>>"
+          "passage": "Widgets Effects Man",
+          "findString": "<<pain -0.25>>",
+          "replace": "<<LongerLisCombat_StateEdit>>\n<<pain -0.25>>"
         }
       ]
     },
@@ -46,7 +48,7 @@
         "js": [
           {
             "from": "if (V.kylarwatched) V.kylarwatchedtimer--;",
-            "to": "if(C.npc.Eden.init===1 && V.longercombat.Eden.hourlust !== undefined)fragment.append(wikifier(\"npcincr\", \"Eden\",\"lust\",V.longercombat.Eden.hourlust));\nif (V.kylarwatched) V.kylarwatchedtimer--;",
+            "to": "if(C.npc.Eden.init===1 && V.longercombat!==undefined && V.longercombat.Eden.hourlust !== undefined) V.NPCName[6].lust += V.longercombat.Eden.hourlust;\nif (V.kylarwatched) V.kylarwatchedtimer--;",
             "fileName": "time.js"
           }
         ]
@@ -56,11 +58,11 @@
   "dependenceInfo": [
     {
       "modName": "TweeReplacer",
-      "version": ">=1.0.0"
+      "version": "^1.0.0"
     },
     {
       "modName": "ReplacePatcher",
-      "version": ">=1.0.0"
+      "version": "^1.0.0"
     }
   ]
 }

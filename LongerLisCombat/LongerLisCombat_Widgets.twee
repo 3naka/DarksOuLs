@@ -1,15 +1,16 @@
 <!-- 为选项新建个菜单，key就叫longercombat  -->
+<!-- 为什么这都能和其他MOD撞车啊，不管了，真车祸现场再说(还是全改了)  -->
+<!-- 但是变量名不能再改，真是头秃  -->
 <!-- <<widget "allSettings">> 这里需要追加分页按钮 -->
 <!-- <<widget "displaySubsection">> 这里需要追加切页代码 -->
-<!-- 在进菜单的时候初始化数据过于懒狗？但是更合适的地方好像也没有了……-->
+<!-- V0.2：我服了，检测变量的位置到底是什么鬼位置啊，还是统一开菜单检测吧-->
 :: Widgets LongerLisCombat [widget]
-<<widget "longercombatSettings">>
-<<if $longercombat is undefined>>
-		<<set $longercombat to {}>>
-<</if>>
+<<widget "LongerLisCombatSettings">>
+<!-- V0.2：进入菜单时进行数据检测，对全部变量只进行一次-->
+<<LongerLisCombatSettings_SettingsInit>>
+<<LongerLisCombatSettings_SettingsCheck>>
 <div class="solidBorderContainer settings-container">	
 <div class="settingsGrid">
-<<longercombatSettings_SettingsCheck "Eden">>
 <div class="settingsToggleItemWide">	
 		<span class="gold">伊甸</span><br>
 		<span class="small-description">自愿AP：</span>
@@ -18,16 +19,15 @@
 				<<numberslider "$longercombat.Eden.apnc" $longercombat.Eden.apnc 500 20000 100>>	
 		<span class="small-description">HP：</span>
 				<<numberslider "$longercombat.Eden.hp" $longercombat.Eden.hp 600 20000 100>>
-		<span class="small-description">神秘强化器：</span><mouse class="tooltip linkBlue">(?)<span>别太离谱了，伊甸厨！</span></mouse>
+		<span class="small-description">神秘强化装置：</span><mouse class="tooltip linkBlue">(?)<span>好神秘哦！</span></mouse>
 				<<numberslider "$longercombat.Eden.hourlust" $longercombat.Eden.hourlust 0 100 1>>		
 		<hr style="border-top:1px solid var(--700)">
 		<label>
 			<<checkbox "$longercombat_EdenRingMode" false true autocheck>>
-			<mouse class="tooltip red">伊甸园法环模式<span>启用此模式后，伊甸的HP与AP将额外X1000倍。</span></mouse>			
+			<mouse class="tooltip red">伊甸园法环模式<span>启用此模式后，伊甸的HP和AP将额外X1000倍。非自愿战时伊甸将进入激昂状态。</span></mouse>			
 		</label>
 </div>
 
-<<longercombatSettings_SettingsCheck "Avery">>
 <div class="settingsToggleItem">			
 		<span class="gold">艾弗里</span><br>		
 		<span class="small-description">自愿AP：</span>	
@@ -36,7 +36,6 @@
 				<<numberslider "$longercombat.Avery.apnc" $longercombat.Avery.apnc 500 20000 100>>
 </div>
 
-<<longercombatSettings_SettingsCheck "Kylar">>
 <div class="settingsToggleItem">		
 				<span class="gold">凯拉尔</span><br>	
 		<span class="small-description">自愿AP：</span>	
@@ -45,7 +44,6 @@
 				<<numberslider "$longercombat.Kylar.apnc" $longercombat.Kylar.apnc 500 20000 100>>
 </div>
 
-<<longercombatSettings_SettingsCheck "Robin">>
 <div class="settingsToggleItem">		
 				<span class="gold">罗宾</span><br>	
 		<span class="small-description">自愿AP：</span>	
@@ -54,7 +52,6 @@
 				<<numberslider "$longercombat.Robin.apnc" $longercombat.Robin.apnc 500 20000 100>>
 </div>
 
-<<longercombatSettings_SettingsCheck "Whitney">>
 <div class="settingsToggleItem">		
 				<span class="gold">惠特尼</span><br>	
 		<span class="small-description">自愿AP：</span>	
@@ -63,7 +60,6 @@
 				<<numberslider "$longercombat.Whitney.apnc" $longercombat.Whitney.apnc 500 20000 100>>
 </div>
 
-<<longercombatSettings_SettingsCheck "Alex">>
 <div class="settingsToggleItem">		
 				<span class="gold">艾利克斯</span><br>	
 		<span class="small-description">自愿AP：</span>	
@@ -72,7 +68,6 @@
 				<<numberslider "$longercombat.Alex.apnc" $longercombat.Alex.apnc 500 20000 100>>
 </div>
 
-<<longercombatSettings_SettingsCheck "Sydney">>
 <div class="settingsToggleItem">		
 				<span class="gold">悉尼</span><br>
 		<span class="small-description">自愿AP：</span>	
@@ -81,7 +76,6 @@
 				<<numberslider "$longercombat.Sydney.apnc" $longercombat.Sydney.apnc 500 20000 100>>
 </div>
 
-<<longercombatSettings_SettingsCheck "Wolf">>
 <div class="settingsToggleItem">		
 				<span class="gold">黑狼</span><br>	
 		<span class="small-description">自愿AP：</span>	
@@ -90,7 +84,6 @@
 				<<numberslider "$longercombat.Wolf.apnc" $longercombat.Wolf.apnc 500 20000 100>>
 </div>
 
-<<longercombatSettings_SettingsCheck "Hawk">>
 <div class="settingsToggleItem">		
 				<span class="gold">巨鹰</span><br>
 		<span class="small-description">自愿AP：</span>	
@@ -103,117 +96,62 @@
 
 <</widget>>
 
-<!--检测变量是否正确，以NPC为单位，_args[0]是NPC的名字-->
-<<widget "longercombatSettings_SettingsCheck">>
-	<!--只给伊甸初始化hP和hourlust-->
-	<<if $longercombat[_args[0]] is undefined>>
-		<<if _args[0] is "Eden">>
-			<<set $longercombat[_args[0]] to {"fullDescription":"Eden","ap":500,"apnc":500,"hp":600,"hourlust":0}>>
-		<<else>>
-			<<set $longercombat[_args[0]] to {"fullDescription":_args[0],"ap":500,"apnc":500}>>
-			<<if _args[0] is "Wolf">>
-				<<set $longercombat[_args[0]].fullDescription to "Black Wolf">>
-			<<elseif _args[0] is "Hawk">>
-				<<set $longercombat[_args[0]].fullDescription to "Great Hawk">>
-			<</if>>
-		<</if>>
-	<<else>>
-	<!--检测数据未定义或超过上限的情况-->
-		<<if _args[0] is "Eden">>
-			<<if $longercombat[_args[0]].hp is undefined or $longercombat[_args[0]].hp lt 600 or $longercombat[_args[0]].hp gt 20000>>
-				<<set $longercombat[_args[0]].hp to 600>>
-			<</if>>
-			<<if $longercombat[_args[0]].hourlust is undefined or $longercombat[_args[0]].hourlust lt 0 or $longercombat[_args[0]].hourlust gt 100>>
-				<<set $longercombat[_args[0]].hourlust to 0>>
-			<</if>>
-		<</if>>
-			<<if $longercombat[_args[0]].ap is undefined or $longercombat[_args[0]].ap lt 500 or $longercombat[_args[0]].ap gt 20000>>
-				<<set $longercombat[_args[0]].ap to 500>>
-			<</if>>
-			<<if $longercombat[_args[0]].apnc is undefined or $longercombat[_args[0]].apnc lt 500 or $longercombat[_args[0]].apnc gt 20000>>
-				<<set $longercombat[_args[0]].apnc to 500>>
-			<</if>>
-	<</if>>
-<</widget>>
+<!--V0.2：进行数据初始化-->
+<<widget "LongerLisCombatSettings_SettingsInit">>
 
+<<if $longercombat is undefined>>
+		<<set $longercombat to {
+			Eden:{
+			fullDescription:"Eden",
+			ap: 500,
+			apnc: 500,
+			hp: 600,
+			hourlust:0,
+		},
+			Wolf:{
+			fullDescription:"Black Wolf",
+			ap: 500,
+			apnc: 500,
+		},
+			Hawk:{
+			fullDescription:"Great Hawk",
+			ap: 500,
+			apnc: 500,
+		},
+			Avery:{
+			fullDescription:"Avery",
+			ap: 500,
+			apnc: 500,
+		},
+			Sydney:{
+			fullDescription:"Sydney",
+			ap: 500,
+			apnc: 500,
+		},
+			Alex:{
+			fullDescription:"Alex",
+			ap: 500,
+			apnc: 500,
+		},
+			Whitney:{
+			fullDescription:"Whitney",
+			ap: 500,
+			apnc: 500,
+		},
+			Robin:{
+			fullDescription:"Robin",
+			ap: 500,
+			apnc: 500,
+		},
+			Kylar:{
+			fullDescription:"AKylar",
+			ap: 500,
+			apnc: 500,
+		}
 
-<!--略微修改一下ap增加规则：现在会依次判定所有NPC并修改AP上限-->
-<!--最后决定在combatinit里面计算出ap和hp修改情况，再摔杯为号丢到effects里面去进行修改。真是惊了，这辈子没见过这么口袋的宏-->
-<!--希望effects不是个战斗中反复调用的宏罢，否则不如丢其他的了-->
-<!--比较麻烦的是伊甸的血量，必须精确判断出这群人里谁是伊甸，有几个伊甸-->
-<!--到底是谁发明的多p言灵啊啊啊啊啊！！！！！-->
-<<widget "longercombat_ApCulculate">>
-<<set $longercombat_finalAP to undefined>>
-<<set $longercombat_finalHP to undefined>>
-<<if $longercombat isnot undefined and $enemyno gt 0 and $npc.length gt 0>>
-	<<set _edit to false>>
-	<<set _resultAp to 0>>
-	<<set _resultHp to [0,0,0,0,0,0]>>
-	<<for _i to 0; _i lt $enemyno; _i++>>
-		<<for _obj range $longercombat>>
-			<<if $NPCList[_i].fullDescription is _obj.fullDescription and _obj.ap isnot undefined and _obj.apnc is not undefined>>			
-					<<if $trueconsensual is 1>>		
-						<<set _ap to _obj.ap>>
-					<<else>>
-						<<set _ap to _obj.apnc>>
-					<</if>>
-					<<if _ap lt 500>>
-						<<set _ap to 500>>
-					<</if>>
-					<<if $NPCList[_i].fullDescription is "Eden">>
-						<<if $longercombat_EdenRingMode>>
-							<<set _ap *=1000 >>
-						<</if>>	
-						<<if $longercombat.Eden.hp isnot undefined>>
-							<<set _hp to $longercombat.Eden.hp>>
-							<<if $longercombat_EdenRingMode>>
-							<<set _hp *=1000 >>
-							<</if>>	
-							<<if _hp gt 600>>
-								<<set _resultHp[_i] to _hp>>
-							<</if>>
-						<</if>>
-					<</if>>								
-					<<set _resultAp += _ap>>
-					<<set _resultAp -= 500>>
-					<<set _edit to true>>
-					<<break>>
-			<</if>>
-		<</for>>
-		<<set _resultAp += 500>>
-	<</for>>
-	<<if _edit and _resultAp gt $enemyarousalmax>>
-		<<set $longercombat_finalAP to _resultAp>>
-	<</if>>
-	<<for _i to 0; _i lt $enemyno; _i++>>
-		<<if _resultHp[_i] gt 0 and _resultHp[_i] gt $NPCList[_i].health>>
-			<<set $longercombat_finalHP to _resultHp>>
-			<<break>>
-		<</if>>
-	<</for>>
+		}>>
 <</if>>
 <</widget>>
 
-<!--朴实无华的ap修改-->
-<<widget "longercombat_ApEdit">>
-	<<if $longercombat_finalAP isnot undefined>>
-		<<set $enemyarousalmax to $longercombat_finalAP>>
-		<<set $longercombat_finalAP to undefined>>
-	<</if>>
-	<<if $longercombat_finalHP isnot undefined>>
-		<<set _sum to 0>>
-		<<for _i to 0; _i lt $enemyno; _i++>>
-			<<if $longercombat_finalHP[_i] gt 0>>
-				<<set $NPCList[_i].healthmax to $longercombat_finalHP[_i]>>
-				<<set $NPCList[_i].health to $longercombat_finalHP[_i]>>
-				<<set _sum += $longercombat_finalHP[_i]>>
-			<<else>>
-				<<set _sum += $NPCList[_i].health>>
-			<</if>>			
-		<</for>>
-		<<set $enemyhealthmax to _sum>>
-		<<set $enemyhealth to _sum>>
-		<<set $longercombat_finalHP to undefined>>
-	<</if>>
-<</widget>>	
+
 

@@ -6,7 +6,7 @@
 * 打包好的MOD请到release文件夹中自取。
 ______
 ### MOD清单
-##### LongerLisCombat：中文名待定
+##### LongerLisCombat：中文名待定（V0.2）
 * 简单粗暴的提高Li们的持久力。
 * 允许在游戏设置中为每个Li单独设置持久力。
 * 注意：尽管功能相似，和LongerCombat不是同一个MOD。
