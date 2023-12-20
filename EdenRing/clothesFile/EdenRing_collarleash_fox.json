@@ -1,0 +1,32 @@
+[
+  {
+    "index": 114514,
+    "name": "Eden's collar for fox (with leash)",
+    "name_cap": "Eden's collar for fox (with leash)", "cn_name_cap": "给狐狸的项圈（附栓绳）",
+    "variable": "EdenRing_collarleash_fox",
+    "integrity": 100,
+    "integrity_max": 100,
+    "fabric_strength": 20,
+    "reveal": 1000,
+    "word": "n",
+    "plural": 0,
+    "colour": 0,
+    "colour_options": [],
+    "type": ["fetish","leash","eerie"],
+    "gender": "n",
+    "femininity": 0,
+    "warmth": 0,
+    "cost": 2000000,
+    "description": "瞧瞧你的耳朵和尾巴，你绝对是<<nnpc_title \"Eden\">>有生以来的最棒的猎物！项圈需要特殊工具才能解锁，但或许你并没有那么在意？",
+    "shop": ["forest"],
+    "collared": 1,
+    "accessory": 1,
+    "accessory_colour": 0,
+    "accessory_colour_options": [],
+    "cursed": 1,
+    "location": 0,
+    "iconFile": "EdenRing_collarleash_fox_icon.png",
+    "accIcon": 0,
+    "EdenRingType": "fox"
+  }
+]

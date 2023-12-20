@@ -110,6 +110,7 @@ function LongerLisCombat_StateEdit(){
         {
             //关于激昂伊甸：在十分愤怒的情况下十分愤怒(啊？)
             //因为战斗开始前必然会消掉这个flag,所以留着也没差啦……但稳妥起见，还是用完就消掉吧
+            //希望能正常吧，我被这70wAP搞得头秃，到底都是什么人在玩伊甸园法环啊！
             V.enemyanger = 200;
             if(V.enemyarousal >= V.enemyarousalmax)
             V.longercombat_EdenAG = false;

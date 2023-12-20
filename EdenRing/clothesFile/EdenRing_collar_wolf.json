@@ -1,0 +1,32 @@
+[
+  {
+    "index": 114233,
+    "name": "Eden's collar for good dog",
+    "name_cap": "Eden's collar good dog", "cn_name_cap": "给好孩子的项圈",
+    "variable": "EdenRing_collar_wolf",
+    "integrity": 100,
+    "integrity_max": 100,
+    "fabric_strength": 20,
+    "reveal": 1000,
+    "word": "n",
+    "plural": 0,
+    "colour": 0,
+    "colour_options": [],
+    "type": ["fetish","eerie"],
+    "gender": "n",
+    "femininity": 0,
+    "warmth": 0,
+    "cost": 2000000,
+    "description": "给最好的<<girl>>的最好的项圈。需要特殊工具才能解锁，但摘下来可就不能当好<<girl>>了！",
+    "shop": ["forest"],
+    "collared": 1,
+    "accessory": 0,
+    "accessory_colour": 0,
+    "accessory_colour_options": [],
+    "cursed": 1,
+    "location": 0,
+    "iconFile": "EdenRing_collar_wolf_icon.png",
+    "accIcon": 0,
+    "EdenRingType": "wolf"
+  }
+]

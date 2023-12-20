@@ -1,0 +1,114 @@
+/* 发现一个严肃问题：在门外找伊甸和门里面找伊甸，是两张passage。
+……确实是非常大力飞砖的实现方式。这边测试就不要太细腻了，直接在屋外测就可以了。*/
+/*<<edenicon "collar">><<link [[要求做项圈测试|EdenRing Collar Test]]>><</link>><br>*/
+:: EdenRing Collar Test
+/* eden is already generated on passages that lead here
+<<npc Eden>><<person1>>*/
+“我要项圈。”你说。
+<br>
+“想要项圈吗，想要就闭上眼睛。”伊甸把手伸进裤兜。
+<br><br>
+你闭上眼睛，小声说道：
+<br><br>
+<<link [[我要基础款项圈|EdenRing Collar Test2]]>><<set $phase to 0>><</link>><br>
+<<link [[我要猫猫款项圈|EdenRing Collar Test2]]>><<set $phase to 1>><</link>><br>
+<<link [[我要牛牛款项圈|EdenRing Collar Test2]]>><<set $phase to 2>><</link>><br>
+<<link [[我要狐狐款项圈|EdenRing Collar Test2]]>><<set $phase to 3>><</link>><br>
+<<link [[我要小鸟款项圈|EdenRing Collar Test2]]>><<set $phase to 4>><</link>><br>
+<<link [[我要狼狼款项圈|EdenRing Collar Test2]]>><<set $phase to 5>><</link>><br>
+<<if $worn.neck.EdenRingType>>
+	<<link [[我要切换栓绳形态|EdenRing Collar Test4]]>><</link>><br>
+<</if>>
+<<link [[不要了，告辞|EdenRing Collar Test3]]>><</link>><br>
+
+:: EdenRing Collar Test2
+<<switch $phase>>
+	<<case 0>><<set _EdenRing_EdenRingTF to "frist">>
+	<<case 1>><<set _EdenRing_EdenRingTF to "cat">>
+	<<case 2>><<set _EdenRing_EdenRingTF to "cow">>
+	<<case 3>><<set _EdenRing_EdenRingTF to "fox">>
+	<<case 4>><<set _EdenRing_EdenRingTF to "bird">>
+	<<case 5>><<set _EdenRing_EdenRingTF to "wolf">>
+<</switch>>
+
+<<EdenRing_ForceNeckwear _EdenRing_EdenRingTF 0>>
+<<attach_leash>>
+<<detach_leash>>
+“好了。”
+<br><br>
+随着一声清脆的咔哒声，你睁开眼睛，发现<span class="lewd">$worn.neck.cn_name_cap</span>已经戴在了自己的脖子上。伊甸笑着凝视着你，似乎对自己的成果十分得意。
+<br><br>
+“还想要吗。”<<he>>说，“想要就再闭上眼睛。”
+<br><br>
+你闭上眼睛，小声说道：
+<br><br>
+<<link [[我要基础款项圈|EdenRing Collar Test2]]>><<set $phase to 0>><</link>><br>
+<<link [[我要猫猫款项圈|EdenRing Collar Test2]]>><<set $phase to 1>><</link>><br>
+<<link [[我要牛牛款项圈|EdenRing Collar Test2]]>><<set $phase to 2>><</link>><br>
+<<link [[我要狐狐款项圈|EdenRing Collar Test2]]>><<set $phase to 3>><</link>><br>
+<<link [[我要小鸟款项圈|EdenRing Collar Test2]]>><<set $phase to 4>><</link>><br>
+<<link [[我要狼狼款项圈|EdenRing Collar Test2]]>><<set $phase to 5>><</link>><br>
+<<link [[不要了，告辞|EdenRing Collar Test3]]>><</link>><br>
+<<if $worn.neck.EdenRingType>>
+	<<link [[我要切换栓绳形态|EdenRing Collar Test4]]>><</link>><br>
+<</if>>
+<<link [[测完了，该收工了！|Eden Clearing]]>><<endevent>><</link>><br>
+
+:: EdenRing Collar Test3
+/* 这个dom判定甚至有两种写法，也不知道哪边才是正统，不过我还是统一用C.npc.Eden.dom吧……*/
+<<if C.npc.Eden.dom*2 gt C.npc.Eden.love>>
+<<EdenRing_ForceNeckwear "TF" 0>>
+“这可由不得你。”伊甸拽着脖子把你拉近，强行给你戴上了<span class="lewd">$worn.neck.cn_name_cap</span>……
+<br><br>
+“不错。”<<he>>满意地点点头，
+<<if C.npc.Eden.dom gt 100>>
+继续审视了你一阵子，才把你放开。
+<<else>>
+放开了你。
+<</if>>
+<br><br>
+“还想要吗。”<<he>>说，想要就再闭上眼睛。”
+<br><br>
+你闭上眼睛，小声说道：
+<br><br>
+<<link [[我要基础款项圈|EdenRing Collar Test2]]>><<set $phase to 0>><</link>><br>
+<<link [[我要猫猫款项圈|EdenRing Collar Test2]]>><<set $phase to 1>><</link>><br>
+<<link [[我要牛牛款项圈|EdenRing Collar Test2]]>><<set $phase to 2>><</link>><br>
+<<link [[我要狐狐款项圈|EdenRing Collar Test2]]>><<set $phase to 3>><</link>><br>
+<<link [[我要小鸟款项圈|EdenRing Collar Test2]]>><<set $phase to 4>><</link>><br>
+<<link [[我要狼狼款项圈|EdenRing Collar Test2]]>><<set $phase to 5>><</link>><br>
+<<link [[不要了，告辞|EdenRing Collar Test3]]>><</link>><br>
+<<if $worn.neck.EdenRingType>>
+	<<link [[我要切换栓绳形态|EdenRing Collar Test4]]>><</link>><br>
+<</if>>
+<<link [[测完了，该收工了！|Eden Clearing]]>><<endevent>><</link>><br>
+<<else>>
+“好吧。”伊甸看起来有些沮丧，但还是让你离开了。
+<br><br>
+<<link [[继续|Eden Clearing]]>><<endevent>><</link>><br>
+<</if>>
+
+:: EdenRing Collar Test4
+<<EdenRing_SwitchLeash>>
+<<if $worn.neck.accessory>>
+<<he>>给你的项圈系上栓绳。
+<<else>>
+<<he>>取下了你的项圈系上栓绳。
+<</if>>
+<br><br>
+“还想要吗。”<<he>>说，想要就再闭上眼睛。”
+<br><br>
+你闭上眼睛，小声说道：
+<br><br>
+<<link [[我要基础款项圈|EdenRing Collar Test2]]>><<set $phase to 0>><</link>><br>
+<<link [[我要猫猫款项圈|EdenRing Collar Test2]]>><<set $phase to 1>><</link>><br>
+<<link [[我要牛牛款项圈|EdenRing Collar Test2]]>><<set $phase to 2>><</link>><br>
+<<link [[我要狐狐款项圈|EdenRing Collar Test2]]>><<set $phase to 3>><</link>><br>
+<<link [[我要小鸟款项圈|EdenRing Collar Test2]]>><<set $phase to 4>><</link>><br>
+<<link [[我要狼狼款项圈|EdenRing Collar Test2]]>><<set $phase to 5>><</link>><br>
+<<link [[不要了，告辞|EdenRing Collar Test3]]>><</link>><br>
+<<if $worn.neck.EdenRingType>>
+	<<link [[我要切换栓绳形态|EdenRing Collar Test4]]>><</link>><br>
+<</if>>
+<<link [[测完了，该收工了！|Eden Clearing]]>><<endevent>><</link>><br>
+

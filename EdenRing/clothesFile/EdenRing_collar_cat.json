@@ -1,0 +1,32 @@
+[
+  {
+    "index": 114333,
+    "name": "Eden's collar for kitty",
+    "name_cap": "Eden's collar for kitty", "cn_name_cap": "给好猫咪的项圈",
+    "variable": "EdenRing_collar_cat",
+    "integrity": 100,
+    "integrity_max": 100,
+    "fabric_strength": 20,
+    "reveal": 1000,
+    "word": "n",
+    "plural": 0,
+    "colour": 0,
+    "colour_options": [],
+    "type": ["fetish","eerie"],
+    "gender": "n",
+    "femininity": 0,
+    "warmth": 0,
+    "cost": 2000000,
+    "description": "只要你，好猫咪！需要特殊工具才能解锁。",
+    "shop": ["forest"],
+    "collared": 1,
+    "accessory": 0,
+    "accessory_colour": 0,
+    "accessory_colour_options": [],
+    "cursed": 1,
+    "location": 0,
+    "iconFile": "EdenRing_collar_cat_icon.png",
+    "accIcon": 0,
+    "EdenRingType": "cat"
+  }
+]

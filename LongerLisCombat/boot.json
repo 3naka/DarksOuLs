@@ -1,68 +1,83 @@
 {
-  "name": "LongerLisCombat",
-  "version": "0.2",
-  "styleFileList": [],
-  "scriptFileList": [
-    "LongerLisCombat_Functions.js"
-  ],
-  "tweeFileList": [
-    "LongerLisCombat_Widgets.twee"
-  ],
-  "imgFileList": [],
-  "additionFile": [
-    "readme.md"
-  ],
-  "addonPlugin": [
-    {
-      "modName": "TweeReplacer",
-      "addonName": "TweeReplacerAddon",
-      "modVersion": "1.0.0",
-      "params": [
-        {
-          "passage": "Widgets Settings",
-          "findString": "<div id=\"settingsPregnancy\">",
-          "replace": "<div id=\"settingsLongerCombat\"><<subsectionSettingsTabButton \"战斗AP设置\" \"longerliscombat\">></div>\n<div id=\"settingsPregnancy\">"
-        },
-        {
-          "passage": "Widgets Settings",
-          "findString": "<<pregnancySettings>><</replace>>",
-          "replace": "<<pregnancySettings>><</replace>><<case \"longerliscombatSettings\">><<set _subsection to \"longerliscombat\">><<replace #subsectionDiv>><<LongerLisCombatSettings>><</replace>>"
-        },
-        {
-          "passage": "Widgets NPCs",
-          "findString": "<<wetnessCalculate>>",
-          "replace": "<<wetnessCalculate>>\n<<LongerLisCombat_StateCulculate>>"
-        },
-        {
-          "passage": "Widgets Effects Man",
-          "findString": "<<pain -0.25>>",
-          "replace": "<<LongerLisCombat_StateEdit>>\n<<pain -0.25>>"
-        }
-      ]
-    },
-    {
-      "modName": "ReplacePatcher",
-      "addonName": "ReplacePatcherAddon",
-      "modVersion": "1.0.0",
-      "params": {
-        "js": [
+    "name": "LongerLisCombat",
+    "version": "0.2",
+    "styleFileList": [
+    ],
+    "scriptFileList_earlyload": [
+    ],
+    "scriptFileList_inject_early": [
+    ],
+    "scriptFileList_preload": [
+    ],
+    "scriptFileList": [
+      "LongerLisCombat_Functions.js"
+    ],
+    "tweeFileList": [
+      "LongerLisCombat_Widgets.twee"
+    ],
+    "imgFileList": [
+
+    ],
+    "additionFile": [
+     
+      "readme.md"
+     
+    ],
+    "addonPlugin": [
+      {
+        "modName": "TweeReplacer",
+        "addonName": "TweeReplacerAddon",
+        "modVersion": "1.0.0",
+        "params": [
           {
-            "from": "if (V.kylarwatched) V.kylarwatchedtimer--;",
-            "to": "if(C.npc.Eden.init===1 && V.longercombat!==undefined && V.longercombat.Eden.hourlust !== undefined) V.NPCName[6].lust += V.longercombat.Eden.hourlust;\nif (V.kylarwatched) V.kylarwatchedtimer--;",
-            "fileName": "time.js"
+            "passage": "Widgets Settings",
+            "findString": "<div id=\"settingsPregnancy\">",
+            "replace": "<div id=\"settingsLongerCombat\"><<subsectionSettingsTabButton \"战斗AP设置\" \"longerliscombat\">></div>\n<div id=\"settingsPregnancy\">"
+          },
+          {
+            "passage": "Widgets Settings",
+            "findString": "<<pregnancySettings>><</replace>>",
+            "replace": "<<pregnancySettings>><</replace>><<case \"longerliscombatSettings\">><<set _subsection to \"longerliscombat\">><<replace #subsectionDiv>><<LongerLisCombatSettings>><</replace>>"
+          },
+          {
+            "passage": "Widgets NPCs",
+            "findString": "<<wetnessCalculate>>",
+            "replace": "<<wetnessCalculate>>\n<<LongerLisCombat_StateCulculate>>"
+          },
+          {
+            "passage": "Widgets Effects Man",
+            "findString": "<<pain -0.25>>",
+            "replace": "<<LongerLisCombat_StateEdit>>\n<<pain -0.25>>"
           }
         ]
+      },
+
+      {
+        "modName": "ReplacePatcher",
+        "addonName": "ReplacePatcherAddon",
+        "modVersion": "1.0.0",
+        "params": {
+         "js": [
+          {
+           "from": "if (V.kylarwatched) V.kylarwatchedtimer--;",
+           "to": "if(C.npc.Eden.init===1 && V.longercombat.Eden.hourlust !== undefined)fragment.append(wikifier(\"npcincr\", \"Eden\",\"lust\",V.longercombat.Eden.hourlust));\nif (V.kylarwatched) V.kylarwatchedtimer--;",
+           "fileName": "time.js"
+          }
+          
+         ]
+        }
       }
-    }
-  ],
-  "dependenceInfo": [
-    {
-      "modName": "TweeReplacer",
-      "version": "^1.0.0"
-    },
-    {
-      "modName": "ReplacePatcher",
-      "version": "^1.0.0"
-    }
-  ]
-}
+      
+    ],
+    "dependenceInfo": [
+      { 
+        "modName": "TweeReplacer",
+        "version": "^1.0.0"
+      },
+      {
+        "modName": "ReplacePatcher",
+        "version": "^1.0.0"
+       }
+
+    ]
+  }

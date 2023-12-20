@@ -1,0 +1,219 @@
+{
+    "name": "EdenRing",
+    "version": "0.1",
+    "styleFileList": [
+    ],
+    "scriptFileList_earlyload": [
+    ],
+    "scriptFileList_inject_early": [
+    ],
+    "scriptFileList_preload": [
+    ],
+    "scriptFileList": [
+      "jsFile/EdenRing_Functions.js"
+    ],
+    "tweeFileList": [
+      
+    ],
+    "imgFileList": [
+  "img/clothes/neck/EdenRing_collarleash_frist/full.png",
+  "img/clothes/neck/EdenRing_collarleash_frist/acc.png",
+  "img/misc/icon/clothes/EdenRing_collarleash_frist_icon.png",
+  "img/clothes/neck/EdenRing_collar_frist/full.png",
+  "img/misc/icon/clothes/EdenRing_collar_frist_icon.png",
+
+  "img/clothes/neck/EdenRing_collarleash_fox/full.png",
+  "img/clothes/neck/EdenRing_collarleash_fox/acc.png",
+  "img/misc/icon/clothes/EdenRing_collarleash_fox_icon.png",
+  "img/clothes/neck/EdenRing_collar_fox/full.png",
+  "img/misc/icon/clothes/EdenRing_collar_fox_icon.png",
+
+  "img/clothes/neck/EdenRing_collarleash_cow/full.png",
+  "img/clothes/neck/EdenRing_collarleash_cow/acc.png",
+  "img/misc/icon/clothes/EdenRing_collarleash_cow_icon.png",
+  "img/clothes/neck/EdenRing_collar_cow/full.png",
+  "img/misc/icon/clothes/EdenRing_collar_cow_icon.png",
+
+  "img/clothes/neck/EdenRing_collarleash_wolf/full.png",
+  "img/clothes/neck/EdenRing_collarleash_wolf/acc.png",
+  "img/misc/icon/clothes/EdenRing_collarleash_wolf_icon.png",
+  "img/clothes/neck/EdenRing_collar_wolf/full.png",
+  "img/misc/icon/clothes/EdenRing_collar_wolf_icon.png",
+
+  "img/clothes/neck/EdenRing_collarleash_cat/full.png",
+  "img/clothes/neck/EdenRing_collarleash_cat/acc.png",
+  "img/misc/icon/clothes/EdenRing_collarleash_cat_icon.png",
+  "img/clothes/neck/EdenRing_collar_cat/full.png",
+  "img/misc/icon/clothes/EdenRing_collar_cat_icon.png",
+
+  "img/clothes/neck/EdenRing_collarleash_bird/full.png",
+  "img/clothes/neck/EdenRing_collarleash_bird/acc.png",
+  "img/misc/icon/clothes/EdenRing_collarleash_bird_icon.png",
+  "img/clothes/neck/EdenRing_collar_bird/full.png",
+  "img/misc/icon/clothes/EdenRing_collar_bird_icon.png"
+  
+ ],
+    "additionFile": [
+     
+      "readme.md",
+      "clothesFile/EdenRing_collarleash_frist.json",
+      "clothesFile/EdenRing_collar_frist.json",
+
+      "clothesFile/EdenRing_collarleash_fox.json",
+      "clothesFile/EdenRing_collar_fox.json",
+
+      "clothesFile/EdenRing_collarleash_cow.json",
+      "clothesFile/EdenRing_collar_cow.json",
+
+      "clothesFile/EdenRing_collarleash_wolf.json",
+      "clothesFile/EdenRing_collar_wolf.json",
+
+      "clothesFile/EdenRing_collarleash_cat.json",
+      "clothesFile/EdenRing_collar_cat.json",
+
+      "clothesFile/EdenRing_collarleash_bird.json",
+      "clothesFile/EdenRing_collar_bird.json"
+     
+    ],
+    "addonPlugin": [
+      {
+      "modName": "ModLoader DoL ImageLoaderHook",
+      "addonName": "ImageLoaderAddon",
+       "modVersion": "^2.3.0",
+       "params": []
+      },
+      {
+        "modName": "ModdedClothesAddon",
+        "addonName": "ModdedClothesAddon",
+        "modVersion": "^1.1.0",
+        "params": {
+         "clothes": [
+          {
+           "key": "neck",
+           "filePath": "clothesFile/EdenRing_collarleash_frist.json"
+          },
+          {
+            "key": "neck",
+            "filePath": "clothesFile/EdenRing_collar_frist.json"
+           },
+           {
+            "key": "neck",
+            "filePath": "clothesFile/EdenRing_collarleash_fox.json"
+           },
+           {
+             "key": "neck",
+             "filePath": "clothesFile/EdenRing_collar_fox.json"
+            },
+            {
+              "key": "neck",
+              "filePath": "clothesFile/EdenRing_collarleash_cow.json"
+             },
+             {
+               "key": "neck",
+               "filePath": "clothesFile/EdenRing_collar_cow.json"
+              },
+              {
+                "key": "neck",
+                "filePath": "clothesFile/EdenRing_collarleash_wolf.json"
+               },
+               {
+                 "key": "neck",
+                 "filePath": "clothesFile/EdenRing_collar_wolf.json"
+                },
+                {
+                  "key": "neck",
+                  "filePath": "clothesFile/EdenRing_collarleash_cat.json"
+                 },
+                 {
+                   "key": "neck",
+                   "filePath": "clothesFile/EdenRing_collar_cat.json"
+                  },
+                  {
+                    "key": "neck",
+                    "filePath": "clothesFile/EdenRing_collarleash_bird.json"
+                   },
+                   {
+                     "key": "neck",
+                     "filePath": "clothesFile/EdenRing_collar_bird.json"
+                    }
+        ]
+        }
+      },
+
+	  {
+        "modName": "TweeReplacer",
+        "addonName": "TweeReplacerAddon",
+        "modVersion": "1.0.0",
+        "params": [
+          {
+            "passage": "Widgets Cabin",
+            "findString": "<<if $edenradiointro is 1>>",
+            "replace": "<<edenicon \"collar\">><<link [[要求做项圈测试|EdenRing Collar Test]]>><</link>><br>\n<<if $edenradiointro is 1>>"
+          },
+          {
+            "passage": "Transformation Widgets",
+            "all": true ,
+            "findString": "\"cat bell collar\"",
+            "replace": "\"cat bell collar\" and !$worn.neck.EdenRingType "           
+          },
+
+          {
+            "passage": "Transformation Widgets",
+            "all": true ,
+            "findString": "\"spiked collar with leash\"",
+            "replace": "\"spiked collar with leash\" and !$worn.neck.EdenRingType "           
+          },
+          {
+            "passage": "Transformation Widgets",
+            "all": true ,
+            "findString": "\"cow bell\"",
+            "replace": "\"cow bell\" and !$worn.neck.EdenRingType "           
+          },
+          {
+            "passage": "Transformation Widgets",
+            "all": true ,
+            "findString": "\"feathered hair clip\"",
+            "replace": "\"feathered hair clip\" and !$worn.neck.EdenRingType "           
+          },
+          {
+            "passage": "Transformation Widgets",
+            "all": true ,
+            "findString": "\"spirit mask\"",
+            "replace": "\"spirit mask\" and !$worn.neck.EdenRingType "           
+          },
+          {
+            "passage": "Widgets Wardrobe",
+            "all": true ,
+            "findString": "includes($worn.neck.name)",
+            "replace": "includes($worn.neck.name) || $worn.neck.EdenRingType"           
+          },
+          {
+            "passage": "Widgets BDSM",
+            "findString": "<<widget \"attach_leash\">>",
+            "replace": "<<widget \"attach_leash\">>\n<<EdenRing_SwitchLeash 1 >>"           
+          },
+          {
+            "passage": "Widgets BDSM",
+            "findString": "<<widget \"detach_leash\">>",
+            "replace": "<<widget \"detach_leash\">>\n<<EdenRing_SwitchLeash 0 >>"           
+          }
+      
+        ]
+	}
+],
+ 
+    "dependenceInfo": [
+      { 
+        "modName": "TweeReplacer",
+        "version": "^1.0.0"
+      },
+      {
+        "modName": "ModdedClothesAddon",
+        "version": "^1.1.0"
+       },
+      {
+        "modName": "ModLoader DoL ImageLoaderHook",
+        "version": "^2.3.0"
+     }
+    ]
+}
