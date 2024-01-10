@@ -1,6 +1,6 @@
 //获取指定项圈序列。
 //通过两个参数进行获取：EendRingType,accessory
-//前者是我自定义的项圈的属性，类型为String，目前共6：cat,cow,fox,frist,bird,wolf,
+//前者是我自定义的项圈的属性，类型为String，目前共6：cat,cow,fox,classic,bird,wolf,
 function EdenRing_GetEdenRingIndex(ringType , accessory = 0)
 {
 	//console.log(`接收到类型：${ringType}`);
@@ -10,13 +10,12 @@ function EdenRing_GetEdenRingIndex(ringType , accessory = 0)
 }
 
 //通过pc的转化类型（表象）来获取对应项圈。
-//用临时变量T.EdenRing_EdenRingIndex 来传递结果。
 //参（抄）考（的）万圣节服装代码。
 function EdenRing_GetEdenRingIndexByTF(accessory = 0)
 {
     T.tf = checkTFparts();
 
-    let ringtype = "frist";
+    let ringtype = "classic";
 
     if (T.tf.catEars && T.tf.catTail) 
         ringtype = "cat";
@@ -35,7 +34,7 @@ function EdenRing_GetEdenRingIndexByTF(accessory = 0)
 //直接给pc穿戴指定项圈
 //如果脖子上是不可取的东西则破坏掉，否则送回衣柜，拒绝败家。(开启强制破坏模式以及特殊规则除外)
 //如果ringType 为"TF"则根据pc转化类型穿戴。
-function EdenRing_ForceNeckwear(ringType , accessory = 0, forcebreak = false)
+function EdenRing_ForceNeckwear(ringType = "TF" , accessory = 1, forcebreak = false)
 {
     //脱掉旧的
     if(V.worn.neck.name !== "naked")
@@ -64,7 +63,7 @@ DefineMacroS("EdenRing_ForceNeckwear", EdenRing_ForceNeckwear);
 //给项圈添加/移除栓绳。
 //原理是这样：其实有无栓绳是两件衣服，切换就是把原来的破坏换成新的
 //为什么原代码要用名字判断，而不能像我一样配置个关联衣物index的属性呢。。。（其实我没配置，因为index是浮动的）
-function EdenRing_SwitchLeash( leashtype = 2)
+function EdenRing_SwitchLeash(leashtype = 2)
 {
     if (!V.worn.neck.EdenRingType) return"";
     if(leashtype === 2 || leashtype !== V.worn.neck.accessory)
@@ -72,3 +71,12 @@ function EdenRing_SwitchLeash( leashtype = 2)
     return "" ;
 }
 DefineMacroS("EdenRing_SwitchLeash", EdenRing_SwitchLeash);
+
+//简单的随机抽选台词
+//快住手，你这样越写越复杂了喂喂
+function EdenRing_RandomLog(data)
+{
+   return  data[Math.floor(Math.random() * data.length)];
+
+}
+DefineMacroS("EdenRing_RandomLog", EdenRing_RandomLog);

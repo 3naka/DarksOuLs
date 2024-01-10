@@ -13,14 +13,16 @@
       "jsFile/EdenRing_Functions.js"
     ],
     "tweeFileList": [
+      "Events/EdenRing_TestEvent.twee",
+      "Events/EdenRing_Widgets.twee"
       
     ],
     "imgFileList": [
-  "img/clothes/neck/EdenRing_collarleash_frist/full.png",
-  "img/clothes/neck/EdenRing_collarleash_frist/acc.png",
-  "img/misc/icon/clothes/EdenRing_collarleash_frist_icon.png",
-  "img/clothes/neck/EdenRing_collar_frist/full.png",
-  "img/misc/icon/clothes/EdenRing_collar_frist_icon.png",
+  "img/clothes/neck/EdenRing_collarleash_classic/full.png",
+  "img/clothes/neck/EdenRing_collarleash_classic/acc.png",
+  "img/misc/icon/clothes/EdenRing_collarleash_classic_icon.png",
+  "img/clothes/neck/EdenRing_collar_classic/full.png",
+  "img/misc/icon/clothes/EdenRing_collar_classic_icon.png",
 
   "img/clothes/neck/EdenRing_collarleash_fox/full.png",
   "img/clothes/neck/EdenRing_collarleash_fox/acc.png",
@@ -56,8 +58,8 @@
     "additionFile": [
      
       "readme.md",
-      "clothesFile/EdenRing_collarleash_frist.json",
-      "clothesFile/EdenRing_collar_frist.json",
+      "clothesFile/EdenRing_collarleash_classic.json",
+      "clothesFile/EdenRing_collar_classic.json",
 
       "clothesFile/EdenRing_collarleash_fox.json",
       "clothesFile/EdenRing_collar_fox.json",
@@ -90,11 +92,11 @@
          "clothes": [
           {
            "key": "neck",
-           "filePath": "clothesFile/EdenRing_collarleash_frist.json"
+           "filePath": "clothesFile/EdenRing_collarleash_classic.json"
           },
           {
             "key": "neck",
-            "filePath": "clothesFile/EdenRing_collar_frist.json"
+            "filePath": "clothesFile/EdenRing_collar_classic.json"
            },
            {
             "key": "neck",
@@ -196,6 +198,76 @@
             "passage": "Widgets BDSM",
             "findString": "<<widget \"detach_leash\">>",
             "replace": "<<widget \"detach_leash\">>\n<<EdenRing_SwitchLeash 0 >>"           
+          },
+          {
+            "passage": "Eden Collar Ask 2",
+            "findString": "<<leash 21>>",
+            "replace": "<<EdenRing_ForceNeckwear>>"           
+          },
+          {
+            "passage": "Eden Caged Evening Stretch",
+            "findString": "<<if $worn.neck.collared isnot 1>>",
+            "replace": "<<if $worn.neck.collared is 1 and !$worn.neck.EdenRingType>>\n<<EdenRing_Extra_EdenCagedEveningStretch>>\n<<elseif !$worn.neck.EdenRingType>>\n"           
+          },
+          {
+            "passage": "Eden Caged Evening Stretch",
+            "findString": "<<leash 21>>",
+            "replace": "<<EdenRing_ForceNeckwear \"TF\" 1 true>>"       
+          },
+		  {
+            "passage": "Forest Hunter Intro",
+            "findString": "<<leash 21>>",
+            "replace": " "       
+          },
+          {
+            "passage": "Forest Hunter Intro",
+            "findRegex": "(<<[Hh]e>>.+?){2}(?=<<[Hh]e>>)",
+            "replace": "<<EdenRing_Extra_ForestHunterIntro>>"       
+          },
+		  {
+            "passage": "Forest Hunter Intro",
+            "findString": "<<if $hunterintro isnot 1>>",
+            "replace": "<<if _edenmeta>><<EdenRing_Extra_ForestHunterIntro_meta>>\n<<elseif $hunterintro isnot 1>>"       
+          },
+          {
+            "passage": "Street Eden Angry",
+            "findString": "<<else>>",
+            "replace": "<<elseif !$worn.neck.accessory>>"       
+          },
+          {
+            "passage": "Street Eden Angry",
+            "findString": "<<neckwear 21>>",
+            "replace": "<<EdenRing_ForceNeckwear \"TF\" 1 true>>"       
+          },
+          {
+            "passage": "Street Eden Angry",
+            "findString": "<<if $worn.neck.collared isnot 1>>",
+            "replace": "<<if !$worn.neck.EdenRingType>>\n<<EdenRing_Extra_StreetEdenAngry>>\n<</if>>\n<<if $worn.neck.collared isnot 1>>"       
+          },
+          {
+            "passage": "Street Eden Angry Hide",
+            "findString": "<<else>>\n\t\t<<attach_leash>>",
+            "replace": "<<elseif !$worn.neck.accessory>>\n\t\t<<attach_leash>>"       
+          },
+          {
+            "passage": "Street Eden Angry Hide",
+            "findString": "<<neckwear 21>>",
+            "replace": "<<EdenRing_ForceNeckwear \"TF\" 1 true>>"       
+          },
+          {
+            "passage": "Street Eden Angry Hide",
+            "findString": "<<set $edenaskcollar to 0>>",
+            "replace": "<<EdenRing_Extra_StreetEdenAngryHide_edenaskcollar>>"       
+          },
+          {
+            "passage": "Street Eden Angry Hide",
+            "findString": "<<if $worn.neck.collared isnot 1>>",
+            "replace": "<<if !$worn.neck.EdenRingType>>\n<<EdenRing_Extra_StreetEdenAngry>>\n<</if>>\n<<if $worn.neck.collared isnot 1>>"       
+          },
+          {
+            "passage": "Eden Recaptured",
+            "findString": "<<effects>>",
+            "replace": "<<effects>>\n<<set $edendays to 0>>" 
           }
       
         ]

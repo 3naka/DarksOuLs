@@ -2,8 +2,26 @@
 ……确实是非常大力飞砖的实现方式。这边测试就不要太细腻了，直接在屋外测就可以了。*/
 /*<<edenicon "collar">><<link [[要求做项圈测试|EdenRing Collar Test]]>><</link>><br>*/
 :: EdenRing Collar Test
-/* eden is already generated on passages that lead here
-<<npc Eden>><<person1>>*/
+/*<<npc Eden>><<person1>>*/
+/*大概是给伊甸注入一些记忆力（心眼更小了喂！）*/
+/*edenRecaptureTimes包含所有被抓包回去的场合，包括画像、街道追猎（只要见面就算了）、其他场合的抓包（反正被发配回去打屁股）*/
+/*edenRescureTatal包含任何场景、任何情景的救援。特殊救援+3，其余+1.*/
+/*edenCollarRemoveTimes是你明确跟伊甸说这破项圈我不戴了的场景。不包括用旧项圈。edenCollarRemovePermission则是是否曾经获得许可。*/
+/*edenCollarShownTimes是你明确屈辱伊甸审美的次数。只包括用旧项圈*/
+<<if $EdenRing is undefined>>
+	<<set $EdenRing to 
+	{
+		edenLocketShown: false,
+		edenCollarRemovePermission: false,
+		edenCollarShownTimes: 0,
+		edenCollarRemoveTimes: 0,
+		edenRecaptureTimes: 0,
+		edenCageTatalDays: 0,
+		edenRescureTatal: 0,
+		edenRescureAsylum: 0,
+		edenRescureFarm: 0,
+	}>>
+<</if>>
 “我要项圈。”你说。
 <br>
 “想要项圈吗，想要就闭上眼睛。”伊甸把手伸进裤兜。
@@ -20,10 +38,12 @@
 	<<link [[我要切换栓绳形态|EdenRing Collar Test4]]>><</link>><br>
 <</if>>
 <<link [[不要了，告辞|EdenRing Collar Test3]]>><</link>><br>
+<br>
+<<link [[我要测试事件|EdenRing Collar Test5]]>><</link>><br>
 
 :: EdenRing Collar Test2
 <<switch $phase>>
-	<<case 0>><<set _EdenRing_EdenRingTF to "frist">>
+	<<case 0>><<set _EdenRing_EdenRingTF to "classic">>
 	<<case 1>><<set _EdenRing_EdenRingTF to "cat">>
 	<<case 2>><<set _EdenRing_EdenRingTF to "cow">>
 	<<case 3>><<set _EdenRing_EdenRingTF to "fox">>
@@ -32,8 +52,7 @@
 <</switch>>
 
 <<EdenRing_ForceNeckwear _EdenRing_EdenRingTF 0>>
-<<attach_leash>>
-<<detach_leash>>
+
 “好了。”
 <br><br>
 随着一声清脆的咔哒声，你睁开眼睛，发现<span class="lewd">$worn.neck.cn_name_cap</span>已经戴在了自己的脖子上。伊甸笑着凝视着你，似乎对自己的成果十分得意。
@@ -52,6 +71,8 @@
 <<if $worn.neck.EdenRingType>>
 	<<link [[我要切换栓绳形态|EdenRing Collar Test4]]>><</link>><br>
 <</if>>
+<br>
+<<link [[我要测试事件|EdenRing Collar Test5]]>><</link>><br>
 <<link [[测完了，该收工了！|Eden Clearing]]>><<endevent>><</link>><br>
 
 :: EdenRing Collar Test3
@@ -81,6 +102,7 @@
 <<if $worn.neck.EdenRingType>>
 	<<link [[我要切换栓绳形态|EdenRing Collar Test4]]>><</link>><br>
 <</if>>
+<br>
 <<link [[测完了，该收工了！|Eden Clearing]]>><<endevent>><</link>><br>
 <<else>>
 “好吧。”伊甸看起来有些沮丧，但还是让你离开了。
@@ -110,5 +132,61 @@
 <<if $worn.neck.EdenRingType>>
 	<<link [[我要切换栓绳形态|EdenRing Collar Test4]]>><</link>><br>
 <</if>>
+<br>
+<<link [[我要测试事件|EdenRing Collar Test5]]>><</link>><br>
 <<link [[测完了，该收工了！|Eden Clearing]]>><<endevent>><</link>><br>
 
+:: EdenRing Collar Test5
+<<if $phase is 1>>
+“然后呢？”伊甸扬起一边眉毛。
+<<else>>
+“事件？”伊甸皱起了眉头。“好吧，如果你坚持的话。有些事件会有不可逆的后果，要小心。”
+<br><br>
+<<if C.npc.Eden.dom gt 100>>
+“而且我向你保证，”伊甸突然不怀好意地笑了起来。
+“接下来发生的事情，一定非常不愉快。”
+<<else>>
+“而且我向你保证，接下来发生的事情不会很愉快的。”
+<</if>>
+<</if>>
+<br><br>
+<<link [[我要破坏项圈|EdenRing Collar Test5]]>><<set $phase to 1>><<set $worn.neck.type.push("broken")>><<neckruined>><<set $edencollarremove to 1>><</link>><br>
+<<link [[帮我破坏项圈|EdenRing Collar Test5]]>><<set $phase to 1>><<set $worn.neck.type.push("broken")>><<neckruined>><<set $edencollarremove to 0>><</link>><br>
+<<link [[随便穿点什么|EdenRing Collar Test5]]>><<set $phase to 1>><<leash 16>><</link>><br>
+<<link [[穿点别的项圈|EdenRing Collar Test5]]>><<set $phase to 1>><<leash 21>><</link>><br>
+<<link [[穿点别的项圈（无绳）|EdenRing Collar Test5]]>><<set $phase to 1>><<leash 20>><</link>><br>
+<<link [[穿点别的项圈（无锁）|EdenRing Collar Test5]]>><<set $phase to 1>><<leash 25>><</link>><br>
+<<link [[穿狗狗项圈|EdenRing Collar Test5]]>><<leash 10>><<set $phase to 1>><</link>><br>
+<<link [[穿猫猫项圈|EdenRing Collar Test5]]>><<leash 7>><<set $phase to 1>><</link>><br>
+<<link [[穿牛牛铃铛|EdenRing Collar Test5]]>><<leash 8>><<set $phase to 1>><</link>><br>
+<<link [[穿同心项链（伊甸的）|EdenRing Collar Test5]]>><<set $phase to 1>><<leash 30>><<set $worn.neck.photo to "Eden">><</link>><br>
+<<link [[穿同心项链（别人的）|EdenRing Collar Test5]]>><<set $phase to 1>><<leash 30>><</link>><br>
+<<link [[获得项圈许可|EdenRing Collar Test5]]>><<set $phase to 1>><<set $edenaskcollar to 1>><</link>><br>
+<<link [[移除项圈许可|EdenRing Collar Test5]]>><<set $phase to 1>><<set $edenaskcollar to 0>><</link>><br>
+<br>
+<<link [[当街被捕|Street Eden Angry]]>><</link>><br>
+<<link [[当街拒捕|Street Eden Angry Hide]]>><<set $rng to 50>><</link>><br>
+<<link [[笼中漫步|Eden Caged Evening Stretch]]>><</link>><br>
+<<link [[昨日重现|Forest Hunter Intro]]>><</link>><br>
+<<link [[真·昨日重现|Forest Hunter Intro]]>><<set $hunterintro to 0>><</link>><br>
+<br>
+<<link [[你能表演一下全新的剧目吗|EdenRing Collar Test6]]>><</link>><br>
+<br>
+<<link [[返回项圈测试|EdenRing Collar Test]]>><</link>><<set $phase to 0>><br>
+<<link [[测完了，该收工了！|Eden Clearing]]>><<endevent>><<set $phase to 0>><</link>><br>
+
+
+:: EdenRing Collar Test6
+"嘿！这可不是表演。"伊甸严肃地说。
+<br><br>
+
+<<link [[同心吊坠|EdenRing Show Locket]]>><</link>><br>
+<<link [[项圈的怨念·初次|EdenRing Show Collar]]>><<set $EdenRing.edenCollarShownTimes to 0>><</link>><br>
+<<link [[项圈的怨念·二次|EdenRing Show Collar]]>><<set $EdenRing.edenCollarShownTimes to 1>><<set $asphyxiaLvl to 3>><</link>><br>
+<<link [[项圈的怨念·二次·删减版|EdenRing Show Collar]]>><<set $EdenRing.edenCollarShownTimes to 1>><<set $asphyxiaLvl to 0>><</link>><br>
+<<link [[项圈的怨念·二次·威力加强版|EdenRing Show Collar]]>><<set $EdenRing.edenCollarShownTimes to 1>><<set $asphyxiaLvl to 3>><<set $arousal to 10000>><</link>><br>
+
+
+<br><br>
+<<link [[返回施工现场|EdenRing Collar Test5]]>><</link>><br>
+<<link [[测完了，该收工了！|Eden Clearing]]>><<endevent>><<set $phase to 0>><</link>><br>

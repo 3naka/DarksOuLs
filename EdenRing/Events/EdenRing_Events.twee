@@ -1,0 +1,287 @@
+/*主要是伊甸家里的项圈警察差分以及一些事件后续*/
+
+/*为了避免伊甸反复自取其辱，现在有如下情况伊甸都不会管你(当然戴着伊甸的项圈是不会管你的)：
+0、前提：不能戴着公共项圈（公共项圈必被出警）：$worn.neck.name isnot "free use collar with leash" and $worn.neck.name isnot "free use collar"
+1、曾经展示过吊坠盒，且戴着吊坠盒(并没有照片要求)：$EdenRing.edenCollarShown and $worn.neck.name is "love locket"
+2、获得戴所有的许可，且戴的不是项圈：$edenaskcollar and !$worn.neck.collared
+3、获得戴所有的许可，曾经侮辱过伊甸的审美，且戴着项圈：$edenaskcollar and $EdenRing.edenCollarShownTimes and $worn.neck.collared
+*/
+/*获得吊坠或者项圈的许可的时候，也会同时获得戴其它的许可。吊坠的许可不会失效，而项圈的是会失效的。*/
+
+/*换言之，出警逻辑是这样的：
+0、戴了公共项圈---直接带去摘了，没有拒绝选项：$worn.neck.name is "free use collar with leash" or $worn.neck.name is "free use collar"
+1、戴着其他项圈，且不满足项圈豁免：---只有前两次有拒绝选项，拒绝两次后事件改变，不再有拒绝选项。
+2、戴其它东西，且不满足吊坠和许可豁免：---一直有拒绝选项，基本就是原版事件。
+*/
+
+/*给伊甸看同心吊坠，这个事件最多发生一次*/
+:: EdenRing Show Locket
+<<set $EdenRing.edenLocketShown to true>>
+<<set _kusareen to ($EdenRing.edenRecaptureTimes gte 9 or $EdenRing.edenCageTatalDays gte 6)>>
+	<<if $speech_attitude is "meek">>
+		"对、对不起，我把它摘掉了。我想戴着这个。"<br>你低下头，不安地拨弄起你的吊坠。
+	<<elseif $speech_attitude is "bratty">>
+		"别惦记你那项圈了。"你挺起胸膛，让吊坠更加显眼。<br>"我有更好的。"
+	<<else>>
+		"我把它摘掉了，因为我更想戴着这个。"你说。<br>"不行吗？"
+	<</if>>
+<br><br>
+<<if C.npc.Eden.love lt 60 or _kusareen>>
+	伊甸的神色变得更加严厉，似乎立刻就要拒绝你。
+<<elseif C.npc.Eden.dom gte 135>>
+	伊甸竖起一边眉毛，无声地催促你进一步解释。
+<<else>>
+	伊甸怀疑地盯着你，似乎想争辩什么。
+<</if>>
+<br><br>
+你凑近，<<if $bodysize lt 2>>示意<<he>>稍微低下身子，然后<</if>>打开吊坠盒，把它轻轻放进<<he>>的手心里。
+在犹豫的一瞥之后，<<he>>像被烫到一样，让吊坠脱手而出。接着，你便满意地看到，<<nnpc_title "Eden">>的脸在<<if _kusareen>>尴尬、害羞与矛盾<<else>>尴尬和害羞<</if>>之中越涨越红。
+<<gglove "Eden">><<npcincr "Eden" love 10>>
+<br><br>
+"好吧，好吧。你可以留着你的吊坠。"<br>过了一会，
+<<if _kusareen>>
+	<<he>>叹了口气，<<if C.npc.Eden.love lt 60>>看起来仍然心情复杂。<<else>>揉了揉你的脑袋，看起来仍然心情复杂。<</if>>
+<<else>>
+	<<if C.npc.Eden.love lt 60>>
+		<<he>>嘟囔了一句，看起来仍有些手足无措。
+	<<elseif C.npc.Eden.dom gte 135>>
+		<<he>>轻笑着摇摇头，揉了揉你的脑袋。
+	<<else>>
+		<<he>>嘟囔着，拍拍你的脑袋，看起来仍有些手足无措。
+	<</if>>
+<</if>>
+<br><br>
+<<link [[拥抱|EdenRing Show Locket Hug]]>><</link>><br>
+<<link [[微笑|EdenRing Show Locket Smile]]>><</link>><br>
+
+:: EdenRing Show Locket Hug
+你拥抱了伊甸。<<he>>的身体绷紧了。
+<br><br>
+很快，<<he>>也紧紧抱住了你。或许不想让你看到<<he>>的脸，
+<<he>>一边抚摸你的头发，一边让你的头埋进<<if $NPCList[0].breastsize gt 1>><<he>>$NPCList[0].breastsdesc之间。<<else>><<he>>的胸膛里。<</if>><br>
+你听到<<he>>的心正砰砰地跳动着。
+<br><br>
+又过了一会，<<he>>吻了吻你的额头，拉开了距离，<<EdenRing_EdenBackToWork "happy">>
+<br><br>
+在走远之前，<<He>>的耳根仍然有些发红。
+<br><br>
+<<link [[返回施工现场|EdenRing Collar Test6]]>><</link>><br>
+
+
+:: EdenRing Show Locket Smile
+你向<<he>>笑了笑。<<he>>也向你报以微笑。
+<br><br>
+之后，<<he>>转身离开，<<EdenRing_EdenBackToWork "happy">>
+<br>
+在走远之前，<<He>>的耳根仍然有些发红。
+<br><br>
+<<link [[返回施工现场|EdenRing Collar Test6]]>><</link>><br>
+
+
+/*当你自己买了个其它项圈戴着。这个事件可能反复发生，但是如果第一次获得许可之后又失去，之后就不可能再获得了。*/
+/*这个事件最多发生两次。*/
+/*为什么伊甸这么凶，因为有作者的怨念加成。*/
+:: EdenRing Show Collar
+<<if $EdenRing.edenCollarShownTimes>>/*不是初次*/
+	<<if $speech_attitude is "meek">>
+		感到难以直面<<he>>的责备，你低下头。
+	<<elseif $speech_attitude is "bratty">>
+		"就是你想的那样。"你回答。
+	<<else>>
+		"我换掉了。"你说。
+	<</if>>
+	<br><br>
+	<<if $asphyxiaLvl lt 2>>/*如果不允许窒息，这里就省略窒息演出了(非常敷衍地)*/
+			"所以你觉得这样很好玩？嗯？"<br>
+			伊甸不动声色地注视你片刻，
+		<<if $worn.neck.accessory>>
+			<<he>>冷不丁地拽住你项圈的栓绳，把你强行拉到<<he>>面前。
+		<<else>>
+			<<he>>冷不丁地勾住你的项圈，把你强行拉到<<he>>面前。
+		<<if $speech_attitude is "meek">>
+			<<he>>摇晃着项圈，强迫你抬起头来。
+		<<elseif $speech_attitude is "bratty">>
+			你试图挣扎，<<he>>却抓得更紧了。
+		<<else>>
+			你试图抗议，<<he>>却无动于衷。
+		<</if>>
+		<</if>>
+			<br><br>
+			"不要试探我。"<br>
+			<<he>>凝视着你的眼睛，一字一顿地说。灼热的呼吸吹到你的面上。<br>
+			"我没把你再拴起来，你应该心怀感激。"
+			<br><br>
+		<<if C.npc.Eden.love gte 60>>
+			说完，<<he>>松开你，任凭你跌坐在地上。
+		<<else>>
+			说完，<<he>>把你摔在地上。
+		<</if>>
+	<<else>>
+			"所以你觉得这样很好玩？嗯？"<br>
+			伊甸不动声色地注视你片刻，冷不丁地紧紧锁住你的喉咙。
+			你甚至不理解发生了什么，剧痛便淹没了你的感官。
+			<<if $choketrait or $masochism_level gte 2>>
+				<<if $arousal gte ($arousalmax / 5)*4>>
+				你试图抗议，吐出的却是淫荡的呻吟。<<gggpain>><<pain 25>><<ggarousal>><<arousal 800>>
+				<<else>>
+				你试图抗议，却只发出一声微弱的娇喘。<<gggpain>><<pain 25>><<ggarousal>><<arousal 800>>	
+				<</if>>
+			<<else>>
+				你试图抗议，却只发出一声微弱的呻吟。<<gggpain>><<pain 25>><</if>>
+			<br><br>
+		<<if $choketrait>>
+			"喜欢这个对吧？你这下贱的婊子。"
+		<<elseif $masochism_level gte 2>>
+			"别以为我不知道。这么对待你，你不是求之不得吗？"
+		<<elseif $sadism_level gte 2>>
+			"你感觉怎么样？我甚至有点享受呢。"
+		<<elseif $beauty gte 8000>>
+			"觉得我舍不得对你动手，是吗？"
+		<<else>>
+			"想找刺激？它这不就来了吗。"
+		<</if>>
+		<<he>>冷酷地嘲笑你。
+		<br><br>
+			手越钳越紧。
+		<<if $arousal gte 10000>>
+			<<orgasm>>
+			恍惚中，你听见<<he>>哼出几声嗤笑。<<gglust>><<npcincr "Eden" "lust" 10>>
+		<<elseif $bodysize lt 2>>
+			恍惚中，你感觉脚下的地面消失了。
+		<<else>>
+			恍惚中，你感觉双膝摇摇欲坠。
+		<</if>>
+		<br><br>
+			在你即将失去意识之际，<<he>>把你拉到面前。<br>
+			"不要试探我。"<br>
+			他凝视着你的眼睛，一字一顿地说。灼热的呼吸吹到你的面上。<br>
+			"我没把你再拴起来，你应该心怀感激。"	
+		<br><br>
+		<<if (C.npc.Eden.dom + C.npc.Eden.love) gte 250>>
+			<<he>>啄上你的双唇。一边啃咬，一边深深地亲吻你。
+			<<if C.npc.Eden.lust gte 50>>
+				<<he>>的舌头插入你的口腔，在其中蛮横地翻搅。
+			<</if>>
+			<<takeKissVirginity "Eden" "loveRape">>
+			<br><br>
+			无论是拥抱还是推开<<he>>，你都没有足够的力气了。强烈的感情冲击着你，你的意识溃散了。
+			<<set $phase to 1>>			
+		<<elseif (C.npc.Eden.dom + C.npc.Eden.love) gte 200>>
+			<<he>>粗暴地亲吻你，在你的嘴唇上猛啄。然后，<<he>>松开手，任凭你无助地跌坐在地。<<takeKissVirginity "Eden" "loveRape">>
+		<<elseif C.npc.Eden.love gte 60>>
+			<<he>>松开手，任凭你无助地跌坐在地。
+		<<else>>
+			<<he>>甩开了你。你跌坐在地，无助地喘息着，试图止住咳嗽和眼泪。
+		<</if>>
+	<</if>>
+	<br><br>
+	<<link [[继续|EdenRing Show Collar 2]]>><</link>><br>
+<<else>>/*初次*/
+	<<if $speech_attitude is "meek">>
+		"别担心，这、这是我给自己买的。"你说。
+	<<elseif $speech_attitude is "bratty">>
+		"这是我自己的东西。"你说。
+	<<else>>
+		"这是我给自己买的。"你说。
+	<</if>>
+	<br>
+	"为什么？"<<he>>震惊地问道。
+	<br><br>
+	<<if $speech_attitude is "meek">>
+		"我没有不喜欢你给我的项圈！我、我只是偶尔换个打扮！"你略微颔首，眼波闪闪地看向<<he>>。"求、求你了？"
+	<<elseif $speech_attitude is "bratty">>
+		"哎哟。我还以为你不会发现呢。"你吐吐舌头。<<he>>哑口无言，用难以置信的表情看着你。
+	<<else>>
+		"不是我不欣赏你的品味，但我也会想改变造型。只是换换心情，你知道的。"你说。
+	<</if>>
+	<br><br>
+	<<he>>继续瞪了你一会，仍然一副深受打击的模样。<<if C.npc.Eden.dom gte 135>>你注意到<<he>>攥紧了拳头。<</if>>
+	<br><br>
+	"好吧。"<br>
+	又过了一会，<<he>>终于再次开口。<br>
+	"随便你。"
+	<br><br>
+	<<he>>生硬地挤出这句话，扭过头去不看你，表示这个话题到此为止。
+	<<set $EdenRing.edenCollarShownTimes +=1 >><<set $edenaskcollar to true>>
+	<br><br>
+	<<link [[返回施工现场|EdenRing Collar Test6]]>><</link>><br>
+<</if>>
+
+:: EdenRing Show Collar 2
+<<if $phase is 1>>当你恢复意识，你发现自己跌坐在原地。<br><br><</if>>
+你听到脚步声渐远又匆匆渐近。<<he>>回到你身旁，用一把小刀割开了你的项圈。随即，一个崭新的项圈扔到了你的怀里。
+<br><br>
+"戴上。"<br>
+<<he>>以不容置喙地口吻命令道。<br>
+"不会再有下次了。"
+<br><br>
+<<link [[继续|EdenRing Show Collar 3]]>><</link>><br>
+
+
+/*第二次侮辱审美的后续，您这沏茶速度也太快了罢*/
+:: EdenRing Show Collar 3
+<<if $masochism_level gte 2>>
+	尽管陷入如此窘境，你的内心却莫名地躁动起来。<<garousal>><<arousal 300>>
+<<elseif $speech_attitude is "meek">>
+	事已至此，你并不想再违抗<<he>>。
+<<elseif $speech_attitude is "bratty">>
+	尽管不情愿，你不觉得自己有别的选择。
+<<else>>
+	事已至此，你也只能照做了。
+<</if>>
+<br><br>
+你把项圈套上自己的脖子。当冰冷的皮革贴紧皮肤，你差点拿不稳它。
+<<if $hairlength gte 200>>
+你尽可能地留心头发，不让它们卡在里面。<</if>>
+<br><br>
+伊甸沉默地观看着你的一举一动。只当锁扣发出咔哒声时，<<he>>轻轻地笑了。
+<br><br>
+你完成后，<<he>>牵起你项圈上的栓绳，另一只手搂着你，帮你站起来。
+<br><br>
+"这才对。你可以做个好<<girl>>的，不是吗？"<br>
+<<he>>以指尖点过你的项圈和皮肤，你低下头。从<<he>>的声音里，你听见残留的愤怒，以及掩盖不住的欲望。<<gglust>><<npcincr "Eden" "lust" 10>><br>
+"这个项圈来得并不是那么容易。别再把它弄丢了。"
+<br><br>
+<<he>>警告地拽了一下栓绳，然后后退，示意你可以离开。
+<br><br>
+<<link [[返回施工现场|EdenRing Collar Test6]]>><</link>><br>
+
+/*高支配下同意移除项圈的后续*/
+:: EdenRing Collar Remove Highdom 2
+<<switch $phase>>
+	<<case 1>>
+	<<if $speech_attitude is "meek">>
+		"对、对不起……请、请原谅我吧……"你尽量稳住自己的声音。
+	<<elseif $speech_attitude is "bratty">>
+		"对不起。"你不情愿地挤出几个字。
+	<<else>>
+		"对不起……"你不知道现在道歉是否真的管用。
+	<</if>>
+	<<case 2>>
+		你闭上眼睛。
+	<<default>>你沉默地等待着接下来的发生的事。
+<</switch>>
+<br><br>
+<<if $asphyxiaLvl && $phase isnot 1>>
+	<<he>>的手指动了。你立刻就喘不过气来。但这感觉并不痛苦，比起让你窒息，更像只是坚定的、不容拒绝的爱抚。
+	在你承受不了之前，<<he>>收回了手。
+<<else>>/*没开启窒息的场合。以及道歉是有用的。*/
+	<<if $phase is 2>>
+	你等待了许久，想象中的痛苦仍未降临。当你忍不住睁开眼睛，看到<<he>>收回了手。
+	<<else>>
+	时间仿佛凝固了。当你心跳开始平复，<<he>>收回了手。
+	<</if>>
+<</if>>
+	<br><br>
+	<<if $worn.neck.name !== "naked">>
+		"我想，我没道理拒绝你，不是吗？"<<he>>似笑非笑地说。<br>
+		"好吧，<<girl>>。你可以留着你的<span>$worn.neck.cn_name_cap</span>。"
+	<<else>>
+		"真漂亮啊，你的脖子。"<<he>>的声音流露出难以掩饰的渴望。<br>
+		"好吧，<<girl>>。我想，我应该允许你继续展示它"。		
+	<</if>>
+
+<br><br>
+	<<link [[返回施工现场|EdenRing Collar Test6]]>><</link>><br>
+
+

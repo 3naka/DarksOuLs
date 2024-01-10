@@ -1,0 +1,509 @@
+:: EdenRing Event Widgets [widget]
+/*用来给一些事件新增差分，主要是戴了项圈但是不是伊甸的项圈的场合*/
+/*写不来啊……啊啊……随便发挥下罢*/
+
+/*这个是狗笼散步的。因为一开始会先被扒光，所以理论上应该不存在戴的其他颈饰吧，有我也写不动了*/
+<<widget "EdenRing_Extra_EdenCagedEveningStretch">>
+当你站起身来伸展身体时，你感觉有冰冷的锐物抵上了自己的后颈。你在惊慌中下意识地回头，一只手突然按在你的后脑上，阻止了你的动作。
+<br><br>
+"别乱动。"伊甸咬牙切齿地警告你，你听见皮料撕裂的声音。你原本佩戴的<span>$worn.neck.cn_name_cap</span>随即断裂，掉在地上。
+之后，伴随着熟悉的咔哒声，又有什么环上了你的脖子。是一条新的项圈。
+<br><br>
+<<EdenRing_ForceNeckwear "TF" 1 true>>
+<</widget>>
+
+
+/*这个是当街逮捕的。只要你戴的不是我们伊甸园法环品牌的项圈，我们的品牌大使就会生气的呢*/
+<<widget "EdenRing_Extra_StreetEdenAngry">>
+	<<if $worn.neck.collared>>		
+		当视线落在你脖子上时，<<he>>用更大的力气攥紧了你的胳膊。<<gpain>><<pain 2>>
+		<br><br>
+		<<if $edenaskcollar or _edenaskcollarbreak>>
+			<<set $edenaskcollar to 0>><<set _edenaskcollarbreak to true>>
+			"该死，谁给你戴的这个？"<<he>>的恼怒中似乎添了几分懊丧。<<gdom "Eden">><<npcincr "Eden" dom 2>> 
+		<<else>>
+			"谁给你戴的这个？"
+		<</if>>
+		<<he>>把手指强行伸进你的<span>$worn.neck.cn_name_cap</span>，粗暴地撕扯起来。
+	<<elseif $worn.neck.name !== "naked" and C.npc.Eden.dom gte 60>>
+		当视线落在你脖子上时，<<he>>脸上的怒气更盛了。
+		"好啊。"<<he>>说着，开始粗暴地拽扯你的<span>$worn.neck.cn_name_cap</span>。
+	<<else>>
+		当视线落在你脖子上时，<<he>>脸上的怒气更盛了。
+		"好啊。"<<he>>说。
+	<</if>>
+
+	<<if $edenaskcollar or _edenaskcollarbreak>>
+		<<if C.npc.Eden.dom gte 100>>
+			"得到一点容许，你就忘记自己属于谁了？"
+		<<else>>
+			"我以为你不会滥用我的宽容。"
+		<</if>>
+	<<elseif C.npc.Eden.dom gte 100>>
+			"真他妈棒，你还敢弄丢我给你的东西。看来必须得重新管教你。"
+	<<else>>
+			"你还搞丢了我给你的东西。我们要处理的问题又多了一个。"
+	<</if>>
+
+	<<if $worn.neck.collared>>
+		<<gpain>><<gstress>><<pain 1>><<stress 5>>
+		<br><br>
+		松开了你的<span>$worn.neck.cn_name_cap</span>，<<he>>抽出一把刀将它割断，
+		又把一个新的项圈套在了你的脖子上。<br><br>
+		<<EdenRing_ForceNeckwear "TF" 1 true>>
+	<<elseif $worn.neck.name !== "naked">>
+		<br><br>
+		扔掉了<span>$worn.neck.cn_name_cap</span>，
+	<<else>>
+		<br><br>
+	<</if>>
+<</widget>>
+
+/*如果在画像寻人事件里躲伊甸失败，伊甸会收回你不戴项圈的许可，这是原本有的设定！*/
+<<widget "EdenRing_Extra_StreetEdenAngryHide_edenaskcollar">>
+<<if $edenaskcollar>>
+	<<set _edenaskcollarbreak to true>>
+<</if>>
+	<<set $edenaskcollar to 0>>
+<</widget>>
+
+/*抓入木屋的事件。用正则替换掉的进门第一句，但愿管用啦。*/
+<<widget "EdenRing_Extra_ForestHunterIntro">>
+<<set _EdenRingType = "classic">>
+<<set _forcebreack = true>>
+<<He>>把你摔倒在坚硬的地板上
+<<if $hunterintro>>
+	<<if !$worn.neck.EdenRingType>>
+		<<if $worn.neck.collared>>
+			。注意到你的<span>$worn.neck.cn_name_cap</span>时，<<he>>看起来相当恼火。<br><br>
+			<<He>>拿起一把刀，割断你原本的项圈，又给你套上一个新的项圈。它咔嗒一声关上。<<He>>站在你身边，把皮带系在你的项圈上。然后，
+		<<elseif $edenaskcollar>>
+			<<set _forcebreack = false>>
+			，在你的脖子上套上一个项圈。它咔嗒一声关上。<<He>>站在你身边，把皮带系在你的项圈上。然后，
+		<<else>>
+			<<set _forcebreack = false>>
+			。目光落在你颈部时，<<he>>的神情有些不悦。<br><br>
+			<<He>>给你套上一个项圈。它咔嗒一声关上。<<He>>站在你身边，把皮带系在你的项圈上。然后，
+		<</if>>	
+	<<elseif $worn.neck.accessory>>
+		，然后，
+	<<else>>
+		。<<He>>站在你身边，把皮带系在你的项圈上。然后，
+	<</if>>
+<<else>>
+	<<if $worn.neck.name is "love locket" and $worn.neck.photo is "Eden">>
+		<<set _edenmeta to true>>
+		。<br><br>注意到你的<span class = "gold">$worn.neck.cn_name_cap</span>，<<he>>皱了皱眉，把它摘下来，拿在手中。似乎有什么使<<he>>犹豫不决，<<he>>打开吊坠暼了一眼，
+		立刻震惊地瞪大眼睛，差点把吊坠落在地上。
+		<br><br>
+		"你……"<<he>>把吊坠紧紧握在掌心里，眼中流露出你无法解读的复杂神色。
+		<br><br>沉默了好一阵，<<he>>才回过神来，收起吊坠，叹了口气。<<he>>在你的脖子上套上一个新的项圈，又把皮带系在你的项圈上。然后，
+	<<elseif $worn.neck.EdenRingType>>
+		<<set _EdenRingType = $worn.neck.EdenRingType>>
+		<<set _edenmeta to true>>
+		。<br><br>"嘿……"注意到你脖子上的<span class="red">$worn.neck.cn_name_cap</span>，<<he>>显得十分惊讶。
+		"你是……"<<he>>俯身摩挲你的项圈，眼中流露出你无法解读的复杂神色。
+		<br><br>过了一会，<<he>>似乎回过神来，叹了口气，把皮带系在你的项圈上。然后，	
+	<<elseif $worn.neck.collared>>
+		。<<he>>检查你的<span>$worn.neck.cn_name_cap</span>，皱了皱眉头，拿起一把小刀。
+		<br><br>
+		"别害怕，我不会伤害你。"<<he>>指了指你的脖子，看起来有些抱歉。"我们只是解决一个小问题。"
+		<<he>>尽量温和地割开你的项圈。但尽管如此，当刀背摩擦你的肌肤，你仍不由主地颤抖起来。<<gstress>><<stress 5>>
+		<br><br>
+		解决完你原本的项圈，<<he>>给你套上一个新的项圈。它咔嗒一声关上。<<He>>站在你身边，把皮带系在你的项圈上。
+	<<elseif $worn.neck.name is "cow bell">>
+			<<set _EdenRingType = "cow">>
+			。<br><br>"你喜欢扮演奶牛吗？"注意到你的<span>$worn.neck.cn_name_cap</span>，<<he>>困惑地笑了笑，把它摘下来，又在你的脖子上套上一个新的项圈。
+			它咔嗒一声关上。<<He>>站在你身边，把皮带系在你的项圈上。然后，
+	<<elseif $worn.neck.name is "cat bell collar">>
+			<<set _EdenRingType = "cat">>
+			。<br><br>"小猫咪，希望你不要太淘气。"注意到你的<span>$worn.neck.cn_name_cap</span>，<<he>>笑了笑，把它摘下来，又在你的脖子上套上一个新的项圈。
+			它咔嗒一声关上。<<He>>站在你身边，把皮带系在你的项圈上。然后，
+	<<elseif $worn.neck.name is "spiked collar" or $worn.neck.name is "leather collar with leash">>
+			<<set _EdenRingType = "wolf">>
+			。<br><br>"看来你还野性未驯，是吗？"注意到你的<span>$worn.neck.cn_name_cap</span>，<<he>>笑了笑，把它摘下来，又在你的脖子上套上一个新的项圈。
+			它咔嗒一声关上。<<He>>站在你身边，把皮带系在你的项圈上。然后，
+	<<elseif $worn.neck.name is "love locket">>
+			。<br><br>注意到你的<span>$worn.neck.cn_name_cap</span>，<<he>>皱了皱眉，把它摘下来，又在你的脖子上套上一个新的项圈。
+			它咔嗒一声关上。<<He>>站在你身边，把皮带系在你的项圈上。然后，
+	<<elseif $worn.neck.name is "ivory necklace">>
+			<<set _forcebreack = false>>
+			。<br><br>"这是……"注意到你的<span>$worn.neck.cn_name_cap</span>，<<he>>的神情变得严肃，似乎是考虑着什么。
+			片刻之后，<<he>>把它摘下收起来，又在你的脖子上套上一个新的项圈。
+			它咔嗒一声关上。<<He>>站在你身边，把皮带系在你的项圈上。然后，
+	<<else>>
+		，在你的脖子上套上一个项圈。它咔嗒一声关上。<<He>>站在你身边，把皮带系在你的项圈上。然后，
+	<</if>>
+<</if>>
+<<EdenRing_ForceNeckwear _EdenRingType 1 _forcebreack>>
+<</widget>>
+
+/*让你随便写几个分歧，你还写上瘾了是吧*/
+<<widget "EdenRing_Extra_ForestHunterIntro_meta">>
+<<set $hunterintro to 1>>
+"我想，你应该已经知道我是谁。毕竟，我们根本不可能忘记彼此，不是吗？"<<he>>说。"不过，再做一次自我介绍，应该也是无妨。我叫伊甸。"
+<br><br>
+<<he>>停顿片刻，继续说道。"我在这里已经自给自足了。但有时会很孤独。如果我保护和供养你，你会给我安慰和陪伴吗？"
+<br><br>
+<span class = "red">"不要拒绝。你知道，你别无选择。"</span><<he>>的神情忽然变得柔和。
+<br>"以及，欢迎回家。"
+<br><br>
+<<link [[点头|Forest Hunter Nod]]>><</link>><br>
+<<link [[点头|Forest Hunter Nod]]>><</link>><br>
+<<link [[点头|Forest Hunter Nod]]>><</link>>
+<</widget>>
+
+/*根据伊甸的时间表，显示伊甸走开之后去干啥。参数含义：
+_args[0]：控制特殊表现。"angry":还在生闷气 "happy":心情很好
+_args[1]：控制换场表现。"indoor":事件发生在小屋里。"outdoor":事件发生在小屋里。
+*/
+/*0~6：睡觉
+7~8：准备
+9~10：拔草
+11~14：打猎（这期间不可能有事件
+15：处理猎物
+16：砍柴
+17：洗澡
+18：晚饭
+19~25：摸鱼
+*/
+<<widget "EdenRing_EdenBackToWork">>
+	<<switch Time.hour>>
+		<<case 0 1 2 3 4 5 6>>
+			<<if _args[1] is "outdoor">>
+				<<set $_goindoor = true>>
+			<<else>>
+				回到床上躺下。<<if _args[0] is "angry">>小屋里只余下一片寂静。<<else>>你很快听到了<<he>>的鼾声。<</if>>
+			<</if>>
+		<<case 7 8>>
+			<<if _args[1] is "outdoor">><<set $_goindoor = true>><<else>>回到水槽边，继续做自己的准备工作。<</if>>
+		<<case 9 10>>
+			<<if _args[1] is "indoor">>
+				<<set $_gooutdoor = true>>
+			<<else>><<if _args[0] is "angry">>继续和杂草较劲。<<else>>继续照料菜地。<</if>><</if>>
+		<<case 11 12 13 14>>
+			说："你知道吗？我甚至不该出现在这里。"说完，<<he>><<if _args[1] is "indoor">><<set $_gooutdoor = true>><<else>>拿起猎枪，很快消失在了森林之中。<</if>>
+		<<case 15>>
+			<<if _args[1] is "indoor">><<set $_gooutdoor = true>><<else>>继续处理猎物。<</if>>
+		<<case 16>>
+			<<if _args[1] is "indoor">><<set $_gooutdoor = true>><<else>>提起斧子，回去砍柴。<</if>>
+			<<if _args[0] is "angry">>你注意到，<<he>>似乎比之前弄出了更多噪音。<</if>>
+		<<case 17>>
+			<<if _args[1] is "outdoor">><<set $_goindoor = true>><<else>>走进浴室里。<</if>>
+		<<case 18>>
+			<<if _args[1] is "outdoor">><<set $_goindoor = true>><<else>>回到餐桌边。<</if>>
+		<<default>>
+			<<if _args[1] is "outdoor">><<set $_goindoor = true>><<else>>回到炉火边，继续自己的事。<</if>>
+	<</switch>>
+	<<if $_goindoor>>
+		<<switch _args[0]>>
+			<<case "angry">><<EdenRing_RandomLog {"跺着脚走进了小屋。","步伐沉重地走进了小屋。","快步走进了小屋。"}>>
+			<<case "happy">><<EdenRing_RandomLog {"懒洋洋地走进了小屋。","步履轻快地走进了小屋。","走进了小屋，看起来有些得意。"}>>
+			<<default>>走进了小屋。
+		<</switch>>
+	<</if>>
+	<<if $_gooutdoor>>
+		<<switch _args[0]>>
+			<<case "angry">><<EdenRing_RandomLog {"快步离开了小屋。","摔门而出。","气呼呼地走了。",}>>
+			<<case "happy">>步履轻快地离开了小屋。
+			<<default>>离开了小屋。
+		<</switch>>
+	<</if>>
+<</widget>>
+
+/*pc要求移除项圈的追加差分（非项圈的场合）。有这几种分歧：
+<60love:初次：拒绝。 二次：拒绝：三次：同意 之后：循环(注：0爱不会同意)
+135+dom,190+love:初次：同意 之后：循环
+135+dom,190-love：初次：拒绝 二次：同意 之后：循环
+都不满足：初次：原版事件（同意） 之后：循环
+为了防止属性乱流，无论如何获得的同意（不包括吊坠和审美豁免），只要获得过一次同意，之后的事件就会变成循环事件变体（结果都是同意。）
+是的，会因此错过事件(最多只能看到2拒绝和1同意1循环，最少只看得到原版同意+1循环，悲)，但是反正一个存档其实也看不到几个分歧，悲
+<<if $EdenRing.edenCollarRemovePermission or $EdenRing.edenCollarRemoveTimes gte 1 or C.npc.Eden.love lt 60 or C.npc.Eden.dom gte 135>>
+/*
+/*所有事件挤一起果然还是太精污了。果然还是都拆了然后用一个宏集中调用吧。
+*/
+<<widget "EdenRing_Extra_EdenCollarRemove_Main">>
+<<if $EdenRing.edenCollarRemovePermission>>/*循环事件*/
+	<<EdenRing_Extra_EdenCollarRemove_loop>>
+<<else>>
+	<<if C.npc.Eden.love lt 60>>/*低爱分歧*/
+		<<if C.npc.Eden.love gt 0 and $EdenRing.edenCollarRemoveTimes gte 2>>/*低爱：第三次同意*/
+			<<EdenRing_Extra_EdenCollarRemove_lowlove_3>>
+		<<elseif $EdenRing.edenCollarRemoveTimes gte 1>>/*低爱：第二次拒绝*/
+			<<EdenRing_Extra_EdenCollarRemove_lowlove_2>>
+		<<else>>/*低爱：第一次拒绝*/
+			<<EdenRing_Extra_EdenCollarRemove_lowlove_1>>
+		<</if>>
+	<<elseif C.npc.Eden.dom gte 135>>/*高支配分歧*/
+		<<if C.npc.Eden.love gte 180 and $EdenRing.edenCollarRemoveTimes is 0>>	/*高支配-高爱:初次同意*/	
+			<<sEdenRing_Extra_EdenCollarRemove_highdom_love>>
+		<<else>>/*高支配-其他分歧*/
+			<<if $EdenRing.edenCollarRemoveTimes gte 1>>/*高支配-其他：第二次同意*/
+				<<EdenRing_Extra_EdenCollarRemove_highdom_2>>
+			<<else>>/*高支配-其他：第一次拒绝*/
+				<<EdenRing_Extra_EdenCollarRemove_highdom_1>>
+			<</if>>
+		<</if>>
+	<<else>>/*类原版:被其它分歧拒绝之后的同意事件*/
+		<<EdenRing_Extra_EdenCollarRemove_other>>
+	<</if>>
+<</if>>
+<</widget>>
+
+<<widget "EdenRing_Extra_EdenCollarRemove_loop">>
+	<<if $speech_attitude is "meek">>
+		"我、我把它移走了。"你说。
+	<<elseif $speech_attitude is "bratty">>
+		"我把它摘下来了。"你说道。
+	<<else>>
+		"我把它移走了。"你说道。
+	<</if>>
+	<br><br>
+	<<if C.npc.Eden.love lt 60>>
+		"很好。"伊甸移开视线，转身<<EdenRing_EdenBackToWork>>
+	<<elseif C.npc.Eden.dom gte 135>>
+		伊甸又看了你一眼。<<he>>点点头，<<EdenRing_EdenBackToWork>>
+	<<else>>
+		伊甸点点头。接着<<he>>便转身，<<EdenRing_EdenBackToWork>>
+	<</if>>
+<</widget>>
+
+<<widget "EdenRing_Extra_EdenCollarRemove_lowlove_1">>
+	<<if $speech_attitude is "meek">>
+		"我、我把它移走了。"你说。
+	<<elseif $speech_attitude is "bratty">>
+		"我把它摘下来了。"你说道。
+	<<else>>
+		"我把它移走了。"你说道。
+	<</if>>
+		<br>
+	<<if $EdenRing.edenCollarShownTimes>>
+		<<he>>脸上阴云密布。
+	<<else>>
+		<<he>>看起来十分沮丧，但沮丧转瞬被阴郁的怒火所取代。
+	<</if>>
+		<br><br>
+		"看来你还不明白自己地位。"伊甸说着，把你拽到<<he>>身旁。"我会好好教你的。"<<he>>强迫你趴在<<he>>的膝盖上。
+<</widget>>
+
+<<widget "EdenRing_Extra_EdenCollarRemove_lowlove_2">>
+	<<if $speech_attitude is "meek">>
+		"我、我又把它移走了。"你小声说。"对、对不起？"
+	<<elseif $speech_attitude is "bratty">>
+		"我说过，我不想戴着它。"你说道。
+	<<else>>
+		"我又把它移走了。"你说道。
+	<</if>>
+		<br><br>
+		"你受到的教训还不够，是吗？"伊甸说。"没关系。我再教你一次。"<<he>>拉过你，强迫你趴在<<he>>的膝盖上。
+<</widget>>
+
+<<widget "EdenRing_Extra_EdenCollarRemove_lowlove_3">>
+<<if $speech_attitude is "meek">>
+		"我、是我……"想到之前发生的事，你突然失去了勇气。
+	<<elseif $speech_attitude is "bratty">>
+		"我不戴。所以你又要惩罚我吗？"你说道。
+	<<else>>
+		"是啊，是啊。我把它移走了。"你说道。
+	<</if>>
+		<br><br>
+		伊甸抓住你的肩膀，似乎马上就要责备你。但或许是你的神情令<<he>>犹豫了，<<he>>只是瞪了你一阵。
+		<br><br>
+		"理由呢？"<<he>>低声问，松开了你。
+		<br>
+	<<if $speech_attitude is "meek">>
+		"如果你不在场，人们可能会利用它来占我的便宜。"你说。
+	<<elseif $speech_attitude is "bratty">>
+		"这会让我陷入危险的境地，"你说道。"人们可能会利用它来占我的便宜。"
+	<<else>>
+		"这很冒险。"你说道。"人们可能会利用它来占我的便宜。"
+	<</if>>
+		<br><br>
+		<<he>>移开目光，考虑你的话，最终在失败中叹息。
+	<<if C.npc.Eden.dom gte 135>>
+		<<if $EdenRing.edenRescureTatal gte 5>>
+			"好吧。"<<he>>说，"但你最好呆在家里。我可不想成天处理你的麻烦。"
+		<<elseif  $EdenRing.edenCageTatalDays gte 1 or $EdenRing.edenRecaptureTimes gte 3>>
+			"好吧。"<<he>>说，"但你最好别到处乱跑，否则我会惩罚你的。"
+		<<else>>
+			"好吧。"<<he>>说，"但你最好乖乖呆在家里，别自找麻烦。"
+		<</if>>
+			说完，<<he>>转过身去，没有再追问这个话题。
+	<<else>>
+		"好吧。<<he>>说，"别忘记你的责任。"说完，<<he>>转过身去，没有再追问这个话题。
+	<</if>>
+<</widget>>
+
+<<widget "EdenRing_Extra_EdenCollarRemove_highdom_love">>
+	<<if $speech_attitude is "meek">>
+		"我、我把它移走了。"你说。
+	<<elseif $speech_attitude is "bratty">>
+		"我把它摘下来了。"你说道。
+	<<else>>
+		"我把它移走了。"你说道。
+	<</if>>
+	<<if $EdenRing.edenCollarShownTimes>>
+		"你还想怎么样？"<<he>>生硬地问。
+	<<else>>
+		"为什么？"沮丧之情在<<he>>脸上浮现又隐去。
+	<</if>>
+		<br>
+	<<if $speech_attitude is "meek">>
+		"如果你不在场，人们可能会利用它来占我的便宜。"你说。
+	<<elseif $speech_attitude is "bratty">>
+		"这会让我陷入危险的境地，"你说道。"人们可能会利用它来占我的便宜。"
+	<<else>>
+		"这很冒险。"你说道。"人们可能会利用它来占我的便宜。"
+	<</if>>
+		<br><br>
+		<<he>>认真地思考了一会。<br>"好吧，"<<he>>说。"可是，你应该先征求我的同意。"
+		<br>
+	<<if $speech_attitude is "meek">>
+		"对、对不起。我、我可以摘掉吗？"你的声音越来越小。
+	<<elseif $speech_attitude is "bratty">>
+		"我才不需要事事都向你汇报。"你抗议道。
+	<<else>>
+		"所以，我可以摘掉吗？"你问。
+	<</if>>
+		<br><br>
+		伊甸没有回答。<<he>>凑近你，凝视着你的眼睛。
+	<<if $worn.neck.name !== "naked">>
+		<<he>>缓缓摘下你的<span>$worn.neck.cn_name_cap</span>，一边把手环上你的脖子。
+	<<else>>
+		<<he>>伸出双手，缓缓地环上了你的脖子。
+	<</if>>
+		手指收紧了。力道很大，却不至痛苦。动作似要让你窒息，又好像只是坚定的、不容拒绝的爱抚。
+	<<if $choketrait>>
+		你不禁漏出一声微弱的喘息，但<<he>>并未为此有任何停顿。
+	<</if>>
+		<br><br>
+		在你喘不过气之前，<<he>>松开手，向下摩挲，把手掌按在你<<breasts>>之间。你感觉自己的心跳得更快了。
+		<br><br>
+		"我允许。"片刻后，<<he>>终于开口。
+		<br>
+	<<if $EdenRing.edenRescureTatal gte 9>>
+		"只要你记得，保护你的人是我。"
+	<<elseif $EdenRing.edenCageTatalDays gte 6>>
+		"只要你记得，不服从的下场会是怎样。"
+	<<elseif $EdenRing.edenRecaptureTimes gte 9>>
+		"只要你记得，我永远都能再抓住你。"	
+	<<else>>
+		"只要你记住，你是我的<<wife>>。我拥有你的一切。"
+	<</if>>
+		<br><br>
+	<<if $speech_attitude is "meek">>
+		你低下头，不敢再与<<he>>对视。即便如此，你仍无法摆脱视线加身的灼热感觉。
+	<<elseif $speech_attitude is "bratty">>
+		你尽力保持与<<he>>的对视。在<<he>>的眼里，你看到一种幽暗的火光。
+	<<else>>
+		你移开视线。但在余光中，你仍能看到<<he>>燃烧的眼睛。
+	<</if>>
+	<<if $worn.neck.name !== "naked">>
+		<<if C.npc.Eden.lust gte 50>>
+			<<he>>久久地亲吻你的脖子，又帮你把<span>$worn.neck.cn_name_cap</span>穿好。之后，<<he>><<EdenRing_EdenBackToWork>>你留在原地，仍然心有余悸。
+		<<else>>
+			<<he>>吻了吻你的颈窝，笑着把<span>$worn.neck.cn_name_cap</span>还给你。慌忙穿好它后，你仍然心有余悸。
+		<</if>>
+	<<else>>
+		<<he>>吻了吻你的颈窝，<<EdenRing_EdenBackToWork>>你留在原地，摸着自己的脖子，仍然心有余悸。
+	<</if>>
+<</widget>>
+
+<<widget "EdenRing_Extra_EdenCollarRemove_highdom_1">>
+<<if $speech_attitude is "meek">>
+		"我、我把它移走了。"你说。
+	<<elseif $speech_attitude is "bratty">>
+		"我把它摘下来了。"你说道。
+	<<else>>
+		"我把它移走了。"你说道。
+	<</if>>
+	<br>
+		伊甸沉默地审视着你。<<if $EdenRing.edenCollarShownTimes>>愤怒<<else>>沮丧<</if>>在<<he>>脸上浮现又褪去，最后定格成一副引而不发的危险神情。
+	<br><br>
+		"我或许会允许你的。"当你开始感到不安，<<he>>终于开口了。
+	<br>
+		"如果你学会事先征求同意的话。"
+	<br><br>
+		<<if $bus is "edenclearing">>
+			<<he>>向小屋的方向走出几步，又回头向你扬了扬下巴，示意你跟上。
+		<<else>>
+			<<he>>走到一个橱柜前，回头向你扬了扬下巴，示意你过去。
+		<</if>>
+<</widget>>
+
+<<widget "EdenRing_Extra_EdenCollarRemove_highdom_2">>
+<<if $speech_attitude is "meek">>
+		"我、我又擅自摘掉了。对不起……"你低下头。
+	<<elseif $speech_attitude is "bratty">>
+		"我摘掉了。我才不需要事事都先问你。"你说道。
+	<<else>>
+		"我把它移走了。"你简短地说。
+	<</if>>
+		<br>
+	<<if $EdenRing.edenCollarShownTimes>>
+		"你又想怎么样？"
+	<<else>>
+		"为什么？"
+	<</if>>
+		伊甸平淡地回应你。从语气里你听不出任何情绪，<<he>>的脸上也没有什么表情。
+		<br><br>
+	<<if $speech_attitude is "meek">>
+		"如果你不在场，人们可能会利用它来占我的便宜。"你说。
+	<<elseif $speech_attitude is "bratty">>
+		"这会让我陷入危险的境地，"你说道。"人们可能会利用它来占我的便宜。"
+	<<else>>
+		"这很冒险。"你说道。"人们可能会利用它来占我的便宜。"
+	<</if>>
+	<br><br>
+		<<he>>似乎认真地思量起你的话，又似乎只是用视线向你施压。在<<he>>的眼中，一种幽暗的火光正熊熊燃烧。你惴惴不安，不自觉地移开了视线。
+	<br><br>
+		就在这一瞬间，伊甸伸出手，锁住了你的喉咙。你来不及反应，连叫喊也没发出，便在被扼喉的预感中僵直了身体。
+	<br><br>
+		然而手指并未掐住你。尽管它们以随时都能把你碾碎的势头按在皮肤和血管上。
+		你回过神来，心悸不已。一定是感觉到了你脉搏加速，伊甸玩味地一偏头，似乎在考虑要掐下去，还是放过你。
+	<br><br>
+	<<link [[道歉|EdenRing Collar Remove Highdom 2]]>><<set $phase to 1>><</link>><br>
+	<<link [[闭上眼睛|EdenRing Collar Remove Highdom 2]]>><<set $phase to 2>><</link>><br>
+	<<link [[保持沉默|EdenRing Collar Remove Highdom 2]]>><<set $phase to 0>><</link>>
+<</widget>>
+
+<<widget "EdenRing_Extra_EdenCollarRemove_default">>
+<<if $speech_attitude is "meek">>
+		"我、我又把它移走了。"你小声说。"对、对不起……"
+	<<elseif $speech_attitude is "bratty">>
+		"我不想戴着它。"你说道。
+	<<else>>
+		"我又把它移走了。"你说。
+	<</if>>
+		<br><br>
+	<<if $EdenRing.edenCollarShownTimes>>
+		"你又想怎么样？"<<he>>生硬地问。
+	<<else>>
+		"为什么？"迟疑片刻，<<he>>沮丧地问道。
+	<</if>>
+	<<if $speech_attitude is "meek">>
+		"如果你不在场，人们可能会利用它来占我的便宜。"你说。
+	<<elseif $speech_attitude is "bratty">>
+		"这会让我陷入危险的境地，"你说道。"人们可能会利用它来占我的便宜。"
+	<<else>>
+		"这很冒险。"你说道。"人们可能会利用它来占我的便宜。"
+	<</if>>
+		<br><br>
+		<<he>>移开目光，考虑你的话，最终在失败中叹息。
+	<<if C.npc.Eden.dom gte 135>>
+		<<if $EdenRing.edenRescureTatal gte 5>>
+			"好吧。"<<he>>说，"但你最好留在家里。我没法时时照看你。"
+		<<elseif  $EdenRing.edenCageTatalDays gte 1 or $EdenRing.edenRecaptureTimes gte 3>>
+			"好吧。"<<he>>说，"但别在镇上逗留太久。我不想再为此惩罚你。"
+		<<else>>
+			"好吧。"<<he>>说，"但你最好留在家里。在这里你不会遇到那些问题。"
+		<</if>>
+			说完，<<he>>转过身去，没有再追问这个话题。
+	<<else>>
+		"好吧。<<he>>说，"别让我担心你，好吗？"说完，<<he>>转过身去，没有再追问这个话题。
+	<</if>>
+<</widget>>
+
+
+
+
