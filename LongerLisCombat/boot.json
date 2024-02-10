@@ -60,7 +60,7 @@
          "js": [
           {
            "from": "if (V.kylarwatched) V.kylarwatchedtimer--;",
-           "to": "if(C.npc.Eden.init===1 && V.longercombat.Eden.hourlust !== undefined)fragment.append(wikifier(\"npcincr\", \"Eden\",\"lust\",V.longercombat.Eden.hourlust));\nif (V.kylarwatched) V.kylarwatchedtimer--;",
+           "to": "if(C.npc.Eden.init && V.longercombat && V.longercombat.Eden.hourlust)fragment.append(wikifier(\"npcincr\", \"Eden\", \"lust\", V.longercombat.Eden.hourlust));\nif (V.kylarwatched) V.kylarwatchedtimer--;",
            "fileName": "time.js"
           }
           
