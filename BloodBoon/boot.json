@@ -1,0 +1,90 @@
+{
+    "name": "BloodbBoon",
+    "version": "0.1",
+    "styleFileList": [
+    ],
+    "scriptFileList_earlyload": [
+    ],
+    "scriptFileList_inject_early": [
+    ],
+    "scriptFileList_preload": [
+    ],
+    "scriptFileList": [
+         ],
+    "tweeFileList": [
+         ],
+    "imgFileList": [
+
+    ],
+    "additionFile": [
+     
+      "readme.md"
+     
+    ],
+    "addonPlugin": [
+      {
+        "modName": "TweeReplacer",
+        "addonName": "TweeReplacerAddon",
+        "modVersion": "1.0.0",
+        "params": [
+          {
+            "passage": "Widgets Settings",
+            "findRegex": "<<widget \"fetishSettings\">>\\s+<div class=\"solidBorderContainer settings-container\">\\s+<div class=\"settingsGrid\">",
+            "replace":"<<widget \"fetishSettings\">>\n<div class=\"solidBorderContainer settings-container\">\n<div class=\"settingsGrid\">\n<div class=\"settingsToggleItem\">\n<label>\n<<checkbox \"$BloodbBoon\" 0 1 autocheck>> <span class=\"wraith\">与我共舞吧，在永恒的满月下</span> \n</label>\n</div>\n"
+          },
+          {
+            "passage": "Widgets Wraith",
+            "findString": "Time.days gte 32",
+            "replace":"(Time.days gte 32 or $BloodbBoon)"
+          },
+           {
+            "passage": "Widgets Wraith",
+            "findString": "random(0,2) is 2",
+            "replace":"$BloodbBoon or random(0,2) is 2"
+          }
+        ]
+      },
+
+      {
+        "modName": "ReplacePatcher",
+        "addonName": "ReplacePatcherAddon",
+        "modVersion": "1.0.0",
+        "params": {
+         "js": [
+			 {
+           "from": "if (Time.monthDay === Time.lastDayOfMonth)",
+           "to": "if (V.BloodbBoon)\n{V.moonstate = \"morning\";\nwikifier(\"checkWraith\", true);\nreturn;}\nif (Time.monthDay === Time.lastDayOfMonth)",
+           "fileName": "time.js"
+          },
+		  {
+           "from": "Weather.sky.initMoon();",
+           "to": "if (V.BloodbBoon)\n{V.moonstate = \"evening\";\nV.moonEvent = true;\nwikifier(\"checkWraith\", true);}\nWeather.sky.initMoon();",
+           "fileName": "time.js"
+          },
+          {
+           "from": "(date.day === date.lastDayOfMonth && date.hour >= 21) || (date.day === 1 && date.hour < 6)",
+           "to": "((date.day === date.lastDayOfMonth && date.hour >= 21) || (date.day === 1 && date.hour < 6))||(V.BloodbBoon && (date.hour >= 21 || date.hour < 6))",
+           "fileName": "time.js"
+          },
+		   {
+           "from": "(date.day === date.lastDayOfMonth && date.hour >= sunRise) || (date.day === 1 && date.hour < sunSet)",
+           "to": "((date.day === date.lastDayOfMonth && date.hour >= sunRise) || (date.day === 1 && date.hour < sunSet))||(V.BloodbBoon && (date.hour >= sunRise || date.hour < sunSet))",
+           "fileName": "01-weather.js"
+          }
+         ]
+        }
+      }
+      
+    ],
+    "dependenceInfo": [
+      { 
+        "modName": "TweeReplacer",
+        "version": "^1.0.0"
+      },
+      {
+        "modName": "ReplacePatcher",
+        "version": "^1.0.0"
+       }
+
+    ]
+  }
