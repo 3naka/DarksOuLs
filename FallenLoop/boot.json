@@ -1,0 +1,85 @@
+{
+    "name": "FallenLoop",
+    "version": "0.1",
+    "styleFileList": [
+    ],
+    "scriptFileList_earlyload": [
+    ],
+    "scriptFileList_inject_early": [
+    ],
+    "scriptFileList_preload": [
+    ],
+    "scriptFileList": [
+         ],
+    "tweeFileList": [  "FallenLoop_Widgets.twee"
+         ],
+    "imgFileList": [
+
+    ],
+    "additionFile": [
+     
+      "readme.md"
+     
+    ],
+    "addonPlugin": [
+      {
+        "modName": "TweeReplacer",
+        "addonName": "TweeReplacerAddon",
+        "modVersion": "1.0.0",
+        "params": [
+          {
+            "passage": "Widgets Settings",
+            "findRegex": "<<widget \"fetishSettings\">>\\s+<div class=\"solidBorderContainer settings-container\">\\s+<div class=\"settingsGrid\">",
+            "replace":"<<widget \"fetishSettings\">>\n<div class=\"solidBorderContainer settings-container\">\n<div class=\"settingsGrid\">\n<<FallenLoopSettings>>\n"
+          },
+          {
+            "passage": "Widgets Mirror",
+            "findString": "<<if $transformationParts.cat.heterochromia is \"hidden\">>",
+            "replace":"<<FallenLoop_record>>\n<<if $transformationParts.cat.heterochromia is \"hidden\">>"
+          },
+           {
+            "passage": "Widgets End Combat",
+            "findString": "<<if $assertive gte 1>>",
+            "replace":"<<FallenLoop_transform>>\n<<if $assertive gte 1>>"
+          },
+          {
+            "passage": "Transformation Widgets",
+            "findString": "<<if $angel gt 0>>",
+            "replace":"<<if $angel gt 0 and ($FallenLoop isnot 1 or $angel is 6)>>"
+          }
+        ]
+      },
+
+      {
+        "modName": "ReplacePatcher",
+        "addonName": "ReplacePatcherAddon",
+        "modVersion": "1.0.0",
+        "params": {
+         "js": [
+			 {
+           "from": "else if (V.fallenangel >= 2)",
+           "to": "else if (V.fallenangel >= 2 && !V.FallenLoop)",
+           "fileName": "time.js"
+          },
+           {
+           "from": "statChange.purity(dailyPurity);",
+           "to": "statChange.purity((V.FallenLoop && (V.angel >=6 || V.fallenangel >= 2 || V.FallenLoop_normal)) ? dailyPurity : 1000);",
+           "fileName": "time.js"
+          }
+         ]
+        }
+      }
+      
+    ],
+    "dependenceInfo": [
+      { 
+        "modName": "TweeReplacer",
+        "version": "^1.0.0"
+      },
+      {
+        "modName": "ReplacePatcher",
+        "version": "^1.0.0"
+       }
+
+    ]
+  }

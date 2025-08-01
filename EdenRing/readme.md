@@ -4,3 +4,4 @@
 * 详细说明请看feature.md
 #### 作者：
 * FungiEggroll
+* 动作指导/文案协力：米谢利亚

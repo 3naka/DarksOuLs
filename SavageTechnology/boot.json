@@ -1,0 +1,91 @@
+{
+    "name": "SavageTechnology",
+    "version": "0.1",
+    "styleFileList": [
+    ],
+    "scriptFileList_earlyload": [
+    ],
+    "scriptFileList_inject_early": [
+    ],
+    "scriptFileList_preload": [
+    ],
+    "scriptFileList": [
+      "SavageTechnology_Widgets.js"
+    ],
+    "tweeFileList": [
+      
+    ],
+    "imgFileList": [
+ ],
+    "additionFile": [
+     
+      "readme.md"
+     
+    ],
+    "addonPlugin": [
+      {
+        "modName": "TweeReplacer",
+        "addonName": "TweeReplacerAddon",
+        "modVersion": "1.0.0",
+        "params": [
+         
+          {
+            "passage": "StoryCaption",
+            "findString": "and $passage isnot \"Start2\" and $cheatdisable is \"f\"",
+            "replace": "and $passage isnot \"Start2\""
+          },
+          {
+            "passage": "Widgets State Man",
+            "findString": "<<unset $speechcamerapose>>",
+            "replace": "<<ShowHp>><<ShowAp>><<ShowAG>>\n<<unset $speechcamerapose>>"
+          },
+           {
+            "passage": "Hospital Bed Examination",
+            "findString": "<<elseif $trauma lt ($traumamax / 10) * 9>>",
+            "replace": "<<elseif 1>>"
+          },
+          {
+            "passage": "Hospital Bed Examination Sydney",
+            "findString": "<<elseif $trauma lt ($traumamax / 10) * 9>>",
+            "replace": "<<elseif 1>>"
+          }
+        ]
+      },
+       {
+         "modName": "ReplacePatcher",
+        "addonName": "ReplacePatcherAddon",
+        "modVersion": "1.0.0",
+        "params": {
+         "js": [
+         
+          {
+           "from": "V.science_exam = Math.clamp(V.science_exam - 7, -107, 200);",
+           "to": "",
+           "fileName": "time.js"
+          },
+		   {
+           "from": "V.maths_exam = Math.clamp(V.maths_exam - 7, -107, 200);",
+           "to": "",
+           "fileName": "time.js"
+          },
+		   {
+           "from": "V.english_exam = Math.clamp(V.english_exam - 7, -107, 200);",
+           "to": "",
+           "fileName": "time.js"
+          },
+		   {
+           "from": "V.history_exam = Math.clamp(V.history_exam - 7, -107, 200);",
+           "to": "",
+           "fileName": "time.js"
+          }
+        ]
+      }
+    }
+    ],
+    "dependenceInfo": [
+      { 
+        "modName": "TweeReplacer",
+        "version": "^1.0.0"
+      }
+    ]
+  }

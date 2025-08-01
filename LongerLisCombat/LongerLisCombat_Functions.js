@@ -144,3 +144,15 @@ function LongerLisCombat_StateEdit(){
 }
 
 DefineMacroS("LongerLisCombat_StateEdit", LongerLisCombat_StateEdit);
+
+//好烦，竟然还是单独函数
+function LongerLisCombat_IvoryWraith(data)
+{
+	if(V.longercombat  ===undefined || V.longercombat.IvoryWraith === undefined )return"";
+
+	if(data === "abomination" && V.enemyarousalmax< V.longercombat.IvoryWraith.apnc)V.enemyarousalmax = V.longercombat.IvoryWraith.apnc;
+	if(data === "man" && V.enemyarousalmax< V.longercombat.IvoryWraith.ap)V.enemyarousalmax = V.longercombat.IvoryWraith.ap;
+	 return"";
+}
+
+DefineMacroS("LongerLisCombat_IvoryWraith", LongerLisCombat_IvoryWraith);

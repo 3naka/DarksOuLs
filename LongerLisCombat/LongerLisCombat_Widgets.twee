@@ -91,15 +91,73 @@
 		<span class="small-description">非自愿AP：</span>
 				<<numberslider "$longercombat.Hawk.apnc" $longercombat.Hawk.apnc 500 20000 100>>
 </div>
+<div class="settingsToggleItem">		
+				<span class="gold">贝利</span><br>
+		<span class="small-description">自愿AP：</span>	
+				<<numberslider "$longercombat.Bailey.ap" $longercombat.Bailey.ap 500 20000 100>>
+		<span class="small-description">非自愿AP：</span>
+				<<numberslider "$longercombat.Bailey.apnc" $longercombat.Bailey.apnc 500 20000 100>>
+</div>
+<div class="settingsToggleItem">		
+				<span class="gold">哈珀</span><br>
+		<span class="small-description">自愿AP：</span>	
+				<<numberslider "$longercombat.Harper.ap" $longercombat.Harper.ap 500 20000 100>>
+		<span class="small-description">非自愿AP：</span>
+				<<numberslider "$longercombat.Harper.apnc" $longercombat.Harper.apnc 500 20000 100>>
+</div>
+<div class="settingsToggleItem">		
+				<span class="gold">雷米</span><br>
+		<span class="small-description">自愿AP：</span>	
+				<<numberslider "$longercombat.Remy.ap" $longercombat.Remy.ap 500 20000 100>>
+		<span class="small-description">非自愿AP：</span>
+				<<numberslider "$longercombat.Remy.apnc" $longercombat.Remy.apnc 500 20000 100>>
+</div>
+<div class="settingsToggleItem">		
+				<span class="gold">伦恩</span><br>
+		<span class="small-description">自愿AP：</span>	
+				<<numberslider "$longercombat.Wren.ap" $longercombat.Wren.ap 500 20000 100>>
+		<span class="small-description">非自愿AP：</span>
+				<<numberslider "$longercombat.Wren.apnc" $longercombat.Wren.apnc 500 20000 100>>
+</div>
+<div class="settingsToggleItem">		
+				<span class="gold">梅森</span><br>
+		<span class="small-description">自愿AP：</span>	
+				<<numberslider "$longercombat.Mason.ap" $longercombat.Mason.ap 500 20000 100>>
+		<span class="small-description">非自愿AP：</span>
+				<<numberslider "$longercombat.Mason.apnc" $longercombat.Mason.apnc 500 20000 100>>
+</div>
+<div class="settingsToggleItem">		
+				<span class="gold">温特</span><br>
+		<span class="small-description">自愿AP：</span>	
+				<<numberslider "$longercombat.Winter.ap" $longercombat.Winter.ap 500 20000 100>>
+		<span class="small-description">非自愿AP：</span>
+				<<numberslider "$longercombat.Winter.apnc" $longercombat.Winter.apnc 500 20000 100>>
+</div>
+<div class="settingsToggleItem">		
+				<span class="gold">约旦</span><br>
+		<span class="small-description">自愿AP：</span>	
+				<<numberslider "$longercombat.Jordan.ap" $longercombat.Jordan.ap 500 20000 100>>
+		<span class="small-description">非自愿AP：</span>
+				<<numberslider "$longercombat.Jordan.apnc" $longercombat.Jordan.apnc 500 20000 100>>
+</div>
+<div class="settingsToggleItem">		
+				<span class="gold">象牙怨灵</span><mouse class="tooltip linkBlue">(?)<span>修改后AP低于初始AP时不会生效。</span></mouse><br>
+		<span class="small-description">一般形态AP：</span>	
+				<<numberslider "$longercombat.IvoryWraith.ap" $longercombat.IvoryWraith.ap 500 20000 100>>
+		<span class="small-description">触手全开AP：</span>
+				<<numberslider "$longercombat.IvoryWraith.apnc" $longercombat.IvoryWraith.apnc 500 20000 100>>
+</div>
 </div>
 </div>
 
 <</widget>>
 
 <!--V0.2：进行数据初始化-->
+
+<!--V0.2.1：新增几个未来可期的人员（真的有未来吗）-->
 <<widget "LongerLisCombatSettings_SettingsInit">>
 
-<<if $longercombat is undefined>>
+<<if $longercombat is undefined or $longercombat.Bailey is undefined>>
 		<<set $longercombat to {
 			Eden:{
 			fullDescription:"Eden",
@@ -145,6 +203,46 @@
 		},
 			Kylar:{
 			fullDescription:"Kylar",
+			ap: 500,
+			apnc: 500,
+		},
+		Bailey:{
+			fullDescription:"Bailey",
+			ap: 500,
+			apnc: 500,
+		},
+		Harper:{
+			fullDescription:"Harper",
+			ap: 500,
+			apnc: 500,
+		},
+		Remy:{
+			fullDescription:"Remy",
+			ap: 500,
+			apnc: 500,
+		},
+		Wren:{
+			fullDescription:"Wren",
+			ap: 500,
+			apnc: 500,
+		},
+		Mason:{
+			fullDescription:"Mason",
+			ap: 500,
+			apnc: 500,
+		},
+		Winter:{
+			fullDescription:"Winter",
+			ap: 500,
+			apnc: 500,
+		},
+		Jordan:{
+			fullDescription:"Jordan",
+			ap: 500,
+			apnc: 500,
+		},
+		IvoryWraith:{
+			fullDescription:"Ivory Wraith",
 			ap: 500,
 			apnc: 500,
 		}

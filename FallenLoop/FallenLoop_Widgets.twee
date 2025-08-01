@@ -1,0 +1,82 @@
+
+:: Widgets FallenLoop [widget]
+<<widget "FallenLoopSettings">>
+<div class="settingsToggleItem">
+<label><<checkbox "$FallenLoop" 0 1 autocheck>>永葆纯洁<mouse class="tooltip linkBlue">(?)<span>……抑或循环往复的堕天轮回</span></mouse></label>
+<label><<checkbox "$FallenLoop_normal" 0 1 autocheck>>非天使时也生效</label>
+<label><<checkbox "$FallenLoop_purity" 0 1 autocheck>>仅恢复纯洁</label>
+</div>
+<</widget>>
+
+<!-- 战斗后把堕天使变回天使。判定也包含在内。-->
+<<widget "FallenLoop_transform">>
+<<if $FallenLoop>>
+    <<if $angel gte 6>>
+    <<purity 1000>>
+    <</if>>
+
+     <<if $fallenangel gte 2 or $FallenLoop_normal>>
+        <<if $player.virginity["penile"] isnot true and $FallenLoop_purity isnot 1>>
+            <<set $player.virginityDetails["penile"] to {}>>
+		    <<set $player.virginity["penile"] to true>>
+            <<set _virginitychange to 1>>
+			<<set $player.virginity.temple to true>>
+        <</if>>
+
+        <<if ($player.virginity["vaginal"] isnot true) and $FallenLoop_purity isnot 1 >>
+            <<set $player.virginityDetails["vaginal"] to {}>>
+		    <<set $player.virginity["vaginal"] to true>>
+            <<set _virginitychange to 1>>
+			<<set $player.virginity.temple to true>>
+        <</if>>
+
+        <<purity 1000>>
+
+        <<if $fallenangel gte 2 and $FallenLoop_purity isnot 1>>
+            <<if $FallenLoop_R is undefined>>
+                <<set $FallenLoop_R to {}>>
+            <</if>>
+            <<set $FallenLoop_R.count += 1>>
+            <<world_corruption "soft" 1>>
+            <<clearDivineTransformations>>
+		    <<set $specialTransform to 1>>
+		    <<set $angel to 6>>
+		    <<set $angelbuild to 50>>
+            <<if $FallenLoop_R.halo and $FallenLoop_R.halo isnot "disabled">>
+		        <<set $transformationParts.angel.halo to $FallenLoop_R.halo>>
+            <<else>>
+                <<set $transformationParts.angel.halo to "default">>
+            <</if>>
+            <<if $FallenLoop_R.wings and $FallenLoop_R.wings isnot "disabled">>
+		         <<set $transformationParts.angel.wings to $FallenLoop_R.wings>>
+            <<else>>
+                 <<set $transformationParts.angel.wings to "default">>
+            <</if>>
+            <<if $FallenLoop_R.count is 1000>>
+                <span class="red">恍惚中，你看到一位头顶不详黑色光环的天使身影。祂缓缓张开翅膀，无数黑色羽毛似雪降下。<br>
+                一瞬的幻象后，你的翅膀再次生出羽毛，破碎的光环聚拢，恢复如新。</span><br><br>
+                <<else>>
+                <span class="gold">温柔的光束笼罩了你，你的翅膀再次生出羽毛，破碎的光环聚拢，恢复如新。</span><br><br>
+            <</if>>	   
+        <<elseif _virginitychange>>
+            <span class="gold">温柔的光束笼罩了你，你感到自己的童贞恢复如新。</span><br><br>
+        <</if>>
+    <</if>>
+
+<</if>>
+<</widget>>
+
+<!-- 检视完内在记录下来装扮信息-->
+<<widget "FallenLoop_record">>
+<<if $FallenLoop and $transformationParts>>
+<<if $FallenLoop_R is undefined>>
+<<set $FallenLoop_R to {}>>
+<</if>>
+    <<set $FallenLoop_R.halo to $transformationParts.angel.halo>>
+    <<set $FallenLoop_R.wings to $transformationParts.angel.wings>>
+<</if>>
+    
+<</widget>>
+
+
+

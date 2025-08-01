@@ -1,6 +1,6 @@
 {
     "name": "LongerLisCombat",
-    "version": "0.2",
+    "version": "0.2.1",
     "styleFileList": [
     ],
     "scriptFileList_earlyload": [
@@ -48,6 +48,11 @@
             "passage": "Widgets Effects Man",
             "findString": "<<pain -0.25>>",
             "replace": "<<LongerLisCombat_StateEdit>>\n<<pain -0.25>>"
+          },
+		   {
+            "passage": "Widgets Wraith",
+            "findString": "<<set $speechdisable to 1>><<set $enemynomax to 1>>",
+            "replace": "<<if _args[0] >><<LongerLisCombat_IvoryWraith _args[0] >><</if>><<set $speechdisable to 1>><<set $enemynomax to 1>>"
           }
         ]
       },
@@ -60,7 +65,7 @@
          "js": [
           {
            "from": "if (V.kylarwatched) V.kylarwatchedtimer--;",
-           "to": "if(C.npc.Eden.init && V.longercombat && V.longercombat.Eden.hourlust)fragment.append(wikifier(\"npcincr\", \"Eden\", \"lust\", V.longercombat.Eden.hourlust));\nif (V.kylarwatched) V.kylarwatchedtimer--;",
+           "to": "if(C.npc.Eden.init && V.longercombat && V.longercombat.Eden.hourlust){C.npc.Eden.lust = Math.clamp(C.npc.Eden.lust+V.longercombat.Eden.hourlust,0,100)};\nif (V.kylarwatched) V.kylarwatchedtimer--;",
            "fileName": "time.js"
           }
           

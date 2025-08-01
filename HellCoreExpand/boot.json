@@ -1,0 +1,198 @@
+{
+    "name": "HellCoreExpand",
+    "version": "0.1",
+    "styleFileList": [
+    ],
+    "scriptFileList_earlyload": [
+    ],
+    "scriptFileList_inject_early": [
+    ],
+    "scriptFileList_preload": [
+    ],
+    "scriptFileList": [
+    ],
+    "tweeFileList": [
+      
+    ],
+    "imgFileList": [
+ ],
+    "additionFile": [
+     
+      "readme.md"
+     
+    ],
+    "addonPlugin": [
+      {
+        "modName": "TweeReplacer",
+        "addonName": "TweeReplacerAddon",
+        "modVersion": "1.0.0",
+        "params": [
+         
+          {
+            "passage": "Widgets",
+            "findString": "<<if (currentSkillValue('willpower') / 10) gte (($pain - 100) + random(1, 100))>>",
+            "replace": "<<if 0>>"
+          },
+          {
+            "passage": "Widgets",
+            "findString": "<<gwillpower>><<willpower 1>>",
+            "replace": "\n",
+            "all":true
+          },
+           {
+            "passage": "Widgets",
+            "findString": "<<ggwillpower>><<willpower 5>>",
+            "replace": "\n"
+          },
+          {
+            "passage": "Widgets",
+            "findString": "<<if $orgasmdown gte 1 and _willpowerorgasmchecked isnot true>>",
+            "replace": "<<if $position isnot \"stalk\" and $arousal gte 10000>><<orgasm>><</if>>\n<<if $orgasmdown gte 1 and _willpowerorgasmchecked isnot true>>\n<<if $consensual isnot 1>><<set $enemyanger += 100>><</if>>\n"
+          },
+          {
+            "passage": "Widgets",
+            "findString": "<<if (currentSkillValue('willpower') / 10) gte (($orgasmdown * 30) + random(1, 80))>>",
+            "replace": "<<if 0>>"
+          },
+		   {
+            "passage": "Widgets",
+            "findString": "<<set V[$_subject + \"_exam\"] to Math.clamp(V[$_subject + \"_exam\"] + ($_gain * _skill_mod), -107, 200)>>",
+            "replace": "<<if $trauma gt $traumamax / 4>><<set $_gain *= 1-( ($trauma - $traumamax / 4) / $traumamax)>> <</if>>\n<<set V[$_subject + \"_exam\"] to Math.clamp(V[$_subject + \"_exam\"] + ($_gain * _skill_mod), -107, 200)>>"
+          },
+		  {
+            "passage": "Widgets Orgasm",
+            "findString": "<<elseif $orgasmcount lte 23>>",
+            "replace": "<<elseif $orgasmcount lte 23>>\n<<combattrauma 6>>\n<<pain 1>>\n"
+          },
+		  {
+            "passage": "Widgets Orgasm",
+            "findString": "<<set $stress += 100>><<combattrauma 10>><<pain 1>>",
+            "replace": "<<set $stress += 100>><<combattrauma 10>><<pain 1>>\n<<combattrauma 10>><<pain 2>><<set $hallucinogen += 10>><<awareness 1>>\n"
+          },
+		   {
+            "passage": "Widgets Orgasm",
+            "findString": "<<if $gamemode is \"hard\">>",
+            "replace": "<<if $bodysize lt 3>><<set _mod = 1 + (3 - $bodysize)/2 >>\n<<set $vaginalPain *= _mod>><<set $penisPain *= _mod>><<set $analPain *= _mod>><</if>>\n<<if $gamemode is \"hard\">>"
+          },
+          {
+            "passage": "Rent Intro",
+            "findString": "<<if $tutorial is 0>>",
+            "replace": "<<if $rentsale is 0>><<set $rentsale to 1>><</if>>\n<<if $tutorial is 0>>"
+          },
+           {
+            "passage": "Widgets State Man",
+            "findString": "if $panicattacks gte 1 and _panicchecked isnot true and random(1, 100) is 100",
+            "replace": "if ($panicattacks gte 2 or ($panicattacks gte 1 and random(1, 100) gte 50)) and _panicchecked isnot true"
+          },
+          {
+            "passage": "Widgets Swarm",
+            "findString": "if $rng is 100",
+            "replace": "if $panicattacks gte 2 or $rng gte 50"
+          },
+          {
+            "passage": "Widgets Vore",
+            "findString": "if $rng is 100",
+            "replace": "if $panicattacks gte 2 or $rng gte 50"
+          },
+          {
+            "passage": "Widgets Tentacles",
+            "findString": "if $rng is 100",
+            "replace": "if $panicattacks gte 2 or $rng gte 50"
+          },
+           {
+            "passage": "Underground Cell",
+            "findString": "<<if $trauma gte $traumamax>>",
+            "replace": "<<if 0>>"
+          },
+          {
+            "passage": "Livestock Field River",
+            "findString": "<<swimmingdifficulty 1 1000>>",
+            "replace": "<<swimmingdifficulty 1000 1000>>"
+          },
+		  {
+            "passage": "Widgets NPCs",
+            "findString": "<<set $enemyarousal to $allure / 50 + $audiencearousal>>",
+            "replace": "<<set $enemyarousal to $audiencearousal/2 >>"
+          },
+		   {
+            "passage": "Widgets NPCs",
+            "findString": "<<set $enemyarousal to $allure / 50>>",
+            "replace": "<<set $enemyarousal to 50>>",
+			"all":true
+          },
+		  {
+            "passage": "Widgets NPCs",
+            "findString": "<<set $enemyarousal to $allure / 100>>",
+            "replace": "<<set $enemyarousal to 25>>",
+			"all":true
+          },
+		  {
+            "passage": "Widgets NPCs",
+            "findString": "<<set $enemyarousalmax to",
+            "replace": "<<set $enemyarousalmax to 1.5 *",
+			"all":true
+          }
+        ]
+      },
+	   {
+        "modName": "ReplacePatcher",
+        "addonName": "ReplacePatcherAddon",
+        "modVersion": "1.0.0",
+        "params": {
+         "js": [
+			 {
+           "from": "pain *= 1 - V.sciencetrait / 10;",
+           "to": "",
+           "fileName": "stat-changes.js"
+          },
+           {
+           "from": "pain *= 1 - V.masochism / 1200;",
+           "to": "pain *= 1 - V.masochism / 3600;",
+           "fileName": "stat-changes.js"
+          },
+		   {
+           "from": "for (let i = 0; i < hours; i++) {",
+           "to": "statChange.drugs(100);\nfor (let i = 0; i < hours; i++) {",
+           "fileName": "time.js"
+          },
+		  {
+           "from": "if (V.robinpaid >= 1) statChange.trauma(-25);",
+           "to": "",
+           "fileName": "time.js"
+          },
+		  {
+           "from": "if (V.schooltrait >= 4) statChange.trauma(-50);",
+           "to": "if (1) ;",
+           "fileName": "time.js"
+          },
+		  {
+           "from": "if (V.trauma >= V.traumamax) V.beauty -= (V.trauma - V.traumamax) / 5;",
+           "to": "if (V.trauma >= V.traumamax) V.beauty += (V.trauma - V.traumamax) / 20;",
+           "fileName": "stat-changes.js"
+          },
+          {
+           "from": "if (V.trauma >= V.traumamax) {",
+           "to": "if (V.trauma >= (V.traumamax / 20 * 19)) {",
+           "fileName": "stat-changes.js"
+          },
+          {
+           "from": "V.wolfpacktrust++;",
+           "to": "",
+           "fileName": "stat-changes.js"
+          }
+         ]
+        }
+      }
+    ],
+	
+    "dependenceInfo": [
+      { 
+        "modName": "TweeReplacer",
+        "version": "^1.0.0"
+      },
+	  {
+        "modName": "ReplacePatcher",
+        "version": "^1.0.0"
+       }
+    ]
+  }
