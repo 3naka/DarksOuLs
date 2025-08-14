@@ -1,0 +1,109 @@
+{
+    "name": "AutoClean",
+    "version": "0.1",
+    "styleFileList": [
+    ],
+    "scriptFileList_earlyload": [
+    ],
+    "scriptFileList_inject_early": [
+    ],
+    "scriptFileList_preload": [
+    ],
+    "scriptFileList": [
+    ],
+    "tweeFileList": [
+    "AutoClean_Widgets.twee"
+    ],
+    "imgFileList": [
+ ],
+    "additionFile": [
+     
+      "readme.md"
+     
+    ],
+    "addonPlugin": [
+      {
+        "modName": "TweeReplacer",
+        "addonName": "TweeReplacerAddon",
+        "modVersion": "1.0.0",
+        "params": [
+
+          {
+            "passage": "Widgets Temple",
+            "findString": "<<set $temple_quarters -= 10>>",
+            "replace": "<<if $housekeeping lt 1000 and $temple_rank isnot \"initiate\">><<set $temple_quarters -= 10>><</if>>"
+          },
+          {
+            "passage": "Widgets Temple",
+            "findString": "<<set $temple_garden -= 10>>",
+            "replace": "<<if $tending lt 1000 and $temple_rank isnot \"initiate\">><<set $temple_garden -= 10>><</if>>"
+          }
+        
+        ]
+      },
+       {
+         "modName": "ReplacePatcher",
+        "addonName": "ReplacePatcherAddon",
+        "modVersion": "1.0.0",
+        "params": {
+         "js": [
+          {
+           "from": "wikifier(\"farm_pigs\", -2);",
+           "to": "",
+           "fileName": "time.js"
+          },
+          {
+           "from": "wikifier(\"farm_pigs\", -1);",
+           "to": "",
+           "fileName": "time.js"
+          },
+           {
+           "from": "V.farm.kennel >= 1",
+           "to": "0",
+           "fileName": "time.js"
+          },
+         {
+           "from": "delete V.alex_to_bed;",
+           "to": "delete V.alex_to_bed;\nV.farm.aggro = 0;\nif(0){ V.farm_attack_timer = 30;}\nwikifier(\"AutoClean_TakeFarmStock\");",
+           "fileName": "time.js"
+          },
+            {
+           "from": "if (V.grace >= 1 && !V.daily.graceUp) statChange.grace(-2);",
+           "to": "if(V.housekeeping >= 1000){V.temple_quarters = 100; }\nif(V.tending >= 1000){V.temple_garden = 100;}\nif (V.grace >= 1 && !V.daily.graceUp && V.spear_vessel !=\"temple\") statChange.grace(-2);",
+           "fileName": "time.js"
+          },
+          {
+           "from": "if (V.edengarden >= 1) V.edengarden--;",
+           "to": "if (V.edengarden != undefined )V.edengarden = 4;",
+           "fileName": "time.js"
+          },
+          {
+           "from": "if (V.edenshrooms >= 1) V.edenshrooms--;",
+           "to": "if (V.edenshrooms != undefined) V.edenshrooms = 4;",
+           "fileName": "time.js"
+          },
+          {
+           "from": "if (V.edenspring >= 1) V.edenspring--;",
+           "to": "if (V.edenspring != undefined) V.edenspring = 4;\nif( V.soap != undefined && V.soap < 10 )V.soap = 10;\nif( V.salve != undefined && V.salve < 10 )V.salve = 10;",
+           "fileName": "time.js"
+          },
+          {
+           "from": "if (V.bird.clean >= 1)",
+           "to": "if(V.bird.upgrades.firepit >= 3 && V.bird.materials.wood < 10 )V.bird.materials.wood = 10;\nif (V.bird.clean >= 1 && V.bird.upgrades.shelter < 3)",
+           "fileName": "time.js"
+          }
+        ]
+      }
+    }
+    ],
+    "dependenceInfo": [
+      { 
+        "modName": "TweeReplacer",
+        "version": "^1.0.0"
+      },
+	  {
+        "modName": "ReplacePatcher",
+        "version": "^1.0.0"
+       }
+    ]
+  }

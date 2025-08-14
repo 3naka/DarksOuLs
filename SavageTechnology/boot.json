@@ -37,7 +37,7 @@
           {
             "passage": "Widgets State Man",
             "findString": "<<unset $speechcamerapose>>",
-            "replace": "<<ShowHp>><<ShowAp>><<ShowAG>>\n<<unset $speechcamerapose>>"
+            "replace": "<<ShowHp>><<ShowAp>><<ShowAG>>\n<br><a onclick=\"V.enemyarousal-=500\">延长战斗</a>|<a onclick=\"V.enemyarousal=V.enemyarousalmax\">终结战斗</a>|<a onclick=\"V.enemyhealth=0\">一拳打飞</a>\n<<unset $speechcamerapose>>"
           },
            {
             "passage": "Hospital Bed Examination",
@@ -48,6 +48,11 @@
             "passage": "Hospital Bed Examination Sydney",
             "findString": "<<elseif $trauma lt ($traumamax / 10) * 9>>",
             "replace": "<<elseif 1>>"
+          },
+           {
+            "passage": "Lake Ruin Box",
+            "findString": "if $rng gte 95",
+            "replace": "if 1"
           }
         ]
       },

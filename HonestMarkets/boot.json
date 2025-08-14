@@ -1,0 +1,52 @@
+{
+    "name": "HonestMarkets",
+    "version": "0.1",
+    "styleFileList": [
+    ],
+    "scriptFileList_earlyload": [
+    ],
+    "scriptFileList_inject_early": [
+    ],
+    "scriptFileList_preload": [
+    ],
+    "scriptFileList": [
+     
+    ],
+    "tweeFileList": [
+       "HonestMarkets_Widgets.twee"
+    ],
+    "imgFileList": [
+ ],
+    "additionFile": [
+     
+      "readme.md"
+     
+    ],
+    "addonPlugin": [
+      {
+        "modName": "TweeReplacer",
+        "addonName": "TweeReplacerAddon",
+        "modVersion": "1.0.0",
+        "params": [
+         
+         
+          {
+            "passage": "Connudatus Markets",
+            "findString": "if $danger gte (14000 - $allure)",
+            "replace": "if 1"
+          },
+           {
+            "passage": "Connudatus Markets",
+            "findString": "<<connudatusMarketsLewdEvents>>",
+            "replace": "<<HonestMarkets_Intro>>"
+          }
+        ]
+      }
+    ],
+    "dependenceInfo": [
+      { 
+        "modName": "TweeReplacer",
+        "version": "^1.0.0"
+      }
+    ]
+  }

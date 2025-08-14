@@ -1,0 +1,104 @@
+
+:: Widgets HonestMarkets[widget]
+<<widget "HonestMarkets_Intro">>
+你走在各色摊位之间，琳琅满目的商品令人眼花缭乱。周围人头攒动，叫卖声不绝于耳。<br>
+要是没有目标，你恐怕连逛三天三夜也难买到心仪的商品。<br><br>
+你要重点关注哪方面的商品？
+<br><br>
+<<link [[购买杂货|HonestMarkets Products]]>><</link>><br>
+<<link [[购买种子和肥料|HonestMarkets Seeds]]>><</link>><br>
+<<link [[只是闲逛|HonestMarkets Walk]]>><</link>><br><br>
+<<getouticon>><<link [[离开|Connudatus Street]]>><<endevent>><</link>>
+<</widget>>
+
+:: HonestMarkets Products
+<<set _change to random(100,500)>>
+你停在一处连排的蔬果和食品摊位前。这里的食材不仅种类繁多，看起来也非常新鲜。
+		
+<<if $loft_river is 1>><br>你忽然想到，或许孤儿们的食谱里也可以添一些维生素。<</if>>
+<br><br>
+	<<if $loft_river is 1 and $money gte 15000>>
+		<<tendingicon "potato">><<link [[为孤儿院购买蔬菜 (£150)|HonestMarkets Products]]>><<money -15000>><<hope 1>><<famegood 1>><<pass 15>><<endevent>><</link>><<ghope>><br>
+	<</if>>
+	<<if $money gte 10000>>
+		<<tendingicon "milk">><<link [[购买3瓶牛奶 (£100)|HonestMarkets Products]]>><<tending_give bottle_of_milk 3>><<money -10000>><<pass 15>><<endevent>><</link>><br>
+	<</if>>
+	<<if $money gte 2000>>
+		<<tendingicon "banana">><<link [[购买24香蕉(£20)|HonestMarkets Products]]>><<money -2000>><<tending_give banana 24>><</link>><br>
+	<</if>>
+	<br>
+	<<tendingicon setup.plants["chicken_egg"].icon>><<link [[偷点鸡蛋||Connudatus Street]]>><<crimeUp 1 "petty">><<tending_give chicken_egg 3>><<transform fox 1>><<pass 15>><<endevent>><</link>><<crime "petty">><br>
+	<<crimeicon "mark">><<link [[偷点零钱||Connudatus Street]]>><<crimeUp 1 "petty">><<money _change>><<pass 15>><<endevent>><</link>><<crime "petty">><br>
+	<br>
+	<<getouticon>><<link [[离开|Connudatus Street]]>><<endevent>><</link>>
+
+:: HonestMarkets Seeds
+一个挂着“园艺用品”牌子的摊位吸引了你的注意。除了园艺工具，这里也出售当季种子和肥料。<br>
+在摊位后，一个满脸雀斑的<<girl>>笑着向你招了招手。
+<br><br>
+<<if $fertiliser is undefined or !$fertiliser.current>>
+	你现在还没有肥料。
+<<else>>
+	你现在有$fertiliser.current 袋肥料。
+<</if>>
+<br>
+<<if $money gte 100000>>
+		<<gardenicon "fertiliser">><<link [[购买肥料 (£1000)|HonestMarkets Seeds]]>><<set $fertiliser.current += 1>><<money -100000>><<pass 15>><<endevent>><</link>>
+<</if>>
+<br><br>
+<<if $money gte 2000>>
+					<<if !$plants_known.includes("tomato")>>
+						<<tendingicon setup.plants["tomato"].icon>><<link [[购买番茄种子 (£20)|HonestMarkets Seeds]]>><<money -2000>><<set $plants_known.push("tomato")>><</link>>
+						<br>
+					<<else>>
+						<span class="blue">你已经有番茄种子了。</span>
+						<br>
+					<</if>>
+
+					<<if !$plants_known.includes("cauliflower")>>
+						<<tendingicon setup.plants["cauliflower"].icon>><<link [[购买花椰菜种子 (£20)|HonestMarkets Seeds]]>><<money -2000>><<set $plants_known.push("cauliflower")>><</link>>
+						<br>
+					<<else>>
+						<span class="blue">你已经有花椰菜种子了。</span>
+						<br>
+					<</if>>
+
+					<<if !$plants_known.includes("wheat")>>
+						<<tendingicon setup.plants["wheat"].icon>><<link [[购买小麦种子 (£20)|HonestMarkets Seeds]]>><<money -2000>><<set $plants_known.push("wheat")>><</link>>
+						<br>
+					<<else>>
+						<span class="blue">你已经有小麦种子了。</span>
+						<br>
+					<</if>>
+
+					<<if !$plants_known.includes("chilli_pepper")>>
+						<<tendingicon setup.plants["chilli_pepper"].icon>><<link [[购买辣椒种子 (£20)|HonestMarkets Seeds]]>><<money -2000>><<set $plants_known.push("chilli_pepper")>><</link>>
+						<br>
+					<<else>>
+						<span class="blue">你已经有辣椒种子了。</span>
+						<br>
+					<</if>>
+
+					<<if !$plants_known.includes("pepper")>>
+						<<tendingicon setup.plants["pepper"].icon>><<link [[购买灯笼椒种子 (£20)|HonestMarkets Seeds]]>><<money -2000>><<set $plants_known.push("pepper")>><</link>>
+						<br>
+					<<else>>
+						<span class="blue">你已经有灯笼椒种子了。</span>
+						<br>
+					<</if>>
+
+					<<if !$plants_known.includes("spinach")>>
+						<<tendingicon setup.plants["spinach"].icon>><<link [[购买菠菜种子 (£20)|HonestMarkets Seeds]]>><<money -2000>><<set $plants_known.push("spinach")>><</link>>
+						<br>
+					<<else>>
+						<span class="blue">你已经有菠菜种子了。</span>
+						<br>
+					<</if>>
+				<<else>>
+					<<ind>><span class="blue">唉，可惜你都买不起。</span>
+					<br>
+<</if>>
+<br><<getouticon>><<link [[离开|Connudatus Street]]>><<endevent>><</link>>
+
+:: HonestMarkets Walk
+<<connudatusMarketsStatusEvents>>

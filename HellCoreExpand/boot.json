@@ -36,7 +36,7 @@
           {
             "passage": "Widgets",
             "findString": "<<gwillpower>><<willpower 1>>",
-            "replace": "\n",
+            "replace": "<<gwillpower>><<willpower 1>>",
             "all":true
           },
            {
@@ -52,7 +52,7 @@
           {
             "passage": "Widgets",
             "findString": "<<if (currentSkillValue('willpower') / 10) gte (($orgasmdown * 30) + random(1, 80))>>",
-            "replace": "<<if 0>>"
+            "replace": "<<if (currentSkillValue('willpower') / 10) gte (($orgasmdown * 30) + random(1, 80))>>"
           },
 		   {
             "passage": "Widgets",
@@ -67,13 +67,14 @@
 		  {
             "passage": "Widgets Orgasm",
             "findString": "<<set $stress += 100>><<combattrauma 10>><<pain 1>>",
-            "replace": "<<set $stress += 100>><<combattrauma 10>><<pain 1>>\n<<combattrauma 10>><<pain 2>><<set $hallucinogen += 10>><<awareness 1>>\n"
+            "replace": "<<set $stress += 100>><<combattrauma 10>><<pain 1>>\n<<combattrauma 10>><<set $hallucinogen += 10>><<awareness 1>>\n"
           },
 		   {
             "passage": "Widgets Orgasm",
             "findString": "<<if $gamemode is \"hard\">>",
-            "replace": "<<if $bodysize lt 3>><<set _mod = 1 + (3 - $bodysize)/2 >>\n<<set $vaginalPain *= _mod>><<set $penisPain *= _mod>><<set $analPain *= _mod>><</if>>\n<<if $gamemode is \"hard\">>"
+            "replace": "<<if $bodysize lt 3>><<set _mod = 1 + (3 - $bodysize)/4 >>\n<<set $vaginalPain *= _mod>><<set $penisPain *= _mod>><<set $analPain *= _mod>><</if>>\n<<if $gamemode is \"hard\">>"
           },
+          
           {
             "passage": "Rent Intro",
             "findString": "<<if $tutorial is 0>>",
@@ -81,33 +82,28 @@
           },
            {
             "passage": "Widgets State Man",
-            "findString": "if $panicattacks gte 1 and _panicchecked isnot true and random(1, 100) is 100",
-            "replace": "if ($panicattacks gte 2 or ($panicattacks gte 1 and random(1, 100) gte 50)) and _panicchecked isnot true"
+            "findString": "<<set $panicviolence to 3>>",
+            "replace": "<<set $$panicparalysis to 3>>"
           },
           {
             "passage": "Widgets Swarm",
-            "findString": "if $rng is 100",
-            "replace": "if $panicattacks gte 2 or $rng gte 50"
+            "findString": "<<set $panicviolence to 3>>",
+            "replace": "<<set $$panicparalysis to 3>>"
           },
           {
             "passage": "Widgets Vore",
-            "findString": "if $rng is 100",
-            "replace": "if $panicattacks gte 2 or $rng gte 50"
+            "findString": "<<set $panicviolence to 3>>",
+            "replace": "<<set $$panicparalysis to 3>>"
           },
           {
             "passage": "Widgets Tentacles",
-            "findString": "if $rng is 100",
-            "replace": "if $panicattacks gte 2 or $rng gte 50"
+            "findString": "<<set $panicviolence to 3>>",
+            "replace": "<<set $$panicparalysis to 3>>"
           },
            {
             "passage": "Underground Cell",
             "findString": "<<if $trauma gte $traumamax>>",
             "replace": "<<if 0>>"
-          },
-          {
-            "passage": "Livestock Field River",
-            "findString": "<<swimmingdifficulty 1 1000>>",
-            "replace": "<<swimmingdifficulty 1000 1000>>"
           },
 		  {
             "passage": "Widgets NPCs",
@@ -131,6 +127,36 @@
             "findString": "<<set $enemyarousalmax to",
             "replace": "<<set $enemyarousalmax to 1.5 *",
 			"all":true
+          },
+          {
+            "passage": "Widgets Fame",
+            "findString": "$fame.exhibitionism, 0, 2000",
+            "replace": "$fame.exhibitionism, 0, 4000",
+			"all":true
+          },
+          {
+            "passage": "Widgets Fame",
+            "findString": "$fame.prostitution, 0, 2000",
+            "replace": "$fame.prostitution, 0, 4000",
+			"all":true
+          },
+          {
+            "passage": "Widgets Fame",
+            "findString": "$fame.bestiality, 0, 2000",
+            "replace": "$fame.bestiality, 0, 4000",
+			"all":true
+          },
+           {
+            "passage": "Widgets Fame",
+            "findString": "$fame.rape, 0, 2000",
+            "replace": "$fame.rape, 0, 10000",
+			"all":true
+          },
+          {
+            "passage": "Widgets Fame",
+            "findString": "$fame.sex, 0, 2000",
+            "replace": "$fame.sex, 0, 4000",
+			"all":true
           }
         ]
       },
@@ -152,7 +178,7 @@
           },
 		   {
            "from": "for (let i = 0; i < hours; i++) {",
-           "to": "statChange.drugs(100);\nfor (let i = 0; i < hours; i++) {",
+           "to": "statChange.drugs(1000);\nfor (let i = 0; i < hours; i++) {",
            "fileName": "time.js"
           },
 		  {
@@ -172,12 +198,7 @@
           },
           {
            "from": "if (V.trauma >= V.traumamax) {",
-           "to": "if (V.trauma >= (V.traumamax / 20 * 19)) {",
-           "fileName": "stat-changes.js"
-          },
-          {
-           "from": "V.wolfpacktrust++;",
-           "to": "",
+           "to": "if (V.trauma >= (V.traumamax / 20 * 19) && !(V.gloryhole && V.consensual)) {",
            "fileName": "stat-changes.js"
           }
          ]
