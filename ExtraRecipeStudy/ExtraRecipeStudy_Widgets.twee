@@ -1,0 +1,51 @@
+:: ExtraRecipeStudy Intro
+<<set $outside to 0>><<set $location to "temple">><<effects>>
+<<npc River>><<person1>>
+你向瑞沃请教更多菜谱。
+<br><br>
+<<housekeeping_exam_select>>
+<<if $chosen_recipe isnot "none">>
+	<<set _basechance to $housekeeping / (2 * setup.plants[$chosen_recipe].difficulty)>>
+	<<if _basechance gte 100>>
+	“我可以教你做<<tendingicon setup.plants[$chosen_recipe].icon>><<recipe_name $chosen_recipe "difficulty">>”瑞沃说。<br>
+	“就和学校的考试一样，你只有20分钟来完成。”<br><br>
+	<<exam "housekeeping">>
+<br><br>
+	<<icon "housekeeping.png">><<link [[学习(1:00)|ExtraRecipeStudy study]]>><<pass 60>><</link>><br>
+	<<getouticon>><<link [[放弃|Soup Kitchen]]>><<endevent>><</link>>
+	<<else>>
+		“恐怕你只是在浪费自己的时间。”瑞沃继续手头的工作，甚至没有抬头来看你。<br>
+		“想在烹饪上进步，那就在学校的课程里多花点心思。”<br><br>
+		<i>如果你的家务技能更加优秀，<<he>>可能会愿意教你。</i>
+		<br><br>
+		<<link [[继续|Soup Kitchen]]>><<endevent>><</link>>
+	<</if>>
+<<else>>
+	“我已经没有能教给你的了。”瑞沃看了你一眼，继续专注在锅和汤上。在<<he>>低下头之前，你捕捉到一丝微妙的神色。那是赞许吗……？
+	<br><br>
+	<<link [[继续|Soup Kitchen]]>><<endevent>><</link>>
+<</if>>
+
+:: ExtraRecipeStudy study
+	瑞沃示意一个<<monk>>接管厨房，随后带你来到厨房无人使用的一角，向你口述菜谱。<br><br>
+	<<recipe_exam_description $chosen_recipe>>
+<<if $exam_chance gte random(1, 100)>>
+	遵照瑞沃的指示，你成功做出了一些<span class="green">能吃的东西</span>。<br><br>
+	瑞沃审视了你的<<recipe_name $chosen_recipe>>片刻。<span class="green">"合格。"</span><<he>>宣布。
+	<br><br>
+	<<set _prop to setup.plants[$chosen_recipe].handheld>>
+	<<wearProp _prop>>
+	<<learn_recipe $chosen_recipe>>
+<<else>>
+	<span class="red">肯定有哪里不对。</span>你的食材糊成了一团。<br><br>
+	<span class="red">"不合格。"</span> <<he>>摇了摇头。<<ghousekeeping>><<housekeeping 1>>
+	<<if random(1, 2) is 2>>
+		<<wearProp "slop">>
+	<<else>>
+		<<wearProp "burnt">>
+	<</if>>
+<</if>>
+<br><br>接下来的时间里，你在后厨忙活，切菜，打扫地面。一切相安无事。
+<br><br>
+<<link [[继续|Soup Kitchen]]>><<endevent>><</link>>
+

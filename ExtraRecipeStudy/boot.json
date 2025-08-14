@@ -1,0 +1,46 @@
+{
+    "name": "ExtraRecipeStudy",
+    "version": "0.1",
+    "styleFileList": [
+    ],
+    "scriptFileList_earlyload": [
+    ],
+    "scriptFileList_inject_early": [
+    ],
+    "scriptFileList_preload": [
+    ],
+    "scriptFileList": [
+     
+    ],
+    "tweeFileList": [
+       "ExtraRecipeStudy_Widgets.twee"
+    ],
+    "imgFileList": [
+ ],
+    "additionFile": [
+     
+      "readme.md"
+     
+    ],
+    "addonPlugin": [
+      {
+        "modName": "TweeReplacer",
+        "addonName": "TweeReplacerAddon",
+        "modVersion": "1.0.0",
+        "params": [
+             
+          {
+            "passage": "Soup Kitchen",
+            "findString": "<<wolficon>>",
+            "replace": "<<if $kitchen_river gte 1>><<icon \"housekeeping.png\">><<link [[请教菜谱|ExtraRecipeStudy Intro]]>><</link>><br><</if>>\n<<wolficon>>"
+          }
+        ]
+      }
+    ],
+    "dependenceInfo": [
+      { 
+        "modName": "TweeReplacer",
+        "version": "^1.0.0"
+      }
+    ]
+  }
