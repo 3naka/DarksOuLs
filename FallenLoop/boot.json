@@ -34,8 +34,8 @@
           },
           {
             "passage": "Widgets Mirror",
-            "findString": "<<if $transformationParts.cat.heterochromia is \"hidden\">>",
-            "replace":"<<FallenLoop_record>>\n<<if $transformationParts.cat.heterochromia is \"hidden\">>"
+            "findString": "<<widget \"mirrorMenu\">>",
+            "replace":"<<widget \"mirrorMenu\">>\n<<FallenLoop_record>>"
           },
            {
             "passage": "Widgets End Combat",
@@ -63,7 +63,7 @@
           },
            {
            "from": "statChange.purity(dailyPurity);",
-           "to": "statChange.purity((V.FallenLoop && (V.angel >=6 || V.fallenangel >= 2 || V.FallenLoop_normal)) ? dailyPurity : 1000);",
+           "to": "statChange.purity(dailyPurity);\nif (V.FallenLoop && (V.angel >=6 || V.fallenangel >= 2 || V.FallenLoop_normal)) statChange.purity(1000);",
            "fileName": "time.js"
           }
          ]

@@ -32,7 +32,7 @@
          
           {
             "passage": "Connudatus Markets",
-            "findString": "if $danger gte (14000 - $allure)",
+            "findString": "if dangerEvent(1, 14000)",
             "replace": "if 1"
           },
            {
