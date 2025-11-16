@@ -1,0 +1,73 @@
+{
+    "name": "I18NFix",
+    "version": "v0.1",
+    "styleFileList": [],
+    "scriptFileList": [],
+    "tweeFileList": [],
+    "imgFileList": [
+    ],
+    "scriptFileList_inject_early": [
+    ],
+    "scriptFileList_earlyload": [
+    ],
+    "scriptFileList_preload": [
+    ],
+    "additionFile": [
+        "README.md"
+    ],
+   "addonPlugin": [
+      {
+        "modName": "TweeReplacer",
+        "addonName": "TweeReplacerAddon",
+        "modVersion": "1.0.0",
+        "params": [
+
+           {
+            "passage": "StreamingWidgets",
+            "findString": "<<set _cmd to setup.randomrelfreq([\"!低档震动\", 40, \"!中档震动\", 30, \"!高档震动\", 20, \"!超高档震动\", 10])>>",
+            "replace": "<<set _cmd to setup.randomrelfreq([\"!lowvibes\", 40, \"!mediumvibes\", 30, \"!highvibes\", 20, \"!ultravibes\", 10])>>"
+          }
+
+]},
+
+  {
+        "modName": "ReplacePatcher",
+        "addonName": "ReplacePatcherAddon",
+        "modVersion": "1.0.0",
+        "params": {
+         "js": [
+          {
+           "from": "（上位）",
+           "to": "（top）",
+           "fileName": "entity.js",
+           "all":true
+          },
+           {
+           "from": "（下位）",
+           "to": "（bottom）",
+           "fileName": "entity.js",
+           "all":true
+          },
+          {
+           "from": "\"开放\"",
+           "to": "\"Disinhibition\"",
+           "fileName": "database_events.js",
+           "all":true
+          }
+         ]
+        }
+
+    }],
+    "dependenceInfo": [
+      { 
+        "modName": "TweeReplacer",
+        "version": "^1.0.0"
+      },
+      {
+        "modName": "ReplacePatcher",
+        "version": "^1.0.0"
+       }
+
+    ]
+
+}
