@@ -1,6 +1,6 @@
 {
     "name": "AutoClean",
-    "version": "0.1",
+    "version": "0.1.2",
     "styleFileList": [
     ],
     "scriptFileList_earlyload": [
@@ -64,7 +64,7 @@
           },
          {
            "from": "delete V.alex_to_bed;",
-           "to": "delete V.alex_to_bed;\nV.farm.aggro = 0;\nif(0){ V.farm_attack_timer = 30;}\nwikifier(\"AutoClean_TakeFarmStock\");",
+           "to": "delete V.alex_to_bed;\nif (V.farm_stage >= 5 && V.farm.aggro != undefined){V.farm.aggro = 0;}\nif(0){ V.farm_attack_timer = 30;}\nwikifier(\"AutoClean_TakeFarmStock\");",
            "fileName": "time.js"
           },
             {
@@ -89,8 +89,13 @@
           },
           {
            "from": "if (V.bird.clean >= 1)",
-           "to": "if(V.bird.upgrades.firepit >= 3 && V.bird.materials.wood < 10 )V.bird.materials.wood = 10;\nif (V.bird.clean >= 1 && V.bird.upgrades.shelter < 3)",
+           "to": "if(V.bird.upgrades !=undefined && V.bird.upgrades.firepit >= 3 && V.bird.materials.wood < 10 )V.bird.materials.wood = 10;\nif (V.bird.clean >= 1 && V.bird.upgrades !=undefined &&  V.bird.upgrades.shelter < 3)",
            "fileName": "time.js"
+          },
+          {
+           "from": "if (V.bus === \"edencabin\") ",
+           "to": "if(V.edenHotSpring)",
+           "fileName": "02-temperature.js"
           }
         ]
       }

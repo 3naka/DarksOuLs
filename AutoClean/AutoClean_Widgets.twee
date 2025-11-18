@@ -1,6 +1,7 @@
 
 :: Widgets AutoClean [widget]
 <<widget "AutoClean_TakeFarmStock">>
+<<if $farm isnot undefined and $farm.stock isnot undefined>>
     <<if $farm.stock.truffles gte 1>>
 		<<tending_give truffle $farm.stock.truffles>><<set $farm.stock.truffles to 0>>
 	<</if>>
@@ -13,6 +14,7 @@
 	<<if $farm.stock.cream gte 1>>
 		<<tending_give cream $farm.stock.cream>><<set $farm.stock.cream to 0>>
 	<</if>>
+<</if>>
 <</widget>>
 
 
