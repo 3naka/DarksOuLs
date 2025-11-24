@@ -1,6 +1,6 @@
 {
     "name": "AutoClean",
-    "version": "0.1.2",
+    "version": "0.1.3",
     "styleFileList": [
     ],
     "scriptFileList_earlyload": [
@@ -37,6 +37,26 @@
             "passage": "Widgets Temple",
             "findString": "<<set $temple_garden -= 10>>",
             "replace": "<<if $tending lt 1000 and $temple_rank isnot \"initiate\">><<set $temple_garden -= 10>><</if>>"
+          },
+		    {
+            "passage": "Widgets Cabin",
+            "findRegex": "<<elseif \\$edengarden is 4>>\\s+.+\\s+<br><br>",
+            "replace": "<<elseif $edengarden is 4>>\n<span class=\"green\">伊甸的庄稼没有杂草。</span>\n<br>\n<<gardenicon \"weeds\">><<link [[照料庄稼 (3:00)|Clearing Weeding]]>><<tending 1>><<tiredness 12>><<npcincr Eden love 1>><</link>><<gtiredness>><<glove>><<gtending>>\n<br><br>"       
+          },
+		  {
+            "passage": "Clearing Weeding",
+            "findString": "<<set $outside to 1>><<set $location to \"cabin\">><<effects>>",
+            "replace": "<<set $outside to 1>><<set $location to \"cabin\">><<effects>>\n<<if $edengarden lt 4>>"
+          },
+		   {
+            "passage": "Clearing Weeding",
+            "findString": "<<physique 6>><<set $edengarden += 1>>",
+            "replace": "<<else>>你跪在地上，开始照料庄稼。尽管已经没有杂草，额外的呵护能让长势更好。\n<</if>>\n<<physique 6>><<if $edengarden lt 4>><<set $edengarden += 1>><</if>>"
+          },
+		   {
+            "passage": "Clearing Weeding",
+            "findString": "<<if $rng gte 51 and",
+            "replace": "<<if $rng gte 51 and $edengarden lt 4 and"
           }
         
         ]

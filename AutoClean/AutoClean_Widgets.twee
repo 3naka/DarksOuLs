@@ -2,16 +2,16 @@
 :: Widgets AutoClean [widget]
 <<widget "AutoClean_TakeFarmStock">>
 <<if $farm isnot undefined and $farm.stock isnot undefined>>
-    <<if $farm.stock.truffles gte 1>>
+    <<if $farm.stock.truffles isnot undefined and $farm.stock.truffles gte 1>>
 		<<tending_give truffle $farm.stock.truffles>><<set $farm.stock.truffles to 0>>
 	<</if>>
-	<<if $farm.stock.eggs gte 1>>
+	<<if $farm.stock.eggs isnot undefined and $farm.stock.eggs gte 1>>
 		<<tending_give chicken_egg $farm.stock.eggs>><<set $farm.stock.eggs to 0>>
 	<</if>>
-	<<if $farm.stock.milk gte 1>>
+	<<if $farm.stock.milk isnot undefined and $farm.stock.milk gte 1>>
 		<<tending_give bottle_of_milk $farm.stock.milk>><<set $farm.stock.milk to 0>>
 	<</if>>
-	<<if $farm.stock.cream gte 1>>
+	<<if $farm.stock.cream isnot undefined and $farm.stock.cream gte 1>>
 		<<tending_give cream $farm.stock.cream>><<set $farm.stock.cream to 0>>
 	<</if>>
 <</if>>
