@@ -1,0 +1,109 @@
+{
+    "name": "FutaNaru",
+    "version": "v0.1",
+    "styleFileList": [],
+    "scriptFileList": [],
+    "tweeFileList": [],
+    "imgFileList": [
+    ],
+    "scriptFileList_inject_early": [
+    ],
+    "scriptFileList_earlyload": [
+    ],
+    "scriptFileList_preload": [
+    ],
+    "additionFile": [
+        "README.md"
+    ],
+   "addonPlugin": [
+      {
+        "modName": "TweeReplacer",
+        "addonName": "TweeReplacerAddon",
+        "modVersion": "1.0.0",
+        "params": [
+
+           {
+            "passage": "Start3",
+            "findString": "<label><<radiobutton \"_custom_gender_genitals\" \"vagina\"",
+            "replace": "<label><<radiobutton \"_custom_gender_genitals\" \"futa\" autocheck>>双性</label>\n<br>\n<label><<radiobutton \"_custom_gender_genitals\" \"vagina\""
+          },
+          {
+            "passage": "Start3",
+            "findString": "_custom_gender_genitals == \"vagina\"",
+            "replace": "_custom_gender_genitals == \"vagina\" || _custom_gender_genitals == \"futa\""
+          },
+          {
+            "passage": "Start3",
+            "findString": "_custom_gender_genitals == \"penis\"",
+            "replace": "_custom_gender_genitals == \"penis\" || _custom_gender_genitals == \"futa\""
+          },
+           {
+            "passage": "Start3",
+            "findString": "length lt 3",
+            "replace": "length lt 1",
+            "all":true
+          },
+            {
+            "passage": "EncounterActs",
+            "findRegex": "(<</if>>\\s+)<<else>>(\\s+<<switch _loc>>)",
+            "replace": "$1<</if>>\n<<if _doer.has_part(\"vagina\")>>\n$2"       
+          },
+          {
+            "passage": "ArcadeTournamentAKPService",
+            "findRegex": "<<else>>\\s+<<dpussy",
+            "replace": "<</if>>\n<<if $pc.has_part(\"vagina\")>><<if $pc.has_part(\"penis\")>>，<</if>>\n<<dpussy"       
+          },
+          {
+            "passage": "PassageHeader",
+            "findString": "<<elseif $pc.has_part(\"vagina\")>>",
+            "replace": "<</if>>\n<<if $pc.has_part(\"vagina\")>>\n",
+            "all":true    
+          },
+          {
+            "passage": "PassageHeader",
+            "findRegex": "(<<if \\$pc.has_part\\(\"vagina\"\\)>>\\s+.+)([，。])(\\s+<<else>>)",
+            "replace": "$1\n<<if $pc.has_part(\"penis\")>>，精前液从抽搐的<<dcock $pc>>前端漏出<<if !_inner or ($pc.get_clothing_flags(\"crotch\").includes(\"under access\") and !$pc.wearing_underwear())>>。<<else>>，<</if>><<else>>$2<</if>>\n$3",
+            "all":true    
+          },
+           {
+            "passage": "WidgetBits",
+            "findRegex": "<<else>>(.+)<</if>><<else>><<dpussy",
+            "replace": "<<else>><<dcock _args[0]>><<if $pc.equals(_args[0]) && _args[0].has_part(\"vagina\")>>和<<dpussy _args[0]>><<else>>$1<</if>><</if>><<else>><<dpussy",
+            "all":true    
+          }
+
+]},
+
+  {
+        "modName": "ReplacePatcher",
+        "addonName": "ReplacePatcherAddon",
+        "modVersion": "1.0.0",
+        "params": {
+         "js": [
+            {
+           "from": "if (parts.includes(\"penis\"))",
+           "to": "if (parts.includes(\"penis\") && !parts.includes(\"vagina\"))",
+           "fileName": "database_archetypes.js"
+          },
+          {
+           "from": "if (parts.includes(\"vagina\"))",
+           "to": "if (parts.includes(\"vagina\") && !parts.includes(\"penis\"))",
+           "fileName": "database_archetypes.js"
+          }
+         ]
+        }
+
+    }],
+    "dependenceInfo": [
+      { 
+        "modName": "TweeReplacer",
+        "version": "^1.0.0"
+      },
+      {
+        "modName": "ReplacePatcher",
+        "version": "^1.0.0"
+       }
+
+    ]
+
+}
