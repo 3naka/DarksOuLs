@@ -1,0 +1,800 @@
+{
+    "name": "GWLRollBack",
+    "version": "0.1",
+    "styleFileList": [
+    ],
+    "scriptFileList_earlyload": [
+    ],
+    "scriptFileList_inject_early": [
+    ],
+    "scriptFileList_preload": [
+    ],
+    "scriptFileList": [
+     
+    ],
+    "tweeFileList": [
+      "GWLRollBack_Widgets.twee"
+     ],
+    "imgFileList": [
+ ],
+    "additionFile": [
+     
+      "readme.md"
+     
+    ],
+    "addonPlugin": [
+      {
+        "modName": "TweeReplacer",
+        "addonName": "TweeReplacerAddon",
+        "modVersion": "1.0.0",
+        "params": [
+             
+          {
+            "passage": "Asylum Hypnosis Trance",
+            "findString": "if $hypnosis_traits.devotion gte 5",
+            "replace": "if 0"
+          },
+          {
+            "passage": "Chef Opening 9",
+            "findString": "if $chef_gwylan",
+            "replace": "if 0"
+          },
+          {
+            "passage": "Chef Opening End",
+            "findString": "if $chef_gwylan",
+            "replace": "if 0",
+            "all": true
+          },
+          {
+            "passage": "Chef Speech Options",
+            "findString": "$chef_gwylan",
+            "replace": "0"
+          },
+          {
+            "passage": "Cliff Street",
+            "findString": "if !isGwylanAbsent()",
+            "replace": "if 0"
+          },
+          {
+            "passage": "Danube Street",
+            "findString": "if C.npc.Gwylan.state is \"active\"",
+            "replace": "if 0"
+          },
+          {
+            "passage": "Eden Hunt 3",
+            "findString": "Eden Hex Signs",
+            "replace": "Eden Clearing"
+          },
+          {
+            "passage": "Widgets Forest",
+            "findString": "!$weekly.gwylanNoLure",
+            "replace": "0",
+             "all": true
+          },
+           {
+            "passage": "Forest Hunter Molestation Finish",
+            "findString": "$worn.neck.name is \"familiar collar\"",
+            "replace": "$worn.neck.name is \"VP 99 NO 88\""
+          },
+          {
+            "passage": "Widgets Nightmares",
+            "findString": "$gwylanSeen?.includes(\"yearning\") or $hypnosis_traits.slumber gte 1 and $hypnosis_traits.devotion gte 3",
+            "replace": "0"
+          },
+          {
+            "passage": "Ocean Breeze Angry",
+            "findString": "$gwylan_cafe_intro",
+            "replace": "0"
+          },
+          {
+            "passage": "Ocean Breeze Ignore",
+            "findString": "$gwylan_cafe_intro",
+            "replace": "0"
+          },
+          {
+            "passage": "Ocean Breeze Work",
+            "findString": "and $gwylan_cafe_intro",
+            "replace": "and 0",
+            "all": true
+          },
+          {
+            "passage": "Ocean Breeze Work",
+            "findString": "!$gwylan_cafe_intro",
+            "replace": "0",
+            "all": true
+          },
+          {
+            "passage": "Ocean Breeze Work",
+            "findString": "if C.npc.Robin.trauma gte 40",
+            "replace": "if 0",
+            "all": true
+          },
+           {
+            "passage": "Ocean Breeze Work",
+            "findRegex": "<<else>>(\\s+<<set _beverage)",
+            "replace": "<<elseif C.npc.Robin.trauma lte 40>>$1"
+          },
+          {
+            "passage": "Ocean Breeze",
+            "findRegex": "<<set \\$bun_cut to 0.3>>[\\s\\S]+?<<endevent>>",
+            "replace": "<<set $bun_cut to 0.3>>\n<br><br>萨姆哼着小曲回去工作了。<br><br>\n<<endevent>>"
+          },
+          {
+            "passage": "Ocean Breeze",
+            "findString": "!$daily.earSlimeOceanBreezeCafeEat",
+            "replace": "0"
+          },
+           {
+            "passage": "Ocean Breeze",
+            "findString": "gwylanSchedule() is \"cafe\"",
+            "replace": "gwylanSchedule() is \"VP99NO88\""
+          },
+          {
+            "passage": "Pub Brown Fox",
+            "findString": "gwylanSchedule() is \"pub\"",
+            "replace": "gwylanSchedule() is \"VP99NO88\"",
+             "all": true
+          },
+          {
+            "passage": "Pub",
+            "findString": "gwylanSchedule() is \"pub\"",
+            "replace": "gwylanSchedule() is \"VP99NO88\""
+          },
+           {
+            "passage": "Rent Intro",
+            "findString": "$worn.neck.name is \"familiar collar\"",
+            "replace": "$worn.neck.name is \"VP 99 NO 88\"",
+             "all": true
+          },
+          {
+            "passage": "Widgets Robin",
+            "findString": "$gwylan?.robin gte 10",
+            "replace": "0"
+          },
+          {
+            "passage": "Widgets Forest",
+            "findString": "!$weekly.forestLullaby",
+            "replace": "0"
+          },
+          {
+            "passage": "Widgets Forest",
+            "findString": "$gwylan?.ritualMissed",
+            "replace": "0",
+            "all": true
+          },
+          {
+            "passage": "Widgets Forest",
+            "findString": "!$daily.gwylan.spy",
+            "replace": "0"
+          },
+           {
+            "passage": "Widgets Forest",
+            "findString": "$hypnosis_traits.devotion",
+            "replace": "0"
+          },
+           {
+            "passage": "Widgets Forest",
+            "findRegex": "<<widget \"forestRescueSetup\">>[\\s\\S]+?<</widget>>",
+            "replace": "<<widget \"forestRescueSetup\">>\n<<GRB_forestRescueSetup>>\n<</widget>>"
+          },
+          {
+            "passage": "Widgets Forest",
+            "findRegex": "<<widget \"forestRescueCheck\">>[\\s\\S]+?<</widget>>",
+            "replace": "<<widget \"forestRescueCheck\">>\n<<GRB_forestRescueCheck _args[0]>>\n<</widget>>"
+          },
+           {
+            "passage": "Widgets Forest",
+            "findRegex": "<<if \\$canRescue.includesAll\\(\"Eden\",\"Gwylan\"\\)>>[\\s\\S]+?<<elseif \\$canRescue.includes\\(\"Gwylan\"\\)>>",
+            "replace": "<<if $canRescue.includesAll(\"Eden\",\"Gwylan\")>>\n<<GRB_ForestCoopRescue _args[0] _args[1] $_close $_lands $_backsOffAnd $_forest $_type>>\n<<elseif $canRescue.includes(\"Gwylan\")>>"
+          },
+           {
+            "passage": "Widgets Forest",
+            "findRegex": "<<gwylanRescueStats true \\$_type>>[\\s\\S]+?<<elseif \\$canRescue.includes\\(\"Nobody\"\\)>>",
+            "replace": "<<GRB_gwylanForestRescue $_type>>\n<<elseif $canRescue.includes(\"Nobody\")>>"
+          },
+           {
+            "passage": "Widgets Forest",
+            "findString": "$worn.neck.name is \"familiar collar\"",
+            "replace": "$worn.neck.name is \"VP 99 NO 88\"",
+             "all": true
+          },
+          {
+            "passage": "School Library",
+            "findRegex": "<<addinlineevent \"forest_rumors_1\">>[\\s\\S]+?<</addinlineevent>>",
+            "replace": "\n"
+          },
+           {
+            "passage": "School Library",
+            "findRegex": "<<addinlineevent \"forest_rumors_2\">>[\\s\\S]+?<</addinlineevent>>",
+            "replace": "\n"
+          },
+           {
+            "passage": "School Library",
+            "findRegex": "<<addinlineevent \"forest_shop_rumors\">>[\\s\\S]+?<</addinlineevent>>",
+            "replace": "\n"
+          },
+           {
+            "passage": "Adult Shop Passout Bondage",
+            "findString": "$worn.neck.name is \"familiar collar\"",
+            "replace": "$worn.neck.name is \"VP 99 NO 88\"",
+             "all": true
+          },
+           {
+            "passage": "Beach Abduction Collared",
+            "findString": "$worn.neck.name is \"familiar collar\"",
+            "replace": "$worn.neck.name is \"VP 99 NO 88\""
+          },
+          {
+            "passage": "Bully Dog Walk 2",
+            "findString": "$worn.neck.name is \"familiar collar\"",
+            "replace": "$worn.neck.name is \"VP 99 NO 88\""
+          },
+          {
+            "passage": "Bully Dog Walk 3",
+            "findString": "$worn.neck.name is \"familiar collar\"",
+            "replace": "$worn.neck.name is \"VP 99 NO 88\""
+          },
+          {
+            "passage": "Chef Blackmail Livestock 2",
+            "findString": "$worn.neck.name is \"familiar collar\"",
+            "replace": "$worn.neck.name is \"VP 99 NO 88\""
+          },
+          {
+            "passage": "Eden Caged Caught Resist",
+            "findString": "$worn.neck.name is \"familiar collar\"",
+            "replace": "$worn.neck.name is \"VP 99 NO 88\""
+          },
+           {
+            "passage": "Eden Caged Evening Stretch",
+            "findString": "$worn.neck.name is \"familiar collar\"",
+            "replace": "$worn.neck.name is \"VP 99 NO 88\"",
+             "all": true
+          },
+          {
+            "passage": "Eden Hunt",
+            "findString": "$worn.neck.name is \"familiar collar\"",
+            "replace": "$worn.neck.name is \"VP 99 NO 88\""
+          },
+          {
+            "passage": "Eden Recaptured Resist",
+            "findString": "$worn.neck.name is \"familiar collar\"",
+            "replace": "$worn.neck.name is \"VP 99 NO 88\""
+          },
+          {
+            "passage": "Farm Breakfast",
+            "findString": "$worn.neck.name is \"familiar collar\"",
+            "replace": "$worn.neck.name is \"VP 99 NO 88\""
+          },
+          {
+            "passage": "Flats Canal Kiss",
+            "findString": "$worn.neck.name is \"familiar collar\"",
+            "replace": "$worn.neck.name is \"VP 99 NO 88\""
+          },
+           {
+            "passage": "History Lesson Collar",
+            "findString": "$worn.neck.name is \"familiar collar\"",
+            "replace": "$worn.neck.name is \"VP 99 NO 88\""
+          },
+          {
+            "passage": "Kylar Abduction Intro",
+            "findString": "$worn.neck.name is \"familiar collar\"",
+            "replace": "$worn.neck.name is \"VP 99 NO 88\""
+          },
+          {
+            "passage": "Mansion Return Walk Dog",
+            "findString": "$worn.neck.name is \"familiar collar\"",
+            "replace": "$worn.neck.name is \"VP 99 NO 88\""
+          },
+          {
+            "passage": "Moor Abduction Remy Wake",
+            "findString": "$worn.neck.name is \"familiar collar\"",
+            "replace": "$worn.neck.name is \"VP 99 NO 88\""
+          },
+           {
+            "passage": "Passout Estate Remy Hot Cold",
+            "findString": "$worn.neck.name is \"familiar collar\"",
+            "replace": "$worn.neck.name is \"VP 99 NO 88\""
+          },
+           {
+            "passage": "Police Cell",
+            "findString": "$worn.neck.name is \"familiar collar\"",
+            "replace": "$worn.neck.name is \"VP 99 NO 88\""
+          },
+          {
+            "passage": "Police Station Collar",
+            "findString": "$worn.neck.name is \"familiar collar\"",
+            "replace": "$worn.neck.name is \"VP 99 NO 88\""
+          },
+          {
+            "passage": "Pound Abduction",
+            "findString": "$worn.neck.name is \"familiar collar\"",
+            "replace": "$worn.neck.name is \"VP 99 NO 88\""
+          },
+          {
+            "passage": "Pound Assault Caught 2",
+            "findString": "$worn.neck.name is \"familiar collar\"",
+            "replace": "$worn.neck.name is \"VP 99 NO 88\""
+          },
+          {
+            "passage": "Pound Free Submit",
+            "findString": "$worn.neck.name is \"familiar collar\"",
+            "replace": "$worn.neck.name is \"VP 99 NO 88\""
+          },
+          {
+            "passage": "Robin Forest Crash Fight",
+            "findString": "$worn.neck.name is \"familiar collar\"",
+            "replace": "$worn.neck.name is \"VP 99 NO 88\""
+          },
+          {
+            "passage": "Sewers Morgan",
+            "findString": "$worn.neck.name is \"familiar collar\"",
+            "replace": "$worn.neck.name is \"VP 99 NO 88\""
+          },
+          {
+            "passage": "Street Collar Molestation",
+            "findString": "$worn.neck.name is \"familiar collar\"",
+            "replace": "$worn.neck.name is \"VP 99 NO 88\""
+          },
+          {
+            "passage": "Street Eden Angry Hide",
+            "findString": "$worn.neck.name is \"familiar collar\"",
+            "replace": "$worn.neck.name is \"VP 99 NO 88\"",
+             "all": true
+          },
+          {
+            "passage": "Street Eden Angry",
+            "findString": "$worn.neck.name is \"familiar collar\"",
+            "replace": "$worn.neck.name is \"VP 99 NO 88\"",
+             "all": true
+          },
+          {
+            "passage": "Street Van Fight Finish",
+            "findString": "$worn.neck.name is \"familiar collar\"",
+            "replace": "$worn.neck.name is \"VP 99 NO 88\""
+          },
+          {
+            "passage": "Street Van Submit",
+            "findString": "$worn.neck.name is \"familiar collar\"",
+            "replace": "$worn.neck.name is \"VP 99 NO 88\""
+          },
+          {
+            "passage": "Sydney Chat",
+            "findString": "\"familiar collar\"",
+            "replace": "\"VP 99 NO 88\""
+          },
+          {
+            "passage": "Sydney Temple Punish End",
+            "findString": "$worn.neck.name is \"familiar collar\"",
+            "replace": "$worn.neck.name is \"VP 99 NO 88\""
+          },
+          {
+            "passage": "Sydney Temple Punish Intro 2",
+            "findString": "$worn.neck.name is \"familiar collar\"",
+            "replace": "$worn.neck.name is \"VP 99 NO 88\""
+          },
+          {
+            "passage": "Sydney Temple Punish Repeat",
+            "findString": "$worn.neck.name is \"familiar collar\"",
+            "replace": "$worn.neck.name is \"VP 99 NO 88\""
+          },
+          {
+            "passage": "Temple Arcade End",
+            "findString": "$worn.neck.name is \"familiar collar\"",
+            "replace": "$worn.neck.name is \"VP 99 NO 88\"",
+            "all": true
+          },
+          {
+            "passage": "Temple Arcade Submit",
+            "findString": "$worn.neck.name is \"familiar collar\"",
+            "replace": "$worn.neck.name is \"VP 99 NO 88\""
+          },
+          {
+            "passage": "Underground Intro",
+            "findString": "$worn.neck.name is \"familiar collar\"",
+            "replace": "$worn.neck.name is \"VP 99 NO 88\"",
+            "all": true
+          },
+          {
+            "passage": "Widgets Blackjack",
+            "findString": "$worn.neck.name is \"familiar collar\"",
+            "replace": "$worn.neck.name is \"VP 99 NO 88\""
+          },
+          {
+            "passage": "Widgets Combat Man-Combat",
+            "findString": "$worn.neck.name is \"familiar collar\"",
+            "replace": "$worn.neck.name is \"VP 99 NO 88\"",
+            "all": true
+          },
+           {
+            "passage": "Widgets Ejaculation",
+            "findString": "$worn.neck.name is \"familiar collar\"",
+            "replace": "$worn.neck.name is \"VP 99 NO 88\""
+          },
+          {
+            "passage": "Widgets School Events",
+            "findString": "$worn.neck.name is \"familiar collar\"",
+            "replace": "$worn.neck.name is \"VP 99 NO 88\""
+          },
+           {
+            "passage": "Widgets Street",
+            "findString": "$worn.neck.name is \"familiar collar\"",
+            "replace": "$worn.neck.name is \"VP 99 NO 88\"",
+            "all": true
+          },
+          {
+            "passage": "Widgets Whitney Street",
+            "findString": "$worn.neck.name is \"familiar collar\"",
+            "replace": "$worn.neck.name is \"VP 99 NO 88\""
+          },
+          {
+            "passage": "Forest Shop Entrance",
+            "findRegex": "<<include \"Forest Shop Intro\">>[\\s\\S]+?<<include \"Forest Shop Mystery Orgasm\">>",
+            "replace": "<<include \"Forest Shop Intro\">>\n"
+          },
+          {
+            "passage": "Forest Shop Entrance",
+            "findString": "<<if !$robin_in_forest_shop and (gwylanSchedule()",
+            "replace": "<<if 0 and (gwylanSchedule()"
+          },
+          {
+            "passage": "Forest Shop Entrance",
+            "findString": "<<if $robin_in_forest_shop>>",
+            "replace": "<<if $gwylanRescue?.failed and !$robin_in_forest_shop>>\n<<GRB_gwylanRescueApology \"shop\">>\n<<elseif $robin_in_forest_shop>>"
+          },
+          {
+            "passage": "Forest Shop Entrance",
+            "findString": "_gwylanLovePercent gte 35 and !$gwylan.punishment and !$gwylan.taken and !$gwylan.timer.wrap",
+            "replace": "1"
+          },
+          {
+            "passage": "Forest Shop Entrance",
+            "findString": "_gwylanLovePercent gte 20",
+            "replace": "0"
+          },
+          {
+            "passage": "Forest Shop Entrance",
+            "findString": "_gwylanLovePercent gte 35",
+            "replace": "0"
+          },
+          {
+            "passage": "Forest Shop Entrance",
+            "findString": "_gwylanLovePercent gte 50",
+            "replace": "0"
+          },
+          {
+            "passage": "Forest Shop Entrance",
+            "findRegex": "<br>\\s+?<<socialiseicon>>[\\s\\S]+?Gwylan Talk Shop]]>><</link>>",
+            "replace": "\n"
+          },
+          {
+            "passage": "Forest Shop Entrance",
+            "findString": "<<if $gwylanSeen.includes(\"lights\")>>",
+            "replace": "<br><<if $awareness gte 600 or $hallucinogen gte 10>>"
+          },
+          {
+            "passage": "Forest Shop Entrance",
+            "findString": "!$gwylanSeen.includes(\"sample\")",
+            "replace": "0"
+          },
+          {
+            "passage": "Forest Shop Entrance",
+            "findString": "$gwylan.timer.sample gte Time.date.timeStamp",
+            "replace": "1"
+          },
+          {
+            "passage": "Forest Shop Entrance",
+            "findString": "$gwylanSeen.includes(\"doggy_bed\")",
+            "replace": "0"
+          },
+          {
+            "passage": "Forest Shop Entrance",
+            "findString": "isPregnancyEnding()",
+            "replace": "0"
+          },
+           {
+            "passage": "Forest Shop Entrance",
+            "findString": "<<set $gwylan.timer.bloodVisit to new DateTime(Time.date).addDays(1).timeStamp>>",
+            "replace": "\n"
+          },
+          {
+            "passage": "Forest Shop Charms",
+            "findString": "!$gwylanSeen.includes(\"sample\")",
+            "replace": "0"
+          },
+          {
+            "passage": "Forest Shop Charms",
+            "findRegex": "<<printNobody>>[\\s\\S]+?<<if \\$dissociation gte 1>>[\\s\\S]+?<</if>>",
+            "replace": "\n"
+          },
+          {
+            "passage": "Forest Shop Widgets",
+            "findString": "heavy",
+            "replace": "VP99"
+          },
+          {
+            "passage": "Forest Shop Widgets",
+            "findString": "Forest Shop Stolen",
+            "replace": "Forest"
+          },
+          {
+            "passage": "Forest Shop Intro",
+            "findString": "<<gwylanRescueApology",
+            "replace": "<<GRB_gwylanRescueApology"
+          },
+          {
+            "passage": "Robin Forest Shop 4",
+            "findString": "<<gwylanRescueApology",
+            "replace": "<<GRB_gwylanRescueApology",
+            "all": true
+          },
+          {
+            "passage": "Forest Shop Intro",
+            "findString": "$exposed gte 1",
+            "replace": "0"
+          },
+          {
+            "passage": "Forest Shop Intro",
+            "findRegex": "<<elseif !_gwylanStatus.includes\\(\"met\"\\)>>([\\s\\S]+?)<<else>>[\\s\\S]+?<</if>>",
+            "replace": "<<elseif !_gwylanStatus.includes(\"met\")>>$1<<else>>“我希望你能找到你喜欢的东西，”<<he>>在说完之后重新扶起梯子。“但找不到也不要担心，我的祖<<print ($pronoun is \"m\" ? \"父\" : \"母\")>>说这里的东西会躲着那些不是真心想购买它们的人。”<<He>>笑了笑，“我相信这一点。”<</if>>"
+          },
+          {
+            "passage": "Forest Shop Intro",
+            "findString": "[\"sleep\"].includes(gwylanSchedule()) or Time.hour gte 22",
+            "replace": "0"
+          },
+          {
+            "passage": "Forest Shop Intro",
+            "findString": "![\"shop\", \"garden\"].includes(gwylanSchedule())",
+            "replace": "0"
+          },
+          {
+            "passage": "Passout Gwylan Hot Cold",
+            "findString": "_gwylanLovePercent gte 50",
+            "replace": "0"
+          },
+          {
+            "passage": "Passout Gwylan Hot Cold",
+            "findString": "$gwylanSeen.includes(\"partners\")",
+            "replace": "0"
+          },
+          {
+            "passage": "Passout Gwylan Hot Cold",
+            "findString": "$gwylanSeen.includes(\"yearning\")",
+            "replace": "0"
+          },
+          {
+            "passage": "Passout Gwylan Hot Cold",
+            "findRegex": "(<<elseif \\$gwylan_rescue gte 1>>[\\s\\S]+?<<else>>[\\s\\S]+?<</if>>)[\\s\\S]+?<br><br>",
+            "replace": "$1。\"\n<br><br>"
+          },
+          {
+            "passage": "Passout Gwylan Hot Cold Sip",
+            "findString": "$gwylanSeen.includes(\"partners\")",
+            "replace": "0"
+          },
+          {
+            "passage": "Forest",
+            "findRegex": "<<if \\$exposed lte 1[\\s\\S]+?<<forestdeeper>>",
+            "replace": "<<GRB_ForestShopForest>>\n<<forestdeeper>>"
+          },
+           {
+            "passage": "Widgets Named Npcs",
+            "findString": "$gwylanSeen?.includes(\"ritual_sex\")",
+            "replace": "0"
+          },
+          {
+            "passage": "Widgets Named Npcs",
+            "findString": "<<elseif $gwylanSeen?.includes(\"partners\")>>",
+            "replace": "0"
+          },
+          {
+            "passage": "Widgets Named Npcs",
+            "findString": "$gwylanSeen?.includes(\"yearning\")",
+            "replace": "0"
+          },
+          {
+            "passage": "Widgets Named Npcs",
+            "findString": "$gwylan?.wary gt 1",
+            "replace": "0",
+            "all":true
+          },
+          {
+            "passage": "Widgets Named Npcs",
+            "findString": "_gwylanStatus.includes(\"aroused\")",
+            "replace": "0"
+          },
+          {
+            "passage": "Mansion Fox Heist Dungeon 2",
+            "findString": "$brownFoxRevealed",
+            "replace": "0"
+          },
+          {
+            "passage": "Mansion Fox Heist Vault",
+            "findString": "$brownFoxRevealed",
+            "replace": "0"
+          },
+          {
+            "passage": "Mansion Mickey Interrupt",
+            "findString": "$brownFoxRevealed",
+            "replace": "0"
+          },
+          {
+            "passage": "Mansion Party Remy Brown Fox Talk",
+            "findString": "$brownFoxRevealed",
+            "replace": "0"
+          },
+          {
+            "passage": "Mansion Piano Demon 2",
+            "findString": "$brownFoxRevealed",
+            "replace": "0"
+          },
+          {
+            "passage": "Mansion Piano Demon",
+            "findString": "$brownFoxRevealed",
+            "replace": "0"
+          },
+          {
+            "passage": "Mansion Piano Fox 2",
+            "findString": "$brownFoxRevealed",
+            "replace": "0"
+          },
+          {
+            "passage": "Mansion Piano Fox Talk End",
+            "findString": "$brownFoxRevealed",
+            "replace": "0",
+            "all": true
+          },
+          {
+            "passage": "Mansion Piano Fox Talk",
+            "findString": "$brownFoxRevealed",
+            "replace": "0",
+            "all": true
+          },
+          {
+            "passage": "Pub Avery Stones Fox End",
+            "findString": "$brownFoxRevealed",
+            "replace": "0"
+          },
+          {
+            "passage": "Pub Brown Fox Task",
+            "findString": "$brownFoxRevealed",
+            "replace": "0",
+            "all": true
+          },
+          {
+            "passage": "Skyscraper Run 3",
+            "findString": "$brownFoxRevealed",
+            "replace": "0"
+          },
+          {
+            "passage": "Skyscraper Run 4",
+            "findString": "$brownFoxRevealed",
+            "replace": "0",
+            "all": true
+          },
+          {
+            "passage": "Skyscraper Run 5",
+            "findString": "$brownFoxRevealed",
+            "replace": "0"
+          },
+          {
+            "passage": "Skyscraper Run Rescue",
+            "findString": "$brownFoxRevealed",
+            "replace": "0"
+          },
+          {
+            "passage": "Skyscraper Run Struggle",
+            "findString": "$brownFoxRevealed",
+            "replace": "0",
+            "all": true
+          },
+          {
+            "passage": "Skyscraper Run Wardrobe",
+            "findString": "$brownFoxRevealed",
+            "replace": "0",
+            "all": true
+          },
+          {
+            "passage": "Skyscraper Save Rescue 3",
+            "findString": "$brownFoxRevealed",
+            "replace": "0"
+          },
+          {
+            "passage": "Widgets Avery Mansion",
+            "findString": "$brownFoxRevealed",
+            "replace": "0"
+          },
+          {
+            "passage": "Widgets Pub",
+            "findString": "$brownFoxRevealed",
+            "replace": "0",
+            "all": true
+          },
+          {
+            "passage": "Temple Slime",
+            "findRegex": "(<br><br>[\\s\\S]+?<br><br>[\\s\\S]+?<br><br>)[\\s\\S]+?<br><br>",
+            "replace": "$1"
+          },
+          {
+            "passage": "Forest Red Rose Pick",
+            "findString": "<<else>>",
+            "replace": "<<GRB_ForestRose>>\n<<else>>"
+          },
+          {
+            "passage": "Forest Red Rose",
+            "findRegex": "<br><br>\\s+?<<link",
+            "replace": "<<GRB_ForestRose>>\n<br><br>\\s+?<<link"
+          },
+          {
+            "passage": "Mansion Piano Demon",
+            "findString": "<<set $phase to 3>><</link>>",
+            "replace": "<<set $phase to 3>><</link>><br>\n<<link [[沉默|Mansion Piano Demon 2]]>><<set $phase to 4>><</link>>"
+          },
+          {
+            "passage": "Mansion Piano Demon 2",
+            "findString": "<<elseif $phase is 2>>",
+            "replace": "<<elseif $phase is 4>>\n你无言地瞪着它。<br><br>它好奇地歪着头。在那张暗色面孔的右侧，一只翠绿的眼睛凝视着你。它的动作变得更加轻柔，触手半蜷着。\n<<elseif $phase is 2>>"
+          },
+          {
+            "passage": "Mansion Sleep",
+            "findString": "\"Mansion Bed\">><<endevent>><</link>>",
+            "replace": "\"Mansion Bed\">><<endevent>><</link>><br>\n<<link [[无视|GWLRollBack Mansion Piano]]>><<bedclotheson \"Mansion Bed\">><<endevent>><</link>>"
+          }
+        ]       
+      },
+       {
+        "modName": "ReplacePatcher",
+        "addonName": "ReplacePatcherAddon",
+        "modVersion": "1.0.0",
+        "params": {
+         "js": [
+          {
+           "from": "function gwylanCanRescueFromWraith() {",
+           "to": "function gwylanCanRescueFromWraith() { return false;",
+           "fileName": "gwylan-functions.js"
+          },
+          {
+           "from": "statusCheck(\"Gwylan\");",
+           "to": "return false;",
+           "fileName": "named-npc.js"
+          },
+          {
+           "from": "if (V.gwylan?.timer?.nobody",
+           "to": "return \"shop\";\nif (V.gwylan?.timer?.nobody",
+           "fileName": "named-npc.js"
+          },
+          {
+           "from": "function isGwylanAbsent() {",
+           "to": "function isGwylanAbsent() { return false;",
+           "fileName": "gwylan-functions.js"
+          },
+          {
+           "from": "gwylanForestRescueRange() {",
+           "to": "gwylanForestRescueRange() { return 25;",
+           "fileName": "gwylan-functions.js"
+          },
+          {
+           "from": "V.gwylanSeen?.includes(\"ritual_sex\")",
+           "to": "V.gwylanSeen?.includes(\"ritual_sex\") || V.mathsprojectwon === 1",
+           "fileName": "clothing-special.js"
+          },
+          {
+           "from": "V.gwylanSeen?.includesAny(\"request_gold_accessories\", \"chastity_gold\")",
+           "to": "V.gwylanSeen?.includesAny(\"request_gold_accessories\", \"chastity_gold\") || V.scienceprojectwon === 1",
+           "fileName": "clothing-special.js"
+          }
+         ]
+        }
+      }
+    ],
+    "dependenceInfo": [
+      { 
+        "modName": "TweeReplacer",
+        "version": "^1.0.0"
+      },
+      {
+        "modName": "ReplacePatcher",
+        "version": "^1.0.0"
+       }
+    ]
+  }

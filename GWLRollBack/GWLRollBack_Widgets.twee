@@ -1,0 +1,518 @@
+:: GWLRollBack Widgets [widget]
+
+/*根据之前版本，格温岚在20深度以下必登场，伊甸50%概率。根据新版把格温岚范围扩大到25，伊甸不能营救黑狼的判定也放在这边。 */
+<<widget "GRB_forestRescueSetup">>
+	<<set $canRescue to []>>
+	<<if $forest lte 25>>
+		<<set $canRescue.push("Gwylan")>>
+	<</if>>
+	<<if !$npc.includes("Black Wolf") and !$npc.includes("Eden") and isLoveInterest("Eden") and (random(1, 2) is 2 or $eden_rescue isnot 1) >>
+		<<set $canRescue.push("Eden")>>
+	<</if>>
+	<<set $rescue to $canRescue.length gte 1 ? 1 : 0>>
+<</widget>>
+
+/*呼救的特殊台词，主要是格温兰转头就跑的部分。*/
+<<widget "GRB_forestRescueCheck">>
+	<<if $alarm is 1>>
+		<<if $rescue is 1>>
+			<<if $canRescue.length gt 1>>
+				<<set $_noText to true>>
+			<<elseif $canRescue.includes("Gwylan") and ["Eden","Black Wolf","bear"].includes(_args[0])>>
+					<<gwylanRescueStats false _args[0]>><<set $rescue to 0>>
+					<<if _args[0] is "Eden">>
+						<<if C.npc.Eden.name_known>>
+							<<set $_assailant to "伊甸">>
+						<<else>>
+							<<set $_assailant to setup.NPC_CN_TITLE(C.npc.Eden.title)>>
+						<</if>>
+					<<elseif _args[0] is "Black Wolf">>
+						<<set $_assailant to "黑狼">>
+					<<else>> <!-- Currently only applies to bears -->
+						<<set $_assailant to "<<beasttype>>">>
+					<</if>>
+					你看见<<gwylanDesc>>被你的喊声惊动，从树林边缘冲出来。<<nnpc_He "Gwylan">>看了$_assailant一眼，<span class="red">随即转身逃走了。</span>
+			<<else>>
+				<<set $_noText to true>>
+			<</if>>
+		<<else>>
+			<<if $gwylan_rescue is 1 and $forest gt 25>>
+				<span class="red">你太深入森林了，格威岚听不到你的声音<<if _args[0] isnot "Eden" and isLoveInterest("Eden")>>，而且伊甸肯定不在这片区域<</if>>。</span>
+			<<else>>
+				<span class="red">你离城镇太远了，不会有人听到你的声音<<if _args[0] isnot "Eden" and isLoveInterest("Eden")>>，而且伊甸不在这一带<</if>>。</span>
+			<</if>>
+		<</if>>
+	<<else>>
+		<<set $_noText to true>>
+	<</if>>
+	<<if $alarm is 1 and $rescue is 0>>
+		<<set $alarm to 0>>
+	<</if>>
+	<<if !$_noText>>
+		<br><br>
+	<</if>>
+<</widget>>
+
+/*格温兰的单独救援只能完全重写了。保留了一些新加的差分。*/
+<<widget "GRB_gwylanForestRescue">>
+	<<set $_type to _args[0]>>
+	<<gwylanRescueStats true $_type>><<run statusCheck("Gwylan")>>
+	<<if $_type is "plant">>/*虽然这个分歧应该是无法触发了*/
+		<<set $_gwylanThrow to "item">>
+		<<person1>><<person>>俯身靠近，却被飞来的?gwylanItem迎面击中。<<him>>痛呼一声，收回藤蔓转为防御姿态。
+		<br><br>
+
+		“嘿！”<<gwylanDesc>>从树林边缘现身喊道，“离<<phim>>远点！”<<nnpc_He "Gwylan">>手里抓着?gwylanItem，似乎马上就要投出去。
+		<br><br>
+
+		<<person>>低下头，显得十分懊悔。“我……好的，对不起。”<<He>>最后瞥了一眼<<gwylanDesc>>，然后顺从地钻进地底。
+		<br><br>
+
+		“天啊。”<<gwylanDesc>>摇摇头，“这些植物都蔓延到森林边缘来了。你还好吗？”
+	<<elseif $_type is "human">>
+		<<set $_gwylanThrow to "item">>
+		<<if $enemynomax is 1>>
+			<<person1>><<person>>向你冲来，却被飞来的?gwylanItem迎面击中。
+		<<else>>
+			<<person1>><<person>>向你冲来，却被飞来的?gwylanItem迎面击中。<<person2>><<person>>转头望去，结果也被一个?gwylanItem砸中。
+		<</if>>
+		<br><br>
+
+		“嘿！”<<gwylanDesc>>从树林边缘现身喊道，“离<<phim>>远点，我这还有更多呢！”像是为了证明这点，<<nnpc_he "Gwylan">>又扔出了?gwylanItem，再次砸中了<<person1>><<person>>的脸。
+		<<if $enemynomax is 1>>
+			<<He>>转身跑开了。
+			<br><br>
+
+			"我希望<<he>>不是个顾客，"<<gwylanDesc>>喃喃自语，"反正我也不想要<<his>>的钱。你还好吗？"
+		<<else>>
+			那<<= $enemynomax is 2 ? "两个人" : "群人">>互相看了一眼，然后转身就跑。
+			<br><br>
+
+			"我希望他们不是顾客，"<<gwylanDesc>>喃喃自语，"反正我也不想要他们的钱。你还好吗？"
+		<</if>>
+	<<elseif $_type is "Eden">>/*这个分歧也是明显不能触发*/
+		<<set $_edenName to C.npc.Eden.name_known ? "伊甸" : "<<nnpc_title 'Eden'>>">>
+		"伊甸！立刻放开<<phim>>！"一道尖锐的命令声在森林里回荡。
+		<br><br>
+		<<= $_edenName.toUpperFirst()>>愣了一下，举起步枪，但是并没从你身上下去！
+		<br><br>
+		<<clotheson>>
+		<<endcombat>>
+		<<set $_combatEnded to true>>
+		<<npc Eden 1>><<npc Gwylan 2>><<person2>>
+		<span class="forest-green">格威岚</span>缓缓从对面现身。
+		<br><br>
+		"离我们远点，bitch。" <<= $_edenName>>啐了一口。“否则我今天就算当着你的面，也非把事办了。”
+		<br><br>
+		“哦，不，你不能这样。”格威岚嘴角勾起一抹冷笑。<span class="forest-green">"我诅咒你，你插不进去！！！”</span>
+		<br>
+		“是吗，别以为只有你才懂js嗷。”<<= $_edenName>>也冲着格威岚邪魅一笑。<span class="red">“伊甸园法环模式，ON！！！”</span>
+		<br>
+		<span class="forest-green">“你作弊！！”</span><br>
+		“你才是吧！！！！！”<br>
+		<span class="forest-green">“口牙！！”</span><br>
+		“桀桀桀桀！！”<br>
+		<span class="forest-green">“耶咦耶噫噢噢噢——”<br></span>
+		“aieeeeeeeeeee——————”<br><br>
+		之后，这两个人手舞足蹈地嚷嚷着你不懂的话……你放空大脑，停止了思考……
+		<br><br>
+		<<link [[这不是我想看的，醒来|Forest]]>><<endevent>><</link>>
+	<<else>> /* beast */	
+		<<set $_gwylanThrow to "item">>	
+		<<beasttype>><<beast_growls_text $_type>>，却被一个飞来的?gwylanItem击中了脸。
+			<<if $_type.includes("boar")>>
+				<<bHe>>咕哝着，环顾四周。
+				<<if $monster is 1>>
+					“诡计和陷阱。讨厌。”
+				<</if>>
+			<<elseif $_type.includes("lizard")>>
+				<<bHe>>惊慌地环顾四周。
+			<<else>>
+				<<bHe>>惊叫一声，警觉地环顾四周。
+				<<if $monster is 1>>
+					“人类的攻击！人类在哪儿？！”
+				<</if>>
+			<</if>>
+				<br><br>
+
+			"咻！"<<nnpc_He "Gwylan">>抛出一个?gwylanItem，从侧面击中了<<beasttype>>。
+			<<if $_type.includes("boar")>>
+				<<bhe>>逃跑了。
+			<<elseif $_type.includes("lizard")>>
+				<<bhe>>重新潜入翻腾的水中。
+			<<else>>
+				<<bhe>>夹着尾巴溜走了。
+			<</if>>
+				<<if $combatTrain.total_length isnot undefined>>
+					The <<= $combatTrain.total_length is 1 ? "其他动物跟在" : "另一个动物跟在">><<bhim>>后面。
+			<</if>>
+			<br><br>
+
+				<<gwylanDesc "cap">>从树林边界现身。
+			“你还好吗？我感觉它们真的是一天比一天凶残了。”<<nnpc_he "Gwylan">>嘟囔道。
+	<</if>>
+	
+		<<if _args.includesAny("river","snow")>>
+			<<nnpc_He "Gwylan">>抓住你的手臂，将你从<<= _args.includes("river") ? "水中" : "雪中">>拉了出来。
+		<</if>>
+		/* Prevents towelup when the player has clothes */
+		<<silently>><<clotheson>><</silently>>
+		<<if $exposed gte 1>>
+			<<nnpc_He "Gwylan">>递给你几条旧毛巾，<<if _args.includesAny("river","snow")>>让你擦干身子并<</if>>遮住身体。<<dry_towel>>
+		<</if>>
+		<<if $pain gte 50>>
+			<<nnpc_He "Gwylan">>花了一些时间来处理你的淤伤。	
+			<<pain -15>>
+		<</if>>
+
+		<<if $_combatEnded>>
+			<<endevent>>
+			<br><br>
+		<<else>>
+			<<clotheson>>
+			<<endcombat>>
+		<</if>>
+		<<npc Gwylan>><<person1>>
+		<<if !_gwylanStatus?.includes("met")>>
+			<<set $daily.gwylan.firstMet to true>>
+			<<He>>有着雀斑和灰褐色的头发，看起来和你差不多大。"我年纪可比看起来要大，"<<he>>仿佛会读心术一般开口，"<span class="green">我叫格威岚。</span>很高兴见到你。"
+			<br><br>
+
+			“我在森林的边缘有一家商店，”<<he>>说道。“你不会错过的。我卖——”<<He>>停顿了一下。“我的祖<<print ($pronoun is "m" ? "父" : "母")>>卖——”又停顿了一下。“我在那儿卖些衣服和小摆设。<span class="blue">你在普通商店里找不到的东西。</span>连我都不知道我有什么存货！”<<He>>听起来很骄傲。
+			<br><br>
+		<<elseif $gwylanRescue.failed>>
+			<<GRB_gwylanRescueApology>>
+			<br><br>
+		<</if>>
+
+		<<if $gwylanRescue.eden gte 1 and !$gwylanRescue.failed and $_type isnot "Eden">>
+			<<He>>环顾四周，好像在等待什么。“奇怪，”<<he>>自言自语。“我以为<<nnpc_title "Eden">>会在这里。一定很忙吧。”
+			<br><br>
+		<</if>>
+
+			<<if $gwylan_rescue isnot 1>>
+				<<set $gwylan_rescue to 1>>
+				"顺便说一下，"<<nnpc_he "Gwylan">>说道。"我能听到你是因为你离我的商店够近。<span class="gold">要是你已经靠近了湖边，还往更里面走的话，我就听不见你的声音了。</span>记住这一点。"
+			<</if>>
+		<<if $_gwylanThrow is "item">>
+			<<He>>收拾好<<his>>的物品，然后朝<<his>>商店的方向走去。
+		<<else>>
+			<<He>>朝着商店的方向走去。
+		<</if>>
+		<br><br>
+		<<if _args.includes("slime")>>
+			<<slimePunishmentForest>>
+			<br><br>
+		<</if>>
+
+		<<link [[继续|Forest]]>><<endevent>><<set $eventskip to 1>><</link>>
+		<br>	
+<</widget>>
+
+
+/*联合救援*/
+<<widget "GRB_ForestCoopRescue">>
+	<<set $_type to _args[6]>>
+	<<if $_type is "plant">>
+			你听到附近传来一声枪响，子弹击穿了<<person1>><<persons>>脚边的地面。与此同时，?gwylanItem砸在<<persons>>的脸上。<<He>>痛呼着缩回<<his>>的藤蔓，迅速钻入地底。
+	<<elseif $_type is "human">>
+		<<if $enemynomax is 1>>
+			你听到附近传来一声枪响，子弹击穿了<<person1>><<persons>>脚边的地面。与此同时，?gwylanItem砸在<<persons>>的脸上。
+			<<if _args.includes("cutter")>>
+				<<He>>踉跄着后退，但似乎更担心枪声。"那个疯子，"<<he>>低声念道。
+			<</if>>
+			<<He>>惊恐地后退，逃进了森林。
+		<<else>>
+			你听到附近传来一声枪响，子弹击穿了<<= $enemynomax is 2 ? "那两个" : "那群">>人脚边的地面。与此同时，?gwylanItem砸在<<person1>><<persons>>的脸上。他们惊恐地后退，逃进了森林。
+		<</if>>
+	<<else>>
+		你听到近处传来一声枪响，子弹<<= _args[3].replace("a","在<<beasttype>>身旁")>>。与此同时，一只?gwylanItem撞上了<<beasttype>>的身体。<<bhe>>_args[4]逃进了_args[5]。
+		<<if $combatTrain.total_length isnot undefined>>
+			The <<= $combatTrain.total_length is 1 ? "其他动物跟在" : "另一个动物跟在">><<bhim>>后面。
+		<</if>>
+	<</if>>
+	<br><br>
+	<<clotheson>>
+	<<endcombat>>
+
+		<<npc Eden 1>><<person1>>
+		<<if $edenCagedEscape or edenFreedomStatus() gte 2>>
+			<<set $gwylanRescue.seen.pushUnique("EdenFailed")>><<set $daily.gwylan.edenRescueFailed to true>>
+			/* Gwylan not generated here as it leads to combat or the cabin */
+				<<gwylanDesc "cap">>从树林边界现身，迅速冲到你的身边。“嘿！你还好——”
+				<br><br>
+			<<if $gwylanRescue.eden gte 4>>
+				<<set $gwylanRescue.failed to "EdenAttack">>
+				有人抓住格威岚的手臂，将<<nnpc_him "Gwylan">>拉到一边，<span class="red">是伊甸。</span><<He>>看起来不太高兴见到你。
+				<br>
+				"你胆子真大，"伊甸咆哮道，"像个该死的混蛋一样抛弃我，还指望我来救你这无助的小屁孩。"
+				<br><br>
+
+				格威岚紧张地咽了一口唾沫，将一只手搭在伊甸的肩上。"冷静点，不如我们——"
+				<br><br>
+
+				伊甸转身一拳打在格威岚的下巴上。<<nnpc_He "Gwylan">>痛苦地大叫，摇摇晃晃地倒在泥土里。<<trauma 12>><<ggtrauma>>
+				<br>
+				"别碰我，"伊甸啐了一口。"我不需要你的帮助，<<pshe>>也不用。"<<He>>怒视着你。"<<pshe>>现在最需要的是知道谁是老大。"
+				<br><br>
+
+				<<He>>抓住你的手腕，开始把你拖进树林，把格威岚留在原地。
+			<<elseif $gwylanRescue.eden gte 1>>
+				<<set $gwylanRescue.failed to "Eden">>
+				<<nnpc_He "Gwylan">>被人猛推一下，摔倒在泥土里，痛叫出声。<span class="red">是伊甸。</span><<He>>的眼中充满怒火。
+				<br>
+				"你胆子真大，"伊甸咆哮道，"像个该死的混蛋一样抛弃我，还指望我来救你这无助的小屁孩。"
+				<br><br>
+
+				格威岚目瞪口呆地看着。伊甸怒视着<<nnpc_him "Gwylan">>。"走开，这是我和<<phim>>之间的事。"
+				<br>
+				格威岚在你们两人之间扫视着，表情混杂着担心和恐惧，随后站起身来，匆匆走开了。<<trauma 6>><<gtrauma>>
+				<br><br>
+
+				伊甸转向你。“我告诉过你我会再找到你的，”<<he>>吐了口唾沫。“没有人能够阻止我。”<<He>>开始把你拖进树林。
+			<<else>>
+				<<set $gwylanRescue.failed to "EdenAttack">>
+				<<nnpc_He "Gwylan">>一只手抓住了，扔进了附近的灌木丛中。<span class="red">是伊甸。</span>
+				<br><br>
+				“我告诉过你我会再找到你的。”<<he>>咆哮着说，“没有人能够阻止我。”
+				<br><br>
+				<<He>>开始把你拖进树林，只留下身后晕头转向的
+				<<if $forest_shop_intro isnot 1 and $gwylanRescue?.count lt 1>><<nnpc_gendery "Gwylan">><<else>>店主<</if>>痛苦地呻吟。
+			<</if>>
+			<br><br>
+
+			<<link [[战斗|Eden Caged Caught Resist]]>><<set $fightstart to 1>><<def 1>><</link>>
+			<br>
+			<<link [[试着拉开距离|Eden Caged Caught Pull]]>><<def 1>><<npcincr Eden dom -1>><</link>><<physiquedifficulty 2000 18000>><<ldom>>
+			<br>
+			<<link [[顺从 (0:30)|Eden Caged Caught]]>><<set $phase to 1>><<pass 30>><<sub 1>><<npcincr Eden dom 1>><</link>><<gdom>>
+			<br>
+		<<elseif $gwylanRescue?.eden gte 4>>
+			<<gwylanRescueStats true $_type "Eden">><<run statusCheck("Gwylan")>>
+			“瞄得挺准，”伊甸说道，<<nnpc_he "Eden">>
+			<<if _args[2]>>
+				靠近，将<<nnpc_his "Eden">>的步枪重新背回肩上。
+				<br><br>
+
+				“但愿我也能这么说，”格威岚回答道。
+			<<else>>
+				从森林中现身。
+				<br><br>
+
+				“但愿我也能这么说，”格威岚回应道，从对面的树林边缘走了出来。
+			<</if>>			
+				“除非你瞄准的是<<= _args.includes("river") ? "水" : "泥巴">>。”伊甸嗤笑一声，不过那表情近乎微笑。
+			<<if $_type is "bear">>
+				<<nnpc_He "Eden">>沿着边界踱步。“我们不该留在这里，那只熊可能会回来。”
+			<</if>>
+			<br><br>
+
+			<<if $gwylanRescue.eden gte 5>>
+				<<if !$gwylanSeen?.includes("eden_frenemies")>>
+					<<set $gwylanSeen.pushUnique("eden_frenemies")>>
+				<</if>>
+				你微笑了一下。以前伊甸总是对格威岚持怀疑态度，而格威岚则总是害怕伊甸。看到他们融洽相处，真是太好了。
+				<<trauma -12>><<ltrauma>>
+				<br><br>
+			<</if>>
+			<!-- 环保女巫捡子弹这种东西还是端下去吧，训伊甸这种东西也一起端下去吧 -->
+			<<GRB_gwylanRescueApologyEden>>
+
+			沉默了一会后，格威岚<<if !_args.includes("river") and $_gwylanThrow isnot "capsule">>收拾好<<nnpc_his "Gwylan">>的物品，
+			<</if>>默默地向<<nnpc_his "Gwylan">>的商店方向走去。伊甸留在原地，仔细确认你是否安好。
+			<<if _args.includes("slime")>>
+				<br>
+				<<slimePunishmentForest>>
+			<</if>>
+			<br><br>
+			<<clotheson>>
+			<<endcombat>>
+			<<forestCabinReturnLinks>>
+		<<elseif $gwylanRescue?.eden gte 1>>
+			<<gwylanRescueStats true $_type "Eden">><<run statusCheck("Gwylan")>>
+			<<if _args[2]>>
+				伊甸谨慎地走在格威岚身旁，但似乎更关注你，并不觉得<<nnpc_him "Gwylan">>能构成威胁。
+			<<else>>
+				伊甸和格威岚从森林小路的两侧走出来。伊甸怀疑地盯着格威岚，
+				但<<nnpc_he "Eden">>认为<<nnpc_him "Gwylan">>构不成威胁。
+			<</if>>
+			<br><br>
+
+			"我们两个都在附近真是太好了，"格威岚说着，伊甸没有回应。
+			<<GRB_gwylanRescueApologyEden>>
+
+			沉默了一会后，
+			格威岚<<if !_args.includes("river") and $_gwylanThrow isnot "capsule">>收拾好<<nnpc_his "Gwylan">>的物品，
+			随后<</if>>一言不发地朝着<<nnpc_his "Gwylan">>的商店方向离去。伊甸留在原地，仔细确认你是否安好。
+
+			<<if _args.includes("slime")>>
+				<br>
+				<<slimePunishmentForest>>
+			<</if>>
+			<br><br>
+
+			<<clotheson>>
+			<<endcombat>>
+			<<forestCabinReturnLinks>>
+		<<else>>
+			<<gwylanRescueStats true $_type "Eden">><<run statusCheck("Gwylan")>>
+			<<set $gwylanRescue.failed to "">>
+			伊甸从树林边缘现身。"你没事吧？"<<nnpc_he "Eden">>问道。"幸好我在这里——"
+			<br><br>
+
+			<<if _args[2]>>
+				<<nnpc_He "Eden">>在看到<<gwylanDesc>>时停了下来。伊甸卸下<<nnpc_his "Eden">>的步枪，将枪口对准<<nnpc_him "Gwylan">>。
+			<<else>>
+				<<nnpc_He "Eden">>的话被<<gwylanDesc>>冲破树林的声响打断。伊甸卸下<<nnpc_his "Eden">>的步枪，将枪口对准<<nnpc_him "Gwylan">>。
+			<</if>>
+			<br><br>
+
+			"等等，"<<gwylanDesc "the" "cap">>举起双臂，丢下了原本拿着的?gwylanItem。“我是你们的盟友！我是来救<<phim>>的！”
+			<br><br>
+
+			伊甸没有放下<<nnpc_his "Eden">>的枪。"我凭什么相信你？"<<nnpc_He "Eden">>将手指搭在扳机上。<<stress 3>><<gstress>>
+			<br><br>
+
+			“真的真的，千真万确！”<<gwylanDesc "the" "cap">>朝你的方向瞥了一眼，又转向伊甸。“我当时正在店里清点货物，突然听见<<phim>>尖叫起来。
+			<<if $gwylan_rescue is 1>>我之前救过<<phim>>，<<pshes>>是我的朋友。<<else>><<if $forest_shop_intro is 1>><<pShes>>是我的顾客之一，<</if>>我想救救<<phim>>。<</if>>"
+			<br><br>
+
+			<<if _gwylanStatus?.includes("met")>>
+				伊甸看向你，确认了一下。你点了点头，<span class="green"><<nnpc_he "Eden">>放下了<<nnpc_his "Eden">>的枪</span>。“好吧。但别耍花招。”
+				<br><br>
+
+				“我不会的，”格威岚回应道，“我还得回去看店。既然<<pshes>>平安无事，那我现在得走了。”
+			<<else>>
+				<<set $daily.gwylan.firstMet to true>>
+				伊甸皱了皱眉头，然后<span class="green">放下了<<nnpc_his "Eden">>的枪</span>。"行。但别耍花样。"
+				<br><br>
+
+				<<gwylanDesc "the" "cap">>松了口气，也把<<nnpc_his "Gwylan">>的手放了下来。<<nnpc_He "Gwylan">>转向你。<<nnpc_He "Gwylan">>长着雀斑，还有灰褐色头发，看起来年龄和你差不多。"我年纪比看起来要大哦。"<<nnpc_he "Gwylan">>仿佛读懂了你的心思， "<span class="green">我叫格威岚</span>。很高兴认识你！"
+				我在森林的边缘有一家商店，”<<nnpc_he "Gwylan">>说道。“你不会错过的。我卖——”<<nnpc_He "Gwylan">>停顿了一下。“我的祖<<print ($pronoun is "m" ? "父" : "母")>>卖——”又停顿了一下。“我在那儿卖衣服和一些小摆设。<span class="blue">你在普通商店里找不到的东西。</span>连我都不知道我有什么存货！”<<nnpc_He "Gwylan">>听起来很骄傲。
+			<</if>>
+			<br><br>
+			<<if $gwylan_rescue isnot 1>>
+				<<set $gwylan_rescue to 1>>
+				<<set _gwylanRescueNotice to true>>
+				<<nnpc_He "Gwylan">>开始走开，但停下来转身。"顺便说一下，"<<nnpc_he "Gwylan">>说道。"我能听到你是因为你离我的商店够近。<span class="gold">要是你已经靠近了湖边，还往更里面走的话，我就听不见了。</span>记住这一点。"
+			<</if>>
+			<<if $eden_rescue isnot 1>>
+				<<set $eden_rescue to 1>>
+				<<if _gwylanRescueNotice>>
+					<br>"至于我，"伊甸说道，"我碰巧在附近。<span class="gold">我可能并不总是在你身边，但我应该能在森林的任何地方救你。</span>如果你遇到危险，喊一声。无论你在多深的森林里，我都会赶来。"
+				<<else>>
+					当格威岚准备转身离开时，伊甸拍了拍你的肩膀。"我能救你是因为碰巧在这个区域，"<<nnpc_he "Eden">>说，"<span class="gold">我可能不会一直在你身边，但我应该能在森林的任何地方救你。</span>如果你有麻烦，喊一声。"
+				<</if>>
+				<br><br>
+			<</if>>
+
+			格威岚转身朝<<nnpc_his "Gwylan">>的商店走去，<<= _args.includes("river") and $_gwylanThrow isnot "capsule" ? "消失在视野里" : "突然又想起<<nnpc_his 'Gwylan'>>丢出的商品，于是把它捡起来，然后离开了">>。伊甸留在原地，仔细确认你是否安好。
+
+			<<if _args.includes("slime")>>
+				<br>
+				<<slimePunishmentForest>>
+			<</if>>
+			<br><br>
+
+			<<clotheson>>
+			<<endcombat>>
+
+			<<forestCabinReturnLinks>>
+		<</if>>
+<</widget>>
+
+/*联合救援的格的见死不救道歉*/
+<<widget "GRB_gwylanRescueApologyEden">>
+	<<if $gwylanRescue.failed is "Eden" or $gwylanRescue.failed is "EdenAttack" or $gwylanRescue.failed is "EdenShop">>
+		格威岚皱了皱眉。“嘿，你为什么要攻击<<phim>>？你们闹矛盾了吗？”	
+		<br><br>
+		伊甸叹了口气，交叉起<<nnpc_his "Eden">>的手臂。“<<pShe>>得学会服从我。”格威岚似乎对那个回答不太满意，但并没有继续追问。	
+		<br><br>
+	<<elseif $gwylanRescue.failed is "Black Wolf">>
+		<<nnpc_He "Gwylan">>转向你，揉了揉<<nnpc_his "Gwylan">>的脖子。“抱歉之前没有救你，但我不想惹毛那只头狼。我不想让整个狼群来敲我的门。"
+		<br><br>
+		“你被那只头狼袭击了？那只黑色的？”伊甸低吼道。“要是那畜生敢碰你一根汗毛，我就扒了它的皮做成黑色地毯。”
+		<br><br>
+	<</if>>
+	<<set $gwylanRescue.failed to "">>
+<</widget>>
+
+/*格的通用见死不救道歉*/
+<<widget "GRB_gwylanRescueApology">>
+	<<if $gwylanRescue.failed is "Wraith">>
+		<<set $_noFollowUp to true>>
+		<<if _args.includes("shop") and !_args.includes("intro")>>
+			<<nnpc_He "Gwylan">>关切地打量着你。
+		<<else>>
+			"嘿，"你走进来时，格威岚说道。<<nnpc_He "Gwylan">>看起来很担心。
+		<</if>>
+		"你感觉还好吗？你脸色有点苍白，那天晚上我好像听到你在尖叫……"
+	<<else>>
+		<<if _args.includes("shop")>>
+			<<if _args.includes("intro")>>
+				<<nnpc_He "Gwylan">>揉了揉<<nnpc_his "Gwylan">>的脖子。“对了，抱歉
+			<<else>>
+				“嘿，”你走进来时，格威岚说道。“抱歉
+			<</if>>
+		<<else>>
+			<<nnpc_He "Gwylan">>不敢看你。“抱歉
+		<</if>>
+	<</if>>
+
+	<<if $_noFollowUp>>
+		/* Nothing */
+	<<else>>
+		<<if $gwylanRescue.failed is "EdenAttack" or $gwylanRescue.failed is "EdenShop" or $gwylanRescue.failed is "Eden">>
+			之前没能救你，但我不想惹怒<<= $gwylanRescue.eden gte 1 ? "伊甸" : "<<nnpc_title 'Eden'>>">>。
+			<<if $gwylanRescue.eden gte 1>>
+				<<nnpc_He "Eden">>仍然让我害怕。"
+			<<else>>
+				<<nnpc_He "Eden">>是这个森林里最恐怖的存在。"
+			<</if>>
+		<<elseif $gwylanRescue.failed is "Black Wolf">>
+			之前没能救你，但我不敢和头狼作对。我可不想让整个狼群把我的门撞开。”
+		<<elseif $gwylanRescue.failed is "bear">>
+			之前没能救你，但我不敢和熊作对。在它们面前，我们不过是美味又软糯的小点心罢了。”
+		<<else>>
+			……呃……$gwylanRescue.failed？等等，你刚刚在和什么打架？是啥着？”格威岚揉了揉自己的脖子。“不过，你没事就好。”
+		<</if>>
+	<</if>>
+	
+	<<if _args.includes("Robin")>>
+		罗宾眨了眨眼睛，但没有质疑。
+	<</if>>
+	<<set $gwylanRescue.failed to "">>
+<</widget>>
+
+/* 森林商店入口，帮制作组加了裸露不能入内提示。 */
+<<widget "GRB_ForestShopForest">>
+	<<if $exposed lte 1>>
+			<<if $forest_shop_intro is 1>>
+				<<shopicon "forest">><<link [[森林商店|Forest Shop Entrance]]>><</link>>
+			<<else>>
+				<<shopicon "forest">><<link [[陌生的商店|Forest Shop Entrance]]>><</link>>
+			<</if>>
+	<<elseif $forest_shop_intro is 1>>
+		<<shopicon "forest">>森林商店就在这里，但你太暴露了，不好意思进入。
+	<<else>>
+		<<shopicon "forest">>这里有一座奇异的建筑，但你太暴露了，不好意思进入。
+	<</if>>
+		<br><br>
+<</widget>>	
+
+/* 采摘红玫瑰现在满足条件可以获得粉玫瑰。 */
+<<widget "GRB_ForestRose">>
+<<if $tending gte 1000 and $plants_known?.includesAll("red_rose","white_rose","orchid","daisy","tulip","lotus","lily","poppy","strange_flower","carnation","plumeria") and !$plants_known?.includes("pink_rose")>>
+	<br><br>
+	你丰富的种植经验和花卉知识让你留意到一簇与众不同的花丛，其中绽放着粉色的玫瑰。这肯定是个稀有变异品质，你小心翼翼地将花朵收集起来。
+	<br><br>
+	<<set $plants_known.push("pink_rose")>>
+	<span class="gold">你现在可以种植<<icon "tending/pink_rose.png">>粉玫瑰了。</span>
+<</if>>
+<</widget>>	
+
+:: GWLRollBack Mansion Piano []
+你闭上眼，钻进被子里。钢琴声很快就听不到了。
+<<set $avery_mansion.fox.end to true>>
+<br><br>
+<<link [[继续|Mansion Bed]]>><<endevent>><</link>>
