@@ -1,0 +1,191 @@
+.vp99 {
+  font-weight: bold;
+  display: inline-block;
+
+   background: linear-gradient(
+    90deg,
+    red,
+    orange,
+    yellow,
+    green,
+    cyan,
+    blue,
+    violet,
+     red,
+    orange,
+    yellow,
+    green,
+    cyan,
+    blue,
+    violet
+  );
+    background-size: 800%;
+
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+
+  animation:
+    rainbowMove 6s linear infinite,
+    glow 6s linear infinite,
+    breathe 6s ease-in-out infinite alternate,
+    float 3s ease-in-out infinite;
+
+  text-shadow:
+     0 0 10px rgba(255,255,255,.5),
+    0 0 20px rgba(255,255,255,.3);
+}
+
+@keyframes huee {
+  0% { filter: hue-rotate(0); }
+  50%   { filter: hue-rotate(180); }
+  100%   { filter: hue-rotate(360); }
+}
+
+@keyframes glow {
+  0% {
+    text-shadow:
+     0 0 10px rgba(255,255,255,.5),
+    0 0 20px rgba(255,255,255,.3);
+  }
+  50% {
+    text-shadow:
+  0 0 5px #f0f,
+  0 0 10px #0ff,
+  0 0 20px #ff0;
+  }
+  
+  100% {
+    text-shadow:
+     0 0 10px rgba(255,255,255,.5),
+    0 0 20px rgba(255,255,255,.3);
+  }
+}
+
+.vp99still {
+  font-weight: bold;
+   background: linear-gradient(
+    90deg,
+    red,
+    orange,
+    yellow,
+    green,
+    cyan,
+    blue,
+    violet,
+     red,
+    orange,
+    yellow,
+    green,
+    cyan,
+    blue,
+    violet
+  );
+    background-size: 800%;
+
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+
+  animation:
+    rainbowMove 6s linear infinite,
+    glow 6s linear infinite,
+    breathe 6s ease-in-out infinite alternate;
+
+  text-shadow:
+     0 0 10px rgba(255,255,255,.5),
+    0 0 20px rgba(255,255,255,.3);
+}
+
+@keyframes huee {
+  0% { filter: hue-rotate(0); }
+  50%   { filter: hue-rotate(180); }
+  100%   { filter: hue-rotate(360); }
+}
+
+@keyframes glow {
+  0% {
+    text-shadow:
+     0 0 10px rgba(255,255,255,.5),
+    0 0 20px rgba(255,255,255,.3);
+  }
+  50% {
+    text-shadow:
+   0 0 5px rgba(255,255,255,.5),
+    0 0 10px rgba(255,255,255,.3);
+  }
+  
+  100% {
+    text-shadow:
+     0 0 10px rgba(255,255,255,.5),
+    0 0 20px rgba(255,255,255,.3);
+  }
+}
+
+@keyframes float {
+  0%   { transform: translate(0,5px); }
+  25%  { transform: translate(-5px,0); }
+  50%  { transform: translate(0,-5px); }
+  75%  { transform: translate(5px,0); }
+  100% { transform: translate(0,5px); }
+}
+
+@keyframes breathe {
+  0% { filter: brightness(1); }
+  50%  { filter: brightness(0.75);}
+  100%  { filter: brightness(1); }
+}
+
+@keyframes rainbowMove {
+  0% { background-position: 0% 50%; }
+  100%   { background-position: -50% 50%; }
+}
+
+
+.edenring {
+    display: inline-block;
+  font-weight: bold;
+  color: #ffd700; /* 基础金色文字 */
+
+  /* 多层光晕 + 发光 */
+  text-shadow:
+    0 0 5px #ffd700,
+    0 0 10px #fff8dc,
+    0 0 20px #fffacd;
+
+  /* 背景渐变闪电流动效果 */
+  background: linear-gradient(
+    90deg,
+    #ffd700,
+    #fffacd,
+    #ffd700
+  );
+  background-size: 200% 100%;
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+
+  /* 动画：呼吸 + 漂浮 + 流动电光 */
+  animation:
+    lightningMove 2s linear infinite,
+    glowPulse 2s ease-in-out infinite alternate,
+}
+
+/* 呼吸光晕动画 */
+@keyframes glowPulse {
+  0% {
+    text-shadow:
+      0 0 5px #ffd700,
+      0 0 10px #fff8dc,
+      0 0 20px #fffacd;
+  }
+  100% {
+    text-shadow:
+      0 0 10px #ffd700,
+      0 0 20px #fff8dc,
+      0 0 40px #fffacd;
+  }
+}
+
+/* 背景流动模拟电光 */
+@keyframes lightningMove {
+  0% { background-position: 0% 50%; }
+  100% { background-position: 100% 50%; }
+}

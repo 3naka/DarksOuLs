@@ -1,13 +1,15 @@
 {
     "name": "GWLRollBack",
-    "version": "0.1",
+    "version": "0.1.1",
     "styleFileList": [
+      "GRBCSS.css"
     ],
     "scriptFileList_earlyload": [
     ],
     "scriptFileList_inject_early": [
     ],
     "scriptFileList_preload": [
+      "GWLRollBack_preload.js"
     ],
     "scriptFileList": [
      
@@ -70,11 +72,6 @@
             "findString": "!$weekly.gwylanNoLure",
             "replace": "0",
              "all": true
-          },
-           {
-            "passage": "Forest Hunter Molestation Finish",
-            "findString": "$worn.neck.name is \"familiar collar\"",
-            "replace": "$worn.neck.name is \"VP 99 NO 88\""
           },
           {
             "passage": "Widgets Nightmares",
@@ -139,12 +136,6 @@
             "passage": "Pub",
             "findString": "gwylanSchedule() is \"pub\"",
             "replace": "gwylanSchedule() is \"VP99NO88\""
-          },
-           {
-            "passage": "Rent Intro",
-            "findString": "$worn.neck.name is \"familiar collar\"",
-            "replace": "$worn.neck.name is \"VP 99 NO 88\"",
-             "all": true
           },
           {
             "passage": "Widgets Robin",
@@ -213,218 +204,294 @@
             "findRegex": "<<addinlineevent \"forest_shop_rumors\">>[\\s\\S]+?<</addinlineevent>>",
             "replace": "\n"
           },
-           {
-            "passage": "Adult Shop Passout Bondage",
-            "findString": "$worn.neck.name is \"familiar collar\"",
-            "replace": "$worn.neck.name is \"VP 99 NO 88\"",
-             "all": true
-          },
-           {
-            "passage": "Beach Abduction Collared",
-            "findString": "$worn.neck.name is \"familiar collar\"",
-            "replace": "$worn.neck.name is \"VP 99 NO 88\""
+          {
+            "passage": "Rent Intro",
+            "findRegex": "neck.cursed is 1>>[\\s\\S]+?<<rentGwylanTrade>>\\s+?<<else>>",    
+             "replace": "neck.cursed is 1>>\n“传说中的<span class=\"vp99still\">VP99情深几许项圈典藏限量款</span>”？贝利嘲讽地说道，“VP也救不了你。”<br><br><</if>>"
           },
           {
-            "passage": "Bully Dog Walk 2",
-            "findString": "$worn.neck.name is \"familiar collar\"",
-            "replace": "$worn.neck.name is \"VP 99 NO 88\""
+            "passage": "Rent Intro",
+            "findRegex": "and \\(\\$avery_fate is[\\s\\S]+?<<rentGwylanTrade>>\\s+?<<else>>",
+             "replace": ">>\n贝利又嘲讽道：“<span class=\"vp99still\">VP99芳心暗许项圈典藏限量款</span>？现在谁都救不了你。”<br><br>前进继续着，<</if>>"
+          },
+          {
+            "passage": "Rent Intro",
+            "findRegex": "<</if>>\\s+?<<elseif \\$rentsale is 1>>",
+            "replace": "<<elseif $rentsale is 1>>"
+          },
+          {
+            "passage": "Rent Intro",
+            "findRegex": "<<rentEdenTrade>>\\s+?<</if>>",
+            "replace": "<<rentEdenTrade>>"
+          },
+          {
+            "passage": "Prison Intro Collar Remove",
+            "findString": "你的项圈在一片白色海洋中散发出淡淡的绿光",
+            "replace": "你的<<icon \"clothes/familiar_collar.png\">><span class=\"vp99still\">VP99永沐爱河项圈典藏限量款</span>在一片白色海洋中散发出绚烂的光芒"
+          },
+           {
+            "passage": "Adult Shop Passout Bondage",
+            "findRegex": "(worn.neck.cursed is 1>>\\s+?<<person>>)[\\s\\S]+?<br><br>",
+            "replace": "$1抓住你的项圈，<<icon \"clothes/familiar_collar.png\">><span class=\"vp99still\">VP99至臻纯爱项圈典藏限量款</span>随之泛起细微震颤，发出绚烂的光芒。西里斯不由得眯起了眼睛。<br><br>"
+          },
+          {
+            "passage": "Adult Shop Passout Bondage Familiar",
+            "findString": "是你在城外那家小店买的吗？",
+            "replace": "这难道就是传说中的<span class=\"vp99still\">VP99典藏限量项圈</span>吗？"
+          },
+          {
+            "passage": "Beach Abduction Collared",
+            "findRegex": "<<pHer>>[\\s\\S]+?<<he>>",
+            "replace": "等等，这不是传说中的<span class=\"vp99still\">VP99项圈典藏限量款</span>\"吗？"
           },
           {
             "passage": "Bully Dog Walk 3",
-            "findString": "$worn.neck.name is \"familiar collar\"",
-            "replace": "$worn.neck.name is \"VP 99 NO 88\""
+            "findRegex": "<span class=\"blue\">[\\s\\S]+?</span>",
+            "replace": "<span class=\"blue\">惠特尼低头盯着你的</span><<icon \"clothes/familiar_collar.png\">><span class=\"vp99still\">VP99永恒绝恋项圈典藏限量款</span><span class=\"blue\">，仿佛被定住了一般。</span>"
           },
           {
             "passage": "Chef Blackmail Livestock 2",
-            "findString": "$worn.neck.name is \"familiar collar\"",
-            "replace": "$worn.neck.name is \"VP 99 NO 88\""
+            "findString": "你的项圈",
+            "replace": "你的<<icon \"clothes/familiar_collar.png\">><span class=\"vp99still\">VP99风沙缠绵项圈典藏限量款</span>"
           },
           {
             "passage": "Eden Caged Caught Resist",
-            "findString": "$worn.neck.name is \"familiar collar\"",
-            "replace": "$worn.neck.name is \"VP 99 NO 88\""
+            "findString": "间的项圈",
+            "replace": "间的<<icon \"clothes/familiar_collar.png\">><span class=\"vp99still\">VP99爱如潮水项圈典藏限量款</span>"
           },
            {
             "passage": "Eden Caged Evening Stretch",
-            "findString": "$worn.neck.name is \"familiar collar\"",
-            "replace": "$worn.neck.name is \"VP 99 NO 88\"",
-             "all": true
+            "findString": "没你好果子吃",
+            "replace": "<span class=\"vp99still\">以后再也别想嗑VP</span>"
           },
           {
             "passage": "Eden Hunt",
-            "findString": "$worn.neck.name is \"familiar collar\"",
-            "replace": "$worn.neck.name is \"VP 99 NO 88\""
+            "findString": "别走远了。",
+            "replace": "<span class=\"vp99still\">又是VP</span>，你不能嗑点别的吗。"
           },
           {
             "passage": "Eden Recaptured Resist",
-            "findString": "$worn.neck.name is \"familiar collar\"",
-            "replace": "$worn.neck.name is \"VP 99 NO 88\""
+            "findRegex": "<span class=\"green\">[\\s\\S]+?<<nnpc_his \"Gwylan\">>！",
+            "replace": "<span class=\"green\">可指尖刚碰到你的<<icon \"clothes/familiar_collar.png\">><span class=\"vp99still\">VP99缱绻柔情项圈典藏限量款</span>，就被电流猛地弹开。</span>\n<br><br>\n“你觉得这很好玩？<span class=\"edenring\">只要我还有一口气在，你就别想再嗑到VP！</span>"
           },
           {
             "passage": "Farm Breakfast",
-            "findString": "$worn.neck.name is \"familiar collar\"",
-            "replace": "$worn.neck.name is \"VP 99 NO 88\""
+            "findString": "这是真金做的吗？",
+            "replace": "这是<span class=\"vp99still\">VP99项圈限量款</span>吗？"
+          },
+          {
+            "passage": "Farm Breakfast",
+            "findString": "铜匠应该能帮你解决这个问题，不过话说回来，这设计还挺别致的。",
+            "replace": "这就是传说中的<span class=\"vp99still\">VP99典藏项圈</span>？设计真别致啊。"
           },
           {
             "passage": "Flats Canal Kiss",
-            "findString": "$worn.neck.name is \"familiar collar\"",
-            "replace": "$worn.neck.name is \"VP 99 NO 88\""
+            "findString": "项圈",
+            "replace": "<<icon \"clothes/familiar_collar.png\">><span class=\"vp99still\">VP99地火天雷项圈典藏限量款</span>"
           },
            {
             "passage": "History Lesson Collar",
-            "findString": "$worn.neck.name is \"familiar collar\"",
-            "replace": "$worn.neck.name is \"VP 99 NO 88\""
+            "findRegex": "worn.neck.cursed is 1>>[\\s\\S]+?<br><br>",
+            "replace": "worn.neck.cursed is 1>>“这是我的<<icon \"clothes/familiar_collar.png\">><span class=\"vp99still\">VP99项圈典藏限量款</span>。”你说。<br><br>"
           },
           {
-            "passage": "Kylar Abduction Intro",
-            "findString": "$worn.neck.name is \"familiar collar\"",
-            "replace": "$worn.neck.name is \"VP 99 NO 88\""
+            "passage": "History Lesson Collar",
+            "findRegex": "确实很熟悉[\\s\\S]+?设计",
+            "replace": "原来这就是传说中的<<icon \"clothes/familiar_collar.png\">><span class=\"vp99still\">VP99八心八箭项圈典藏限量款</span>，真是百闻不如一见，让我回想起一段<span class=\"vp99still\">凄美的往事</span>"
           },
           {
             "passage": "Mansion Return Walk Dog",
-            "findString": "$worn.neck.name is \"familiar collar\"",
-            "replace": "$worn.neck.name is \"VP 99 NO 88\""
+            "findString": "眷属项圈",
+            "replace": "<<icon \"clothes/familiar_collar.png\">><span class=\"vp99still\">VP99金枝玉叶项圈典藏限量款</span>"
+          },
+          {
+            "passage": "Passout Estate Remy Hot Cold",
+            "findString": "眷属项圈",
+            "replace": "<<icon \"clothes/familiar_collar.png\">><span class=\"vp99still\">VP99奇侶仙缘项圈典藏限量款</span>"
           },
           {
             "passage": "Moor Abduction Remy Wake",
-            "findString": "$worn.neck.name is \"familiar collar\"",
-            "replace": "$worn.neck.name is \"VP 99 NO 88\""
-          },
-           {
-            "passage": "Passout Estate Remy Hot Cold",
-            "findString": "$worn.neck.name is \"familiar collar\"",
-            "replace": "$worn.neck.name is \"VP 99 NO 88\""
+            "findString": "眷属项圈",
+            "replace": "<<icon \"clothes/familiar_collar.png\">><span class=\"vp99still\">VP99海枯石烂项圈典藏限量款</span>"
           },
            {
             "passage": "Police Cell",
-            "findString": "$worn.neck.name is \"familiar collar\"",
-            "replace": "$worn.neck.name is \"VP 99 NO 88\""
+            "findString": "看来电击功能是好的。",
+            "replace": "莫非是传说中的<span class=\"vp99still\">VP99项圈典藏限量款</span>？"
           },
           {
             "passage": "Police Station Collar",
-            "findString": "$worn.neck.name is \"familiar collar\"",
-            "replace": "$worn.neck.name is \"VP 99 NO 88\""
+            "findString": "神明插手",
+            "replace": "<span class=\"vp99still\">VP显灵</span>，或是你自己解开"
           },
           {
             "passage": "Pound Abduction",
-            "findString": "$worn.neck.name is \"familiar collar\"",
-            "replace": "$worn.neck.name is \"VP 99 NO 88\""
+            "findString": "worn.neck.cursed is 1>>",
+            "replace": "worn.neck.cursed is 1>>\n<<set _vp to true>>\n<</if>>\n<<if 0>>"
+          },
+          {
+            "passage": "Pound Abduction",
+            "findString": "<<set $worn.neck.cursed to 1>>",
+            "replace": "<<set $worn.neck.cursed to 1>>\n<<if _vp>>“我们就这么把这<<bitch>>搞定了？”有人说，“无敌的<span class=\"vp99still\">VP99典藏项圈</span>倒了？”<br>“说话注意点。”另一个说，“一切为了平衡性考虑。”<br><br><</if>>"
           },
           {
             "passage": "Pound Assault Caught 2",
-            "findString": "$worn.neck.name is \"familiar collar\"",
-            "replace": "$worn.neck.name is \"VP 99 NO 88\""
+            "findString": "worn.neck.cursed is 1>>",
+            "replace": "worn.neck.cursed is 1>>\n<<set _vp to true>>\n<</if>>\n<<if 0>>"
+          },
+          {
+            "passage": "Pound Assault Caught 2",
+            "findString": "<<set $worn.neck.cursed to 1>>",
+            "replace": "<<set $worn.neck.cursed to 1>>\n<<if _vp>>“我们就这么把这<<bitch>>搞定了？”有人说，“<span class=\"vp99still\">VP99典藏项圈</span>不该电击我们所有人吗？”<br>“嘘。”另一个说，“还嫌麻烦不够多吗。”<br><br><</if>>"
           },
           {
             "passage": "Pound Free Submit",
-            "findString": "$worn.neck.name is \"familiar collar\"",
-            "replace": "$worn.neck.name is \"VP 99 NO 88\""
+            "findString": "worn.neck.cursed is 1>>",
+            "replace": "worn.neck.cursed is 1>>\n<<set _vp to true>>\n<</if>>\n<<if 0>>"
+          },
+          {
+            "passage": "Pound Free Submit",
+            "findString": "<<set $worn.neck.cursed to 1>>",
+            "replace": "<<set $worn.neck.cursed to 1>>\n<<if _vp>>“我们就这么把这<<bitch>>搞定了？”有人说，“<span class=\"vp99still\">VP99典藏项圈</span>不该是无敌的吗？”<br>“闭嘴吧。”另一个说，“不要在意这些细节。”<br><br><</if>>"
           },
           {
             "passage": "Robin Forest Crash Fight",
-            "findString": "$worn.neck.name is \"familiar collar\"",
-            "replace": "$worn.neck.name is \"VP 99 NO 88\""
+            "findString": "项圈",
+            "replace": "<<icon \"clothes/familiar_collar.png\">><span class=\"vp99still\">VP99星语心愿项圈典藏限量款</span>"
           },
           {
-            "passage": "Sewers Morgan",
-            "findString": "$worn.neck.name is \"familiar collar\"",
-            "replace": "$worn.neck.name is \"VP 99 NO 88\""
+            "passage": "Sewers Collar Familiar",
+            "findString": "小海鸟的魔法信物",
+            "replace": "传说中的<span class=\"vp99still\">VP99永结同心日月轮回斗转星移真爱亘古欲海情天项圈典藏限量款</span>"
           },
           {
-            "passage": "Street Collar Molestation",
-            "findString": "$worn.neck.name is \"familiar collar\"",
-            "replace": "$worn.neck.name is \"VP 99 NO 88\""
+            "passage": "Sewers Collar Familiar",
+            "findRegex": "<<charles>>[\\s\\S]+?毛团",
+            "replace": "<<charles>>，这说明你是被<span class=\"edenring\">VP加护和眷顾的人</span>啊！如果有谁会被选中，我知道那肯定是你"
           },
           {
             "passage": "Street Eden Angry Hide",
-            "findString": "$worn.neck.name is \"familiar collar\"",
-            "replace": "$worn.neck.name is \"VP 99 NO 88\"",
-             "all": true
+            "findString": "那条项圈",
+            "replace": "<<icon \"clothes/familiar_collar.png\">><span class=\"vp99still\">VP99夜语晨风项圈典藏限量款</span>"
           },
           {
             "passage": "Street Eden Angry",
-            "findString": "$worn.neck.name is \"familiar collar\"",
-            "replace": "$worn.neck.name is \"VP 99 NO 88\"",
-             "all": true
+            "findString": "那条项圈",
+            "replace": "<<icon \"clothes/familiar_collar.png\">><span class=\"vp99still\">VP99唯一眷恋项圈典藏限量款</span>"
           },
           {
-            "passage": "Street Van Fight Finish",
-            "findString": "$worn.neck.name is \"familiar collar\"",
-            "replace": "$worn.neck.name is \"VP 99 NO 88\""
+            "passage": "Livestock Intro Familiar Collar Break",
+            "findString": "你的项圈",
+            "replace": "你的<<icon \"clothes/familiar_collar.png\">><span class=\"vp99still\">VP99双飞同游项圈典藏限量款</span>"
+          },
+          {
+            "passage": "Livestock Intro Familiar Collar 2",
+            "findString": "$remy_mask is 1",
+            "replace": "0"
+          },
+          {
+            "passage": "Livestock Intro Familiar Collar",
+            "findString": "你的项圈",
+            "replace": "你的<<icon \"clothes/familiar_collar.png\">><span class=\"vp99still\">VP99举镇无双项圈典藏限量款</span>"
           },
           {
             "passage": "Street Van Submit",
-            "findString": "$worn.neck.name is \"familiar collar\"",
-            "replace": "$worn.neck.name is \"VP 99 NO 88\""
+            "findString": "现在的项圈",
+            "replace": "现在的<<icon \"clothes/familiar_collar.png\">><span class=\"vp99still\">VP99前尘幻梦项圈典藏限量款</span>"
           },
           {
             "passage": "Sydney Chat",
-            "findString": "\"familiar collar\"",
-            "replace": "\"VP 99 NO 88\""
+            "findString": "眷属项圈",
+            "replace": "<<icon \"clothes/familiar_collar.png\">><span class=\"vp99still\">VP99飞鸟与鱼项圈典藏限量款</span>"
           },
           {
-            "passage": "Sydney Temple Punish End",
-            "findString": "$worn.neck.name is \"familiar collar\"",
-            "replace": "$worn.neck.name is \"VP 99 NO 88\""
+            "passage": "Sydney Chat",
+            "findString": "亵渎的意味，像是那种会被神殿焚毁",
+            "replace": "凄美的意味，像是那种约旦<<nnpc_brother \"Jordan\">>看了也会流泪"
           },
           {
             "passage": "Sydney Temple Punish Intro 2",
-            "findString": "$worn.neck.name is \"familiar collar\"",
-            "replace": "$worn.neck.name is \"VP 99 NO 88\""
-          },
-          {
-            "passage": "Sydney Temple Punish Repeat",
-            "findString": "$worn.neck.name is \"familiar collar\"",
-            "replace": "$worn.neck.name is \"VP 99 NO 88\""
-          },
-          {
-            "passage": "Temple Arcade End",
-            "findString": "$worn.neck.name is \"familiar collar\"",
-            "replace": "$worn.neck.name is \"VP 99 NO 88\"",
-            "all": true
+            "findString": "你的颈圈",
+            "replace": "你的<<icon \"clothes/familiar_collar.png\">><span class=\"vp99still\">VP99蝶恋芳丛项圈典藏限量款</span>"
           },
           {
             "passage": "Temple Arcade Submit",
-            "findString": "$worn.neck.name is \"familiar collar\"",
-            "replace": "$worn.neck.name is \"VP 99 NO 88\""
+            "findString": "你的项圈",
+            "replace": "你的<<icon \"clothes/familiar_collar.png\">><span class=\"vp99still\">VP99海誓山盟项圈典藏限量款</span>"
           },
           {
             "passage": "Underground Intro",
-            "findString": "$worn.neck.name is \"familiar collar\"",
-            "replace": "$worn.neck.name is \"VP 99 NO 88\"",
+            "findString": "你的项圈使劲拉扯",
+            "replace": "你的<<icon \"clothes/familiar_collar.png\">><span class=\"vp99still\">VP99烈火真心项圈典藏限量款</span>使劲拉扯",
             "all": true
           },
           {
+            "passage": "StoryCaption",
+            "findString": "眷属项圈",
+            "replace": "<span class=\"vp99still\">VP99项圈</span>"
+          },
+           {
+            "passage": "StoryCaption",
+            "findString": "$hypnosis_traits.devotion gte 4",
+            "replace": "1"
+          },
+          {
             "passage": "Widgets Blackjack",
-            "findString": "$worn.neck.name is \"familiar collar\"",
-            "replace": "$worn.neck.name is \"VP 99 NO 88\""
+            "findString": "你这项圈可真够邪门的",
+            "replace": "这就是传说中的<span class=\"vp99still\">VP99项圈典藏限量款</span>吗"
           },
           {
             "passage": "Widgets Combat Man-Combat",
-            "findString": "$worn.neck.name is \"familiar collar\"",
-            "replace": "$worn.neck.name is \"VP 99 NO 88\"",
+            "findString": "项圈上的金色心形铭牌",
+            "replace": "的<<icon \"clothes/familiar_collar.png\">><span class=\"vp99still\">VP99倾镇之恋项圈典藏限量款</span>",
+            "all": true
+          },
+          {
+            "passage": "Widgets Combat Tentacle Adv",
+            "findString": "项圈上的金色心形铭牌",
+            "replace": "的<<icon \"clothes/familiar_collar.png\">><span class=\"vp99still\">VP99倾镇之恋项圈典藏限量款</span>",
             "all": true
           },
            {
             "passage": "Widgets Ejaculation",
-            "findString": "$worn.neck.name is \"familiar collar\"",
-            "replace": "$worn.neck.name is \"VP 99 NO 88\""
+            "findString": "项圈",
+            "replace": "<<icon \"clothes/familiar_collar.png\">><span class=\"vp99still\">VP99比翼连理项圈典藏限量款</span>"
           },
           {
             "passage": "Widgets School Events",
-            "findString": "$worn.neck.name is \"familiar collar\"",
-            "replace": "$worn.neck.name is \"VP 99 NO 88\""
+            "findString": "这玩意儿是谁给你的？",
+            "replace": "<span class=\"vp99still\">传说中的VP99项圈典藏限量款？</span>"
           },
            {
             "passage": "Widgets Street",
-            "findString": "$worn.neck.name is \"familiar collar\"",
-            "replace": "$worn.neck.name is \"VP 99 NO 88\"",
+            "findString": "因为你的项圈电击了",
+            "replace": "因为你的<<icon \"clothes/familiar_collar.png\">><span class=\"vp99still\">VP99三世三生项圈典藏限量款</span>电击了",
             "all": true
           },
           {
+            "passage": "Widgets Street",
+            "findString": "这<<bitch>>是有主儿的",
+            "replace": "这<<bitch>>有VP加护"
+          },
+          {
+            "passage": "Widgets Street",
+            "findString": "主人还挺会玩花样",
+            "replace": "VP还挺会玩花样"
+          },
+          {
             "passage": "Widgets Whitney Street",
-            "findString": "$worn.neck.name is \"familiar collar\"",
-            "replace": "$worn.neck.name is \"VP 99 NO 88\""
+            "findString": "项圈",
+            "replace": "<<icon \"clothes/familiar_collar.png\">><span class=\"vp99still\">VP99海枯石烂项圈典藏限量款</span>"
+          },
+          {
+            "passage": "Widgets Text",
+            "findString": "项圈上的心形铭牌",
+            "replace": "你的<<icon \"clothes/familiar_collar.png\">><span class=\"vp99still\">VP99项圈典藏限量款</span>"
+          },
+          {
+            "passage": "Widgets Clothing",
+            "findString": "项圈上的心形铭牌",
+            "replace": "你的<<icon \"clothes/familiar_collar.png\">><span class=\"vp99still\">VP99项圈典藏限量款</span>"
           },
           {
             "passage": "Forest Shop Entrance",
@@ -629,6 +696,11 @@
             "replace": "0"
           },
           {
+            "passage": "Mansion Piano Demon 2",
+            "findString": "ritual_sex",
+            "replace": "VP99"
+          },
+          {
             "passage": "Mansion Piano Demon",
             "findString": "$brownFoxRevealed",
             "replace": "0"
@@ -733,12 +805,32 @@
           {
             "passage": "Mansion Piano Demon 2",
             "findString": "<<elseif $phase is 2>>",
-            "replace": "<<elseif $phase is 4>>\n你无言地瞪着它。<br><br>它好奇地歪着头。在那张暗色面孔的右侧，一只翠绿的眼睛凝视着你。它的动作变得更加轻柔，触手半蜷着。\n<<elseif $phase is 2>>"
+            "replace": "<<elseif $phase is 4>>\n它好奇地歪着头。在那张暗色面孔的右侧，一只翠绿的眼睛凝视着你。它的动作变得更加轻柔，触手半蜷着。<br><br>你面不改色，只是无言地回看它。\n<<elseif $phase is 2>>"
           },
           {
             "passage": "Mansion Sleep",
             "findString": "\"Mansion Bed\">><<endevent>><</link>>",
             "replace": "\"Mansion Bed\">><<endevent>><</link>><br>\n<<link [[无视|GWLRollBack Mansion Piano]]>><<bedclotheson \"Mansion Bed\">><<endevent>><</link>>"
+          },
+           {
+            "passage": "PassageFooter",
+            "findString": "<div id=\"gameVersionDisplay\">",
+            "replace": "<<if $worn?.neck?.name is \"familiar collar\">><<canvas-model-temporary-effect \"petals\">><<set _birdFlowers to 1>><</if>><div id=\"gameVersionDisplay\">"
+          },
+          {
+            "passage": "Widgets Mirror",
+            "findString": "<<if $worn.neck.name is \"love locket\">>",
+            "replace": "<<if $worn.neck.name is \"familiar collar\" && $worn.neck.cursed is 1>><<icon \"clothes/familiar_collar.png\">><<link [[解锁项圈|$passage]]>><<set $worn.neck.cursed to 0>><</link>><br><br><<elseif $worn.neck.name is \"familiar collar\" >><span class=\"vp99still\"><<icon \"clothes/familiar_collar.png\">><<link [[激活项圈|$passage]]>><<set $worn.neck.cursed to 1>><</link>></span><br><br><</if>>\n<<if $worn.neck.name is \"love locket\">>"
+          },
+           {
+            "passage": "Forest Hunter Molestation Finish",
+            "findRegex": "worn.neck.cursed is 1>>[\\s\\S]+?<<else>>([\\s\\S]+?)<</if>>\\s+?<<elseif",
+            "replace": "worn.neck.cursed is 1>>\n<<GRB_HunterMolestationFinish>>\n<</if>>\n$1\n<<elseif"
+          },
+          {
+            "passage": "Adult Shop",
+            "findString": "Adult Shop Menu]]>><<pass 1>><</link>>",
+            "replace": "Adult Shop Menu]]>><<pass 1>><</link>><br>\n<<clothingcategoryicon \"strapon\">><<link [[浏览新款性玩具 (0:01)|GWLRollBack Sex Toys]]>><<pass 1>><</link>>"
           }
         ]       
       },

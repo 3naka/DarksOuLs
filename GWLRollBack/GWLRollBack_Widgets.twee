@@ -62,7 +62,7 @@
 		<<person1>><<person>>俯身靠近，却被飞来的?gwylanItem迎面击中。<<him>>痛呼一声，收回藤蔓转为防御姿态。
 		<br><br>
 
-		“嘿！”<<gwylanDesc>>从树林边缘现身喊道，“离<<phim>>远点！”<<nnpc_He "Gwylan">>手里抓着?gwylanItem，似乎马上就要投出去。
+		“嘿！”<<gwylanDesc>>从树林边缘现身喊道，“离<<phim>>远点！”<<nnpc_He "Gwylan">>手里抓着?gwylanItem，作势就要投出。
 		<br><br>
 
 		<<person>>低下头，显得十分懊悔。“我……好的，对不起。”<<He>>最后瞥了一眼<<gwylanDesc>>，然后顺从地钻进地底。
@@ -90,7 +90,7 @@
 
 			"我希望他们不是顾客，"<<gwylanDesc>>喃喃自语，"反正我也不想要他们的钱。你还好吗？"
 		<</if>>
-	<<elseif $_type is "Eden">>/*这个分歧也是明显不能触发*/
+	<<elseif $_type is "Eden">>/*这个分歧也是明显不能触发，不过要不然戴上项圈就可以触发吧。*/
 		<<set $_edenName to C.npc.Eden.name_known ? "伊甸" : "<<nnpc_title 'Eden'>>">>
 		"伊甸！立刻放开<<phim>>！"一道尖锐的命令声在森林里回荡。
 		<br><br>
@@ -104,16 +104,16 @@
 		<br><br>
 		"离我们远点，bitch。" <<= $_edenName>>啐了一口。“否则我今天就算当着你的面，也非把事办了。”
 		<br><br>
-		“哦，不，你不能这样。”格威岚嘴角勾起一抹冷笑。<span class="forest-green">"我诅咒你，你插不进去！！！”</span>
+		“哦，不，你不能这样。”格威岚嘴角勾起一抹冷笑。<span class="witch">"我诅咒你，你插不进去！！！”</span>
 		<br>
-		“是吗，别以为只有你才懂js嗷。”<<= $_edenName>>也冲着格威岚邪魅一笑。<span class="red">“伊甸园法环模式，ON！！！”</span>
+		“是吗，别以为只有你才懂css嗷。”<<= $_edenName>>也冲着格威岚邪魅一笑。<span class="edenring">“伊甸园法环模式，ON！！！”</span>
 		<br>
-		<span class="forest-green">“你作弊！！”</span><br>
+		“你作弊！！”</span>
 		“你才是吧！！！！！”<br>
-		<span class="forest-green">“口牙！！”</span><br>
+		“口牙！！”</span>
 		“桀桀桀桀！！”<br>
-		<span class="forest-green">“耶咦耶噫噢噢噢——”<br></span>
-		“aieeeeeeeeeee——————”<br><br>
+		<span class="witch">“耶咦耶噫噢噢噢——”<br></span>
+		<span class="vp99still">“aieeeeeeeeeee——————”</span><br><br>
 		之后，这两个人手舞足蹈地嚷嚷着你不懂的话……你放空大脑，停止了思考……
 		<br><br>
 		<<link [[这不是我想看的，醒来|Forest]]>><<endevent>><</link>>
@@ -504,15 +504,48 @@
 <<widget "GRB_ForestRose">>
 <<if $tending gte 1000 and $plants_known?.includesAll("red_rose","white_rose","orchid","daisy","tulip","lotus","lily","poppy","strange_flower","carnation","plumeria") and !$plants_known?.includes("pink_rose")>>
 	<br><br>
-	你丰富的种植经验和花卉知识让你留意到一簇与众不同的花丛，其中绽放着粉色的玫瑰。这肯定是个稀有变异品质，你小心翼翼地将花朵收集起来。
+	你丰富的种植经验和花卉知识让你留意到一簇与众不同的花丛，其中绽放着粉色的玫瑰。花瓣如此纤柔艳丽，你不禁想起<span class="vp99still">一段凄美动人的爱情故事</span>。
+	<br><br>你小心翼翼地将花朵收集起来。它们一定能卖个好价钱。
 	<br><br>
 	<<set $plants_known.push("pink_rose")>>
 	<span class="gold">你现在可以种植<<icon "tending/pink_rose.png">>粉玫瑰了。</span>
 <</if>>
 <</widget>>	
 
+/* 这些傻逼剧情直接删掉真的太便宜VP了 */
+<<widget "GRB_HunterMolestationFinish">>
+	当触碰到你的<<icon "clothes/familiar_collar.png">><span class="vp99still">VP99天海恋歌项圈典藏限量版</span>的瞬间，
+	<<He>>突然僵住了。项圈在<<his>>的触碰下微微发烫。<<gstress>><<stress 2>>
+	<br><br>
+	数秒的沉默后，<<He>>冷哼了一声。<br>
+	“<span class="vp99still">就算是VP来了，我也不会放走你。</span>”
+	<br><br>
+	<<he>>开始用绳子勒你的脖子。<br>
+	"我应该说过，不要反抗。"
+	<br><br>
+<</widget>>	
+
+<<widget "GRB_AdultShopPassoutBondage">>
+
+<</widget>>
+
 :: GWLRollBack Mansion Piano []
 你闭上眼，钻进被子里。钢琴声很快就听不到了。
 <<set $avery_mansion.fox.end to true>>
 <br><br>
 <<link [[继续|Mansion Bed]]>><<endevent>><</link>>
+
+:: GWLRollBack Sex Toys []
+你看向货架，上面挂着挂着醒目的“新款到货”标志牌。
+<br><br>
+<<set $shopName = "forest">>
+<div class="ssm_gridContainer" id="sexShopMenuContainer">
+</div>
+<br>
+<div class="ssm_gridDescContainer" id="ssmDescPillContainer" style="display: none;">
+	<div class="ssm_descContainer" id="ssm_descContainer">
+	</div>
+</div>
+<<run window.sexShopGridInit()>>
+<br><br>
+<<getouticon>><<link [[离开|Adult Shop]]>><</link>>
