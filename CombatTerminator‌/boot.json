@@ -1,0 +1,71 @@
+{
+    "name": "CombatTerminator",
+    "version": "0.1",
+    "styleFileList": [
+    ],
+    "scriptFileList_earlyload": [
+    ],
+    "scriptFileList_inject_early": [
+    ],
+    "scriptFileList_preload": [
+    ],
+    "scriptFileList": [
+    ],
+    "tweeFileList": [
+      
+    ],
+    "imgFileList": [
+ ],
+    "additionFile": [
+     
+      "readme.md"
+     
+    ],
+    "addonPlugin": [
+      {
+        "modName": "TweeReplacer",
+        "addonName": "TweeReplacerAddon",
+        "modVersion": "1.0.0",
+        "params": [
+         
+          {
+            "passage": "Widgets State Man",
+            "findString": "<<unset $speechcamerapose>>",
+            "replace": "<<ShowHp>><<ShowAp>><<ShowAG>>\n<br><a onclick=\"V.pain=1000\">自我了断</a>|<a onclick=\"V.pain=10,V.arousal=0,V.stress=0\">英雄不屈</a>|<a onclick=\"V.enemyarousal-=500\">延长战斗</a>|<a onclick=\"V.enemyarousal=V.enemyarousalmax\">息事宁人</a>|<a onclick=\"V.enemyhealth=0\">一拳打飞</a>\n<<unset $speechcamerapose>>"
+          },
+          {
+            "passage": "Widgets Struggle",
+            "findString": "<<struggle_actions>>",
+            "replace": "<<struggle_actions>><a onclick=\"V.struggle.done = V.struggle.number + 1\">结束战斗</a><br>"
+          },
+          {
+            "passage": "Widgets Tentacles",
+            "findRegex": "(<<widget \"statetentacles\">>[\\s\\S]+?)<</widget>>",
+            "replace": "$1<a onclick=\"V.tentacles.active = 0\">结束战斗</a><</widget>>"
+          },
+          {
+            "passage": "Widgets Swarm",
+            "findRegex": "(<<widget \"swarm\">>[\\s\\S]+?)<</widget>>",
+            "replace": "$1<a onclick=\"V.timer = 0,V.vorestage = 0,V.swimdistance = 0\">结束战斗</a><</widget>>"
+          }
+        ]
+      },
+       {
+         "modName": "ReplacePatcher",
+        "addonName": "ReplacePatcherAddon",
+        "modVersion": "1.0.0",
+        "params": {
+         "js": [
+         
+         
+        ]
+      }
+    }
+    ],
+    "dependenceInfo": [
+      { 
+        "modName": "TweeReplacer",
+        "version": "^1.0.0"
+      }
+    ]
+  }
