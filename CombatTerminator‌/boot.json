@@ -31,7 +31,7 @@
           {
             "passage": "Widgets State Man",
             "findString": "<<unset $speechcamerapose>>",
-            "replace": "<<ShowHp>><<ShowAp>><<ShowAG>>\n<br><a onclick=\"V.pain=1000\">自我了断</a>|<a onclick=\"V.pain=10,V.arousal=0,V.stress=0\">英雄不屈</a>|<a onclick=\"V.enemyarousal-=500\">延长战斗</a>|<a onclick=\"V.enemyarousal=V.enemyarousalmax\">息事宁人</a>|<a onclick=\"V.enemyhealth=0\">一拳打飞</a>\n<<unset $speechcamerapose>>"
+            "replace": "<a onclick=\"V.pain=1000\">自我了断</a>|<a onclick=\"V.pain=10,V.arousal=0,V.stress=0\">英雄不屈</a>|<a onclick=\"V.enemyarousal-=500\">延长战斗</a>|<a onclick=\"V.enemyarousal=V.enemyarousalmax\">息事宁人</a>|<a onclick=\"V.enemyhealth=0\">一拳打飞</a>\n<<unset $speechcamerapose>>"
           },
           {
             "passage": "Widgets Struggle",

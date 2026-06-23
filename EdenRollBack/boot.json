@@ -1,0 +1,117 @@
+{
+    "name": "EdenRollBack",
+    "version": "0.1",
+    "styleFileList": [
+    ],
+    "scriptFileList_earlyload": [
+    ],
+    "scriptFileList_inject_early": [
+    ],
+    "scriptFileList_preload": [
+    ],
+    "scriptFileList": [
+    ],
+    "tweeFileList": [
+      "ERB_Widgets.twee",
+      "ERB_Events.twee"
+    ],
+    "imgFileList": [
+ ],
+    "additionFile": [
+     
+      "readme.md"
+     
+    ],
+    "addonPlugin": [
+      {
+        "modName": "TweeReplacer",
+        "addonName": "TweeReplacerAddon",
+        "modVersion": "1.0.0",
+        "params": [
+               
+          {
+            "passage": "Eden Hunting",
+            "findRegex": "(daily.eden.exposed>>[\\s\\S]+?)<<else>>",
+            "replace": "$1<<elseif $phase is 2>><<ERB_EdenHunting>><<else>>"
+          },
+          {
+            "passage": "Eden Clearing",
+            "findString": "Eden Hunting]]>><<set $phase to 0>><</link>>",
+            "replace": "Eden Hunting]]>><<set $phase to 0>><</link>><br><<link [[告诉伊甸注意安全|Eden Hunting]]>><<set $phase to 2>><</link>>"
+          },
+          {
+            "passage": "Bailey's Office",
+            "findRegex": "(<<if \\$robinpaid isnot 1 and \\$robindebtknown is 1>>[\\s\\S]+?<</if>>)",
+            "replace": "$1<<ERB_BaileyOfficeSeduced>>"
+          },
+          {
+            "passage": "Town Eden Park",
+            "findString": "Town Eden Park Flirt",
+            "replace": "ERB Town Eden Park Flirt"
+          },
+          {
+            "passage": "Town Eden Park Race",
+            "findRegex": "<<npcincr Eden dom -2>><<ldom>>[\\s\\S]+?<<else>>",
+            "replace": "<<npcincr Eden dom -2>><<ldom>><<ERB_TownEdenParkRace>><<else>>"
+          },
+          {
+            "passage": "Town Eden Park Race",
+            "findString": "Town Eden Park Race Tease",
+            "all": true ,
+            "replace": "ERB Town Eden Park Race Tease"
+          },
+          {
+            "passage": "Town Eden Park Race",
+            "findString": "Town Eden Park Race Apologise",
+            "all": true ,
+            "replace": "ERB Town Eden Park Race Apologise"
+          },
+          {
+            "passage": "Widgets Street",
+            "findRegex": "<<link \\[\\[.+?\\|Street Eden Worried Run Cabin\\]\\]>>",
+            "regexFlag": "g",
+            "replace": "<<link [[拒绝|ERB Street Eden Worried Refuse Cabin]]>>"
+          },
+          {
+            "passage": "Town Eden Shopping",
+            "findRegex": "<<switch random\\(1[\\s\\S]+?<</switch>>",
+            "replace": "<<switch random(2)>>\n<<case 0>>\n<<link [[继续|Town Eden Shopping Petshop]]>><</link>>\n<<case 1>>\n<<link [[继续|ERB Town Eden Shopping Clothes Eden Dress Up]]>><</link>>\n<<case 2>>\n<<link [[继续|ERB Town Eden Shopping Clothes PC Dress Up]]>><</link>>\n<</switch>>"
+          },
+          {
+            "passage": "Town Eden Shopping Finish 2",
+            "findRegex": "<<else>>[\\s\\S]+?<</if>>",
+            "replace": "<<else>>\n<<ERB_TownEdenShoppingFinish2>>\n<</if>>"
+          },
+          {
+            "passage": "Eden Cuddle",
+            "findString": "Eden Cuddle Trauma Nod",
+            "all": true ,
+            "replace": "ERB Eden Cuddle Trauma Nod"
+          },
+          {
+            "passage": "Eden Cuddle",
+            "findString": "Eden Cuddle Trauma Honest",
+            "all": true ,
+            "replace": "ERB Eden Cuddle Trauma Honest"
+          }
+        ]
+      },
+       {
+         "modName": "ReplacePatcher",
+        "addonName": "ReplacePatcherAddon",
+        "modVersion": "1.0.0",
+        "params": {
+         "js": [
+         
+         
+        ]
+      }
+    }
+    ],
+    "dependenceInfo": [
+      { 
+        "modName": "TweeReplacer",
+        "version": "^1.0.0"
+      }
+    ]
+  }

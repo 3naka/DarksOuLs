@@ -1,0 +1,64 @@
+{
+  "name": "AutoClothesRepair",
+  "version": "0.1",
+  "styleFileList": [
+  ],
+  "scriptFileList_earlyload": [
+  ],
+  "scriptFileList_inject_early": [
+  ],
+  "scriptFileList_preload": [
+  ],
+  "scriptFileList": [
+    "AutoClothesRepair_js.js"
+  ],
+  "tweeFileList": [
+  ],
+  "imgFileList": [
+  ],
+  "additionFile": [
+
+    "readme.md"
+
+  ],
+  "addonPlugin": [
+    {
+      "modName": "TweeReplacer",
+      "addonName": "TweeReplacerAddon",
+      "modVersion": "1.0.0",
+      "params": [
+        {
+          "passage": "Widgets",
+          "findString": "<<outfitChecks>>",
+          "replace": "<<outfitChecks>>\n<<AutoClothesRepairJS _args[0]>>"
+        },
+        {
+          "passage": "Widgets Clothing",
+          "findString": "<<outfitChecks>>",
+          "replace": "<<AutoClothesRepairJS_AfterCombat>>\n<<outfitChecks>>"
+        },
+        {
+          "passage": "Widgets Clothing",
+          "findString": "and $_wornOrCarried[_args[0]].cursed isnot 1",
+          "replace": "and $_wornOrCarried[_args[0]].cursed isnot 1 and !$combat"
+        }
+      ]
+    },
+    {
+      "modName": "ReplacePatcher",
+      "addonName": "ReplacePatcherAddon",
+      "modVersion": "1.0.0",
+      "params": {
+        "js": [
+
+        ]
+      }
+    }
+  ],
+  "dependenceInfo": [
+    {
+      "modName": "TweeReplacer",
+      "version": "^1.0.0"
+    }
+  ]
+}

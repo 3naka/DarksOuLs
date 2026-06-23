@@ -1,0 +1,49 @@
+:: EdenRollBack Widgets [widget]
+
+/*把注意安全加回来，其实也就多一点点台词*/
+<<widget "ERB_EdenHunting">>
+	<<if $exposed gte 1 and !$daily.eden.exposed>>
+		<<He>>点了点头，但目光停留在你的<<lewdness>>上。"我不想让你独自一人这样。"
+		<br><br>
+
+		<<link [[走进去|Eden Cabin]]>><<endevent>><</link>>
+		<br>
+		<<link [[待在外面|Eden Clearing]]>><<endevent>><<set $daily.eden.exposed to 1>><</link>>
+	<<else>>
+		<<He>>对你点了点头，消失在树林之间。
+		<br><br>
+
+		<<link [[继续|Eden Clearing]]>><<endevent>><</link>>
+		<br>
+	<</if>>
+<</widget>>
+
+/*要不把贝贝也加回来*/
+<<widget "ERB_BaileyOfficeSeduced">>
+<<if $renttime is 1 and ($promiscuity gte 35 or $uncomfortable.prostituting if false) and !$baileyOfficeSeduce>>
+<br>
+	<<link [[诱惑贝利|Bailey Office Seduce]]>><<endevent>><<set $baileyOfficeSeduce to 1>><<trauma 6>><</link>><<gtrauma>><<promiscuous 3>>
+<br>
+<</if>>
+<</widget>>
+
+/*伊甸的公园赛跑*/
+<<widget "ERB_TownEdenParkRace">>
+<br><br>
+
+	你弯下腰，喘着粗气。你听到伊甸的脚步声逐渐靠近。"我以为，"<<he>>停下来喘着气，"以为我又要失去你了。
+	你很健康，但如果我们分开的时候有什么东西抓走了你怎么办？"<<He>>看起来像是松了口气。
+	<br><br>
+
+<<link [[继续|ERB Town Eden Park Finish]]>><</link>>
+<</widget>>
+
+/*服装店后续*/
+<<widget "ERB_TownEdenShoppingFinish2">>
+"好吧。"伊甸说道，"你最好快点来看我。我已经对这个地方感到厌倦了。"
+	<br><br>
+	你拥抱着<<him>>，并承诺会尽快去看<<He>>。<<He>>路都没看地大步跨过马路。
+	<br><br>
+	<<link [[继续|High Street]]>><<endevent>><<set $eventskip to 1>><</link>>
+<</widget>>
+

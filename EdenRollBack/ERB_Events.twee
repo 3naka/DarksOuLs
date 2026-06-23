@@ -1,0 +1,767 @@
+/*伊甸的公园约会*/
+:: ERB Town Eden Park Flirt []
+<<effects>>
+
+你向伊甸靠得更近。
+
+<<if $awarelevel gte 2>>
+	<<if Time.dayState isnot "day">>
+		<<if random(1) is 0 and $NPCList[0].breastsize gte 2>>
+			你指向河里的鸭子时，手不小心碰到了<<his>>$NPCList[0].breastsdesc。
+		<<else>>
+			当你笨拙地试图挽起<<his>>的胳膊时，你的手不小心碰到了<<his>>的屁股。
+		<</if>>
+		你试图把它当做一个意外敷衍过去，但你觉得<<hes>>可能不会相信。
+	<<else>>
+		你在<<his>>的耳边低声说道，"这里有一些我们可以享受私人时间的地方。"
+	<</if>>
+	<<npcincr Eden lust 2>><<glust>>
+<<else>>
+	你朝<<him>>微笑着，让你的眼神和身体传达出你无法言说的意思。
+<</if>>
+<<promiscuity1>>
+
+<<if Time.dayState isnot "day">>
+	在你们走路时，<<He>>把手放在你的<<bottom>>上，不时轻轻捏一下。
+	<<arousal 100 "bottom">><<garousal>>
+<<else>>
+	<<He>>靠向你，<<his>>的手擦过你的腰。你感受到<<he>>温热的呼吸洒在你的耳边。
+	<<arousal 50>><<garousal>>
+<</if>>
+<br><br>
+
+<<if C.npc.Eden.lust gte 50 or
+		(Time.dayState isnot "day" and C.npc.Eden.lust gte 30)>>
+	<<if $awarelevel gte 2>>
+		"淘气的<<girl>>，"<<he>>说着，握住你的胳膊，"我等不及了。这附近一定能找到个僻静的地方。"
+	<<else>>
+		"可怜的<<girl>>，"<<he>>说，"你现在需要被满足，这附近一定能找到个僻静的地方。"
+	<</if>>
+	<br><br>
+
+	<<He>>紧握你的胳膊，加快脚步，眼中充满了欲望。
+	<br><br>
+
+	<<He>>带你走到一片树丛下面，茂密的灌木屏蔽了周围的视线。附近没有人。伊甸转过身来，将你拉近。
+	<br><br>
+
+	<<if Time.dayState is "day">>
+		<span class="pink">虽然是白天，但伊甸似乎已经不在乎了。</span>
+		<<arousal 100>><<npcincr Eden lust 2>><<garousal>><<glust>>
+		<br><br>
+	<</if>>
+	<<link [[继续|ERB Town Eden Park Flirt Sex]]>><<set $sexstart to 1>><</link>>
+<<else>>
+	"等我们回家再说吧，<<girl>>，"<<he>>说，"到时候我会提醒你，你属于谁。"伊甸给了你一个快速的吻，好像是为了阻止任何反对意见。
+	<<takeKissVirginity Eden romantic>>
+	<br><br>
+	<<link [[继续|ERB Town Eden Park Finish]]>><</link>>
+<</if>>
+
+:: ERB Town Eden Park Flirt Sex []
+<<if $sexstart is 1>>
+	<<set $sexstart to 0>>
+	<<consensual>>
+	<<set $consensual to 1>>
+	<<neutral 1>>
+	<<maninit>>
+	<<set $enemytrust += 100>>
+	<<set $enemyhealth to 600>>
+	<<set $enemyhealthmax to 600>>
+<</if>>
+
+<<effects>>
+<<effectsman>>
+<<man>>
+<<stateman>>
+<br><br>
+<<actionsman>>
+
+<span id="next">
+<<if _combatend>>
+	<<link [[继续|ERB Town Eden Park Flirt Sex Finish]]>><</link>>
+<<else>>
+	<<link [[继续|ERB Town Eden Park Flirt Sex]]>><</link>>
+<</if>>
+</span>
+
+:: ERB Town Eden Park Flirt Sex Finish []
+<<effects>>
+
+<<if $enemyarousal gte $enemyarousalmax>>
+	<<ejaculation>>
+	<<npcincr Eden lust -20>><<npcincr Eden love 1>>
+
+	<<He>>因为用力过猛而气喘吁吁。"真他妈需要这个。"<<He>>一边紧紧拥抱着你，一边从高潮的余韵中恢复过来。<<glove>><<llust>>
+	<br><br>
+
+	<<He>>帮你站了起来，用温暖而有力的手刷掉你身上的草。"让我们在有人看到之前穿好衣服。"
+<<elseif $enemyhealth lte 0>>
+	"你本可以直接说不的，"伊甸说道。<<He>>穿好衣服，没有说话。
+	<<llove>><<npcincr Eden love -1>>
+	<br><br>
+	<<tearful>>你等待着<<him>>穿好衣服。
+<<elseif $finish is 1 or $phase is 1>>
+	<<He>>从你身上抽离开来，看起来非常沮丧。
+	<br><br>
+
+	你向<<him>>保证一切都没问题。<<him>>在穿衣服的时候向你投来饥渴的眼神。
+<</if>>
+<br><br>
+
+<<clotheson>>
+<<endcombat>>
+<<npc Eden>><<person1>>
+
+<<link [[继续|ERB Town Eden Park Finish]]>><</link>>
+
+:: ERB Town Eden Park Finish []
+<<effects>>
+
+你和伊甸一起离开了公园。
+<br><br>
+
+"比我预想的更容易忍受，"伊甸说道。
+
+<<if ["night", "dusk"].includes(Time.dayState)>>
+	"时间已经很晚了。你想回小屋过夜吗？你在那里会很安全的，同样也会很温暖。"
+<<else>>
+	"我要回家了，你要一起来吗？"
+<</if>>
+<br><br>
+
+<<link [[同意 (1:00)|ERB Town Eden Park Finish 2]]>><<set $phase to 0>><<pass 60>><</link>>
+<br>
+<<link [[留在小镇|ERB Town Eden Park Finish 2]]>><<set $phase to 1>><</link>>
+
+:: ERB Town Eden Park Finish 2 []
+<<effects>>
+
+<<if $phase is 0>>
+	你同意了，你们一起向森林出发。伊甸的存在防止了任何干扰的发生。
+	<br><br>
+	<<He>>带你进入森林，<<He>>的准确导航很快让你们两个安全地到达了<<He>>的小屋。
+	<br><br>
+
+	<<if Time.hour lte 6>>
+		<<He>>打了个哈欠，伸了个懒腰，
+		<<if $NPCList[0].breastsize gt 1>>
+			上衣受到牵拉，紧贴住<<his>>$NPCList[0].breastsdesc，
+		<<else>>
+			展示出<<his>>健美的身材，
+		<</if>>
+		但<<he>>并不是有意为之。
+		<br><br>
+
+		"已经很晚了，我需要睡觉了。"<<He>>脱掉上衣，然后钻进被窝里。
+	<</if>>
+	<br><br>
+
+	<<link [[继续|Eden Cabin]]>><<endevent>><</link>>
+<<else>>
+	伊甸点了点头。"好吧，"<<he>>说道，"但你最好很快就来看我。"
+	<br><br>
+	你拥抱着<<him>>，并承诺会尽快去看<<He>>。<<He>>路都没看地大步跨过马路。
+	<br><br>
+	<<link [[继续|Park]]>><<set $eventskip to 1>><<endevent>><</link>>
+<</if>>
+
+:: ERB Town Eden Park Race Apologise []
+<<effects>>
+
+<<if $speech_attitude is "meek">>
+	"对、对不起，"你说，"我以为会很有趣。"
+<<elseif $speech_attitude is "bratty">>
+	"好吧，"你说，"对不起。我没有想要吓到你。"
+<<else>>
+	"对不起，"你说，"我没有想让你担心。"
+<</if>>
+<br><br>
+
+伊甸环顾了一下公园，然后站起身来。"我无法忍受失去你的可能，"<<he>>说，"待在我身边。这个地方很危险。"
+<br><br>
+
+<<link [[继续|ERB Town Eden Park Finish]]>><</link>>
+
+:: ERB Town Eden Park Race Tease []
+<<effects>>
+
+<<if $speech_attitude is "meek">>
+	"我并没有处在危险中，"你说，"我只是想让你来抓我。"
+<<elseif $speech_attitude is "bratty">>
+	"是你自己无法忍受离开我，"你说，"你太粘人了。"
+<<else>>
+	"我只是想让你来追我，"你说，"这有什么不对吗？"
+<</if>>
+<br><br>
+
+伊甸瞪了你一眼，然后环顾了一下公园。<<He>>站起身来。"这个地方很危险，"<<he>>说，"我是认真的。"
+<br><br>
+
+<<link [[继续|ERB Town Eden Park Finish]]>><</link>>
+
+:: ERB Street Eden Worried Refuse Cabin []
+<<effects>>
+
+你摇了摇头，试着解释你不能跟<<him>>一起去，你还有其他的事情要做。
+<br><br>
+
+"所以这一切都比我重要？"<<he>>问道。<<He>>扫了一眼周围的街道。
+<br><br>
+
+<<if currentSkillValue('english') gte 500>>
+	"不是这样的，"你反驳道，"我只是必须要去做这些事情。我在这个镇子有义务要履行。我很抱歉我现在不能去看你，但我终究会的，我只是需要一点时间。我保证。"
+	<br><br>
+
+	<<He>>怒视着你，但最终叹了口气。<<He>>看了一眼别处。"好吧，你不用跟我回去了。我自己回家。"<<He>>走了几步，然后又转身面对你，"我会留意你是不是说到做到的。我需要你回到小屋里。"
+	<br><br>
+	说完这些，<<he>>转过身，路都没看地大步跨过了马路。
+<<else>>
+	"是的——不，不是这样！"你解释道，"并不是比你重要。只是有些事情，我必须要去做。我，我只是没有时间……"你意识到自己这些话不会有任何帮助，结结巴巴地沉默了下来。
+	<br><br>
+
+	"骗子！"<<he>>怒斥道，"我来这里找你，想要确保你没事，带你回家。我本该呆在家里。"<<He>>强迫自己看向你，"我只是……"
+	<br><br>
+
+	<<He>>转过身去，看都不看地大步穿过马路。你试图安慰<<him>>，但话到嘴边又咽了回去。<<llove>><<npcincr Eden love -1>>
+<</if>>
+<br><br>
+<<endevent>>
+<<destinationeventend>>
+
+:: ERB Town Eden Shopping Clothes Eden Dress Up []
+<<effects>>
+
+
+<<He>>带你上楼，走进了服装店。<<He>>随意地浏览着，似乎并不是在寻找特定的东西。
+<<if C.npc.Eden.love gte 100>>
+	<<He>>紧紧地抱着你。你意识到<<his>>的存在令你感到很安心。<<lstress>><<stress -10>>
+<</if>>
+<br><br>
+
+<<He>>走向内衣区。你有些犹豫要不要跟着，也许<<he>>会需要一些隐私。但是<<he>>抓住你的手臂，把你拉得更近了一些。
+<<He>>挑选了各种各样的<<if $pronoun is "m">>男式<<elseif $pronoun is "f">>女式<</if>>内衣。
+<<he>>拿了一小把内衣后，走向试衣间。<<he>>把你推到了前面。
+<br><br>
+"告诉我哪一件适合我。"<<he>>说道。
+<br>
+"我觉得我们不应该——"
+<br>
+伊甸笑了笑，然后拉上了后面的试衣帘。
+<br><br>
+
+<<link [[继续|ERB Town Eden Shopping Clothes Eden Dress Up 2]]>><</link>>
+<br>
+
+:: ERB Town Eden Shopping Clothes Eden Dress Up 2 []
+<<effects>>
+
+伊甸背对着门站着，脱掉<<his>>的衣服，直到<<his>>全身
+<<if $pronoun is "f">>
+	只穿着胸罩和内裤。
+<<else>>
+	只穿着内衣。
+<</if>>
+很快内衣也不剩，<<him>>一丝不挂地站在了你面前。
+<br><br>
+
+你欣赏着这个表演，知道<<he>>正想让你看到这一切。你盯着<<his>>
+<<if $NPCList[0].breastsize gt 1>>
+	$NPCList[0].breastsdesc，
+<<else>>
+	健美的胸肌，
+<</if>>
+然后逐渐把眼睛游移到<<his>>紧绷的腹肌上。<<garousal>><<arousal 100>>
+<br><br>
+
+<<if $pronoun is "f">>
+	<<set $eden_underwear_model to [
+		"一条黑色的平角裤",
+		"一套深绿色的蕾丝胸罩和女式内裤",
+		"一条红色的丁字裤"
+	]>>
+<<else>>
+	<<set $eden_underwear_model to [
+		"一条普通的白色三角裤",
+		"一些藏青色的四角裤",
+		"一条黑色的丁字裤"
+	]>>
+<</if>>
+
+<<He>>有些难以直视你的目光。<<He>>试穿了第一件内衣——一件$eden_underwear_model[0]。很适合<<He>>。<<He>>看向你，你点了点头。<<He>>露出片刻微笑。
+<br><br>
+
+<<link [[继续|ERB Town Eden Shopping Clothes Eden Dress Up 3]]>><</link>>
+<br>
+
+:: ERB Town Eden Shopping Clothes Eden Dress Up 3 []
+<<effects>>
+
+
+<<He>>脱下了身上的内衣，拿出了下一件东西——一件$eden_underwear_model[1]。<<He>>似乎更加自信了。
+<<if $pronoun is "f" and $NPCList[0].breastsize gt 1>>
+	<<His>>$NPCList[0].breastsdesc几乎从胸罩中溢出，你无法忽视<<His>>丰满的乳沟。
+<<elseif $NPCList[0].penis isnot "none">>
+	布料紧密地贴合着<<his>>的$NPCList[0].penisdesc。
+<<else>>
+	布料紧密地贴合着<<his>>的身体，几乎无法掩盖轮廓。
+<</if>>
+你怀疑<<hes>>比<<he>>愿意承认的更享受目前的状况。<<garousal>><<arousal 200>>
+<br><br>
+
+<<link [[继续|ERB Town Eden Shopping Clothes Eden Dress Up 4]]>><</link>>
+<br>
+
+:: ERB Town Eden Shopping Clothes Eden Dress Up 4 []
+<<effects>>
+
+<<He>>脱掉身上的衣服，拿起了最后一件东西——一件$eden_underwear_model[2]。这件的布料非常少。
+<<He>>穿上它，然后开始在你面前摆姿势。<<He>>在原地转了一圈，让你从所有角度欣赏<<him>>。
+<<if $player.penisExist>>
+	你感觉到自己的<<penis>>对<<his>>的挑逗做出了反应。
+<<elseif $player.vaginaExist>>
+	在<<his>>的挑逗下，你感觉到自己的心跳开始加速。
+<</if>>
+<<garousal>><<arousal 200>>
+<br><br>
+<<unset $eden_underwear_model>>
+
+<<He>>明显的故意慢慢脱下了身上的衣服。<<He>>似乎放松了下来。
+<<glust>><<npcincr Eden lust 20>>
+<br><br>
+
+<<if C.npc.Eden.lust gte 50>>
+	"你喜欢那个吗？"<<he>>问道。<<He>>的声音听起来既愤怒又充满欲望。<<He>>把你推到了长椅上。
+	<br><br>
+
+
+	<<set $phase to 0>>
+	<<link [[顺其自然|ERB Town Eden Shopping Clothes Eden Dress Up Sex]]>><<npcincr Eden love 1>><<set $sexstart to 1>><</link>><<glove>>
+	<br>
+	<<link [[反抗|ERB Town Eden Shopping Clothes Eden Dress Up Sex Finish]]>><<npcincr Eden love -1>><<set $phase to 1>><</link>><<llove>>
+<<else>>
+	伊甸穿好衣服，和你一起走出了更衣室。
+	<br><br>
+	<<link [[继续|Town Eden Shopping Finish]]>><</link>>
+<</if>>
+
+:: ERB Town Eden Shopping Clothes Eden Dress Up Sex []
+<<if $sexstart is 1>>
+	<<set $sexstart to 0>>
+	<<consensual>>
+	<<set $consensual to 1>>
+	<<neutral 1>>
+	<<maninit>>
+	<<set $enemytrust += 100>>
+	<<set $enemyhealth to 600>>
+	<<set $enemyhealthmax to 600>>
+	<<takeKissVirginity "Eden" "romantic">>
+	<<He>>赤裸着身体，爬到了你身上，狠狠地吻了你一下。这个吻只持续了一瞬间，<<he>>随后支起身子，跨坐到你胸前，用一只手扶着你身后的墙，稳住自己的身体。
+	<<npcoral>>
+<</if>>
+
+<<effects>>
+<<effectsman>>
+<<man>>
+<<stateman>>
+<br><br>
+<<actionsman>>
+
+<span id="next">
+<<if _combatend>>
+	<<link [[继续|ERB Town Eden Shopping Clothes Eden Dress Up Sex Finish]]>><</link>>
+<<else>>
+	<<link [[继续|ERB Town Eden Shopping Clothes Eden Dress Up Sex]]>><</link>>
+<</if>>
+</span>
+
+:: ERB Town Eden Shopping Clothes Eden Dress Up Sex Finish []
+<<effects>>
+
+<<if $finish is 1 or $phase is 1>>
+	<<He>>从你身上抽离开来，看起来非常沮丧。
+	<br><br>
+
+	你向<<him>>保证一切都没问题。<<him>>穿好了衣服，但仍然向你投来饥渴的眼神。
+<<elseif $enemyarousal gte $enemyarousalmax>>
+	<<ejaculation>>
+	<<npcincr Eden lust -20>><<npcincr Eden love 1>>
+
+	<<if $NPCList[0].penis is "mouth">>
+		随着最后一滴精液流入你的口中，<<He>>发出了轻轻的呻吟声。你用舌头清理干净<<his>>的阴茎。
+		<br><br>
+		"正合我意，好<<girl>>。你很擅长使用你的嘴。"
+	<<elseif ["mouth", "facesit"].includes($NPCList[0].vagina)>>
+		<<He>>发出了愉悦的呻吟声，然后将<<his>>的阴部从你的脸上移开。
+		<br><br>
+		"正合我意，好<<girl>>。你很擅长使用你的嘴。"
+	<<else>>
+		<<He>>在疲惫中喘着气。"我他妈太需要这个了。"<<he>>一边紧紧抱着你，一边从高潮的余韵中恢复着。
+	<</if>>
+	<br><br>
+
+	<<He>>抚摸了一会儿你的头发，然后穿好了衣服。
+<<elseif $enemyhealth lte 0>>
+	"你在搞什么鬼？你不想的话直接拒绝不就行了。"<<He>>没有说话，穿好衣服。
+	<<llove>><<npcincr Eden love -1>>
+
+	<<tearful>>你等待着<<him>>。
+<</if>>
+<br><br>
+
+你跟随着<<him>>一起离开购物中心。
+<br><br>
+
+<<clotheson>>
+<<endcombat>>
+<<npc Eden>><<person1>>
+
+<<link [[继续|Town Eden Shopping Finish]]>><</link>>
+
+:: ERB Town Eden Shopping Clothes PC Dress Up []
+<<effects>>
+
+<<He>>带着你上了楼，进入了服装店。
+<<He>>浏览着，似乎并不是在寻找特定的东西。
+<<if C.npc.Eden.love gte 100>>
+	<<He>>紧贴着你。你意识到<<his>>的存在令你感到很安心。<<lstress>><<stress -10>>
+<</if>>
+<br><br>
+
+<<He>>走向内衣区。你有些犹豫要不要跟着，也许<<he>>会需要一些隐私。但是<<he>>抓住你的手臂，把你拉得更近了一些。
+<<He>>开始挑选各种内衣。
+<<he>>拿了一小把内衣后，<<he>>把你推进了一个更衣室里。
+<br><br>
+"我要你试穿这些内衣给我看，"<<he>>说着，拉上了身后的帘子。
+<br>
+"我觉得我们不应该——"
+<br>
+伊甸笑了，然后把一条
+<<if $player.gender_appearance is "f">>
+	平角裤
+<<else>>
+	普通三角裤
+<</if>>
+推到你的胸前。
+<br><br>
+
+
+
+<<link [[乖乖穿上|ERB Town Eden Shopping Clothes PC Dress Up Flaunt]]>>
+	<<set $phase to 1>>
+	<<strip>>
+	<<if $player.gender_appearance is "f">><<underlowerwear 14>><<else>><<underlowerwear 4>><</if>>
+<</link>><<exhibitionist1>>
+<br>
+<<link [[拒绝|ERB Town Eden Shopping Clothes PC Dress Up Flaunt Refuse]]>><</link>>
+
+:: ERB Town Eden Shopping Clothes PC Dress Up Flaunt []
+<<effects>>
+
+<<if $phase is 1>>
+	你转过身去脱衣服。你穿上内衣的时候，可以感觉到伊甸的目光一直在你身上。内衣穿着感觉相当舒适。你转过身来。
+	<<exhibitionism1>>
+	伊甸毫不羞怯地痴迷地盯着你的身体看。
+	<<glust>><<npcincr Eden lust 5>>
+	<br><br>
+	"来，"<<he>>说，"接着试试这些。"<<he>>递给你
+	<<if $player.gender_appearance is "f">>
+		一套蕾丝胸罩和女式内裤。
+	<<else>>
+		一条速干泳裤。
+	<</if>>
+	衣服有些大胆。
+	<br><br>
+	<<if $exhibitionism lte 19>>
+		你还没有淫荡到愿意为伊甸炫耀这么暴露的内衣。
+		<br><br>
+	<<else>>
+		<<link [[试穿|ERB Town Eden Shopping Clothes PC Dress Up Flaunt]]>>
+			<<set $phase to 2>>
+			<<undress "basket">>
+			<<if $player.gender_appearance is "f">><<underlowerwear 3>><<underupperwear 10>><<else>><<underlowerwear 19>><</if>>
+		<</link>><<exhibitionist2>>
+		<br>
+	<</if>>
+
+	<<link [[拒绝|ERB Town Eden Shopping Clothes PC Dress Up Flaunt Refuse]]>><</link>>
+<<elseif $phase is 2>>
+	你拿起那件<<if $player.gender_appearance is "f">>蕾丝内衣<<else>>速干泳裤<</if>>，仔细地检查着它们。
+	<br><br>
+	<<if $player.gender_appearance is "f">>
+		材料摸起来很柔软，但它非常暴露。你怀疑它几乎什么都遮不住。
+	<<else>>
+		它们看起来很紧身。这不是为了保守者设计的泳衣。
+	<</if>>
+	<br><br>
+	在穿上泳衣之前，你转过身来让伊甸看着。它们几乎什么都不遮盖，但你大胆地允许伊甸观看，甚至还转了个小圈。
+	<<exhibitionism2>>
+
+	伊甸的眼神充满了欲望。<<Hes>>很享受这种感觉。
+	<<glust>><<npcincr Eden lust 10>>
+	<br><br>
+	"下一个。"<<He>>递给你一件
+	<<if $player.gender_appearance is "f">>
+		丁字裤。
+	<<else>>
+		系带丁字裤。
+	<</if>>
+	它几乎什么都遮不住。
+	<br><br>
+	<<if $exhibitionism lt 34>>
+		你还没有淫荡到愿意为伊甸炫耀这么暴露的内衣。
+		<br><br>
+	<<else>>
+		<<link [[试穿|ERB Town Eden Shopping Clothes PC Dress Up Flaunt]]>>
+			<<set $phase to 3>>
+			<<undress "basket">>
+			<<if $player.gender_appearance is "f">><<underlowerwear 22>><<else>><<underlowerwear 16>><</if>>
+		<</link>><<exhibitionist3>>
+		<br>
+	<</if>>
+	<<link [[拒绝|ERB Town Eden Shopping Clothes PC Dress Up Flaunt Refuse]]>><</link>>
+<<elseif $phase is 3>>
+	<<if $player.gender_appearance is "f">>
+		你用手指夹着丁字裤。它能够遮住你的<<print ($player.vaginaExist ? "阴部" : "生殖器")>>，但只是刚刚好。它让你的大部分<<bottom>>暴露在外面。
+	<<else>>
+		你用手指夹着丁字裤。它的面料勉强能够遮住你的<<if $player.penisExist>>阴茎<<else>>生殖器<</if>>，但你的<<bottom>>会暴露在外面。
+	<</if>>
+	<br><br>
+	你转过身穿上了内衣。你重新转向伊甸时，感觉自己就像裸体一样。伊甸的眼里闪烁着饥饿的目光。你撩拨着<<him>>，扭动着你的屁股。<<He>>拍了一下你的屁股，同时揉捏了一下。
+	<<exhibitionism3>>
+
+	你的表演对伊甸产生了影响。<<glust>><<npcincr Eden lust 20>>
+	<br><br>
+
+	<<if C.npc.Eden.lust gte 50>>
+		伊甸环抱着你的腰，将手指滑入你的内裤下。<<He>>拉下了它，
+		<<if $player.penisExist>>
+			露出你的阴茎。
+		<<elseif $player.vaginaExist>>
+			露出你的阴部。
+		<</if>>
+		<<undress "basket">>
+		<br><br>
+
+
+		<<link [[顺其自然|ERB Town Eden Shopping Clothes PC Dress Up Sex]]>><<set $sexstart to 1>><</link>>
+		<br>
+		<<link [[拒绝|ERB Town Eden Shopping Clothes PC Dress Up Sex]]>><<set $molestationstart to 1>><</link>>
+
+	<<else>>
+		<<He>>轻轻拍了一下你的<<bottom>>。"我现在就想把你弄翻在床上，"<<He>>说，"但我不能这样。至少在这里不行。赶紧穿上衣服，不然我会失控的。"
+		<br><br>
+		你考虑着是否要进一步挑逗<<him>>，但还是决定按照<<him>>的要求穿好衣服。
+		<br><br>
+
+		离开时，伊甸付了你新内衣的钱。
+		<<storeon "basket">>
+		<<clotheson>>
+		<br><br>
+
+		<<link [[继续|Town Eden Shopping Finish]]>><</link>>
+	<</if>>
+<<else>>
+	<<link [[继续|Town Eden Shopping Finish]]>><</link>>
+<</if>>
+
+:: ERB Town Eden Shopping Clothes PC Dress Up Flaunt Refuse []
+<<effects>>
+
+伊甸看起来有些失望，但并没有逼迫你。
+<br><br>
+<<storeon "basket" "delete">>
+伊甸回到店里归还了那些内衣。
+<br><br>
+<<clotheson>>
+<br>
+
+<<link [[继续|Town Eden Shopping Finish]]>><</link>>
+
+:: ERB Town Eden Shopping Clothes PC Dress Up Sex []
+<<if $sexstart is 1>>
+	<<set $sexstart to 0>>
+	<<consensual>>
+	<<set $consensual to 1>>
+	<<neutral 1>>
+	<<maninit>>
+	<<set $enemytrust += 100>>
+	<<set $enemyhealth to 600>>
+	<<set $enemyhealthmax to 600>>
+
+<<elseif $molestationstart is 1>>
+	"哦？"<<he>>说，"故意挑逗我的<<if $NPCList[0].penis isnot "none">>阴茎<<elseif $NPCList[0].vagina isnot "none">>小穴<</if>>又不想负责？"
+	<br><br>
+	<<He>>向你走来，眼中仍然充满了饥饿的目光。
+	<br><br>
+	<<enable_rescue>>
+	<<set $molestationstart to 0>>
+	<<controlloss>>
+	<<violence 1>>
+	<<neutral 1>>
+	<<molested>>
+	<<maninit>>
+	<<set $enemyhealth to 600>><<set $enemyhealthmax to 600>><<set $enemyanger += 50>>
+<</if>>
+
+<<effects>>
+<<effectsman>>
+<<alarmstate>>
+<<man>>
+<<stateman>>
+<br><br>
+<<actionsman>>
+
+<span id="next">
+<<if _combatend>>
+	<<link [[继续|ERB Town Eden Shopping Clothes PC Dress Up Sex Finish]]>><</link>>
+<<else>>
+	<<link [[继续|ERB Town Eden Shopping Clothes PC Dress Up Sex]]>><</link>>
+<</if>>
+</span>
+
+:: ERB Town Eden Shopping Clothes PC Dress Up Sex Finish []
+<<effects>>
+
+<<if $enemyarousal gte $enemyarousalmax>>
+	<<ejaculation>>
+	<<npcincr Eden lust -20>><<npcincr Eden love 1>>
+
+	"真他妈需要这个。"<<He>>一边紧紧拥抱着你，一边从高潮的余韵中恢复过来。
+	<br><br>
+
+	<<He>>轻抚着你的头发，然后穿好了衣服。
+<<elseif $enemyhealth lte 0>>
+	伊甸向后蹒跚着，撞在了墙上。<<He>>怒视着你，但并没有攻击你。
+	<<llove>><<npcincr Eden love -1>>
+	<br><br>
+	<<tearful>>你拾起你的衣服。
+	<<storeon "basket" "delete">>
+<<elseif $finish is 1>>
+	<<He>>从你身上抽离开来，看起来非常沮丧。
+	<br><br>
+
+	<<He>>穿好衣服，但仍然偶尔向你投来饥渴的眼神。
+	<<storeon "basket" "delete">>
+<<else>>
+	<<set $rescued += 1>>
+	"里面还好吗？"外面传来一个声音。
+	<br><br>
+	伊甸松开了你，走出了试衣帘。你听到了一声尖叫。伊甸回来了，怒视着你。"走了。"<<llove>><<npcincr Eden love -1>>
+	<<storeon "basket" "delete">>
+<</if>>
+<br><br>
+
+<<storeon "basket" "check">>
+<<if _store_check is 1>>
+	<<storeon "basket">>
+	<<clotheson>>
+
+	伊甸比你穿得更快，然后穿过试衣帘消失了。你走出来时，发现<<him>>正在给内衣付款。
+	<br><br>
+<<else>>
+	<<clotheson>>
+<</if>>
+
+<br><br>
+
+<<endcombat>>
+
+
+<<link [[继续|Town Eden Shopping Finish]]>><<npc Eden>><<person1>><</link>>
+
+:: ERB Eden Cuddle Trauma Nod []
+<<set $outside to 0>><<set $location to "cabin">><<effects>>
+
+你轻轻点了点头。伊甸看起来很担心，但并没有进一步追问你。<<His>>似乎比平时抱得更紧了。
+<br><br>
+
+<<link [[保持拥抱 (0:30)|Eden Cuddle]]>><<trauma -3>><<stress -6>><<pass 30>><<npcincr Eden love 1>><</link>><<glove>><<ltrauma>><<lstress>>
+<br>
+
+:: ERB Eden Cuddle Trauma Honest []
+<<set $outside to 0>><<set $location to "cabin">><<effects>>
+
+你向伊甸倾诉了你的不满。一开始只是小事，你先是描述了你一直被人骚扰的遭遇。但不知怎么的，在接下来的几分钟里，谈话变成了你遭遇过的各种痛苦的细节。
+你倾诉了自己对这些遭遇感到多么的崩溃。恍惚中你意识到自己开始哭了。
+<br><br>
+
+伊甸的触摸将你带回现实。<<He>>用拇指轻轻擦过你的脸颊，试图擦干眼泪。你抽泣着抬头看着<<him>>。虽然被泪水模糊了，但<<his>>的脸仍然清晰可见。<<his>>的眼里涌动着感情的风暴。
+当你的哭声减弱时，<<He>>把你拉到<<his>>的胸前。你呼吸着<<his>>的气味。这种气味令你感到安心。
+<br><br>
+
+<<link [[继续|ERB Eden Cuddle Trauma Honest 2]]>><<npcincr Eden dom 1>><</link>><<gdom>>
+
+:: ERB Eden Cuddle Trauma Honest 2 []
+<<set $outside to 0>><<set $location to "cabin">><<effects>>
+
+你和伊甸在火边蜷缩了一段时间。寂静中只有余烬的爆裂声和你抽泣的声音偶尔响起。终于，伊甸尝试着开口了。<<He>>结结巴巴的，几次想说什么但没能说出口。
+经过几次尝试之后，<<he>>终于说出了完整的句子。
+<br><br>
+
+"我不知道该说些什么。"<<His>>的声音听起来充满怀疑、悲伤和愤怒。你不确定<<his>>的愤怒是针对攻击你的人，还是针对<<himself>>。"我本该在你身边的，"<<he>>一边说着，一边把你抱得更紧了。"我本应该保护你的。"更紧了。
+"我本该开枪杀了任何想碰你的人的。"<<His>>的拥抱几乎让你感觉痛苦，"我本该——"<<his>>拥抱的力度让你忍不住畏缩了一下。伊甸立刻放松了一些，再次安静下来。
+<br><br>
+
+这需要一点时间，但你最终鼓起勇气开口了。你低声告诉<<him>>，没关系。<<he>>不需要为你所经历的一切而责备自己。听到你的话，伊甸露出了纠结的表情。"我不知道该怎么帮你，"<<he>>说道。
+"要是我那个时候能为你做些什么就好了。任何事情。"<<He>>开始再次抱紧你，但又停止了自己的动作。可能是你的幻觉，但你感觉<<his>>的手臂在颤抖。
+<br><br>
+<<if $speech_attitude is "meek">>
+	"你现在……在跟我说话，"你说道，"这就足够了。"
+<<elseif $speech_attitude is "bratty">>
+	"你现在在跟我说话，"你说道，"这就很足够了。"
+<<else>>
+	"至少你现在在和我说话，"你说道。
+<</if>>
+<br><br>
+
+伊甸笑了。<<He>>听起来很受挫。
+<br><br>
+
+<<link [[继续|ERB Eden Cuddle Trauma Honest 3]]>><<npcincr Eden dom 1>><</link>><<gdom>>
+
+:: ERB Eden Cuddle Trauma Honest 3 []
+<<set $outside to 0>><<set $location to "cabin">><<effects>>
+
+"我不希望你再离开，"<<he>>说道。你抬头看着<<him>>。"太危险了。"你对<<his>>的话皱眉头。
+<br><br>
+
+<<if $speech_attitude is "meek">>
+	"我……做不到，"你说道。
+<<elseif $speech_attitude is "bratty">>
+	"你知道我做不到，"你说道。
+<<else>>
+	"我做不到，"你说道。
+<</if>>
+<br>
+"为什么不？"<<he>>问。"这里有你需要的一切。"
+<br>
+<<if $speech_attitude is "meek">>
+	"我、我有债务。"你避开<<his>>的凝视，"你太自私了。"
+<<elseif $speech_attitude is "bratty">>
+	"我在镇上有债务。把我留在这儿太自私了。"
+<<else>>
+	"我有债务。让我留下来太自私了。"
+<</if>>
+<br>
+"我太自私了？"<<He>>听起来很恼火，"我是在保护你！"
+<br>
+<<if $speech_attitude is "meek">>
+	"我……我知道，"你低声说道，"但是，我最终还是要回去的。"
+<<elseif $speech_attitude is "bratty">>
+	"我知道，但这改变不了什么。我最终还是要回去的。"
+<<else>>
+	"我知道，但我最终还是要回去的。"
+<</if>>
+<br><br>
+
+伊甸试图反驳，但还是目光移开，叹了口气。"好吧，"<<he>>说道，"我不会阻止你的。"你对<<him>>微微一笑，把脸埋在<<his>>的胸膛里。<<He>>抚摸你的头发作为回应。
+有那么一会儿，你们两个都保持着沉默，满足于彼此的怀抱。宁静被伊甸的声音打破。"如果你需要我，我就在这里，"<<he>>说道。
+你点点头。你们两个人看着余烬在夜里噼啪作响。
+<br><br>
+
+<i>你现在可以在创伤太高的时候同伊甸交谈了。</i>
+<br><br>
+
+<<link [[继续|Eden Cuddle]]>><<npcincr Eden dom 1>><</link>><<gdom>>
+<br>
