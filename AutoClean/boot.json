@@ -1,6 +1,6 @@
 {
     "name": "AutoClean",
-    "version": "0.1.3",
+    "version": "0.1.4",
     "styleFileList": [
     ],
     "scriptFileList_earlyload": [
@@ -10,9 +10,9 @@
     "scriptFileList_preload": [
     ],
     "scriptFileList": [
+      "AutoClean_js.js"
     ],
     "tweeFileList": [
-    "AutoClean_Widgets.twee"
     ],
     "imgFileList": [
  ],
@@ -57,6 +57,11 @@
             "passage": "Clearing Weeding",
             "findString": "<<if $rng gte 51 and",
             "replace": "<<if $rng gte 51 and $edengarden lt 4 and"
+          },
+           {
+            "passage": "Widgets Avery Mansion",
+            "findString": "<<if $avery_mansion.kitchen_made gte 3>>",
+            "replace": "<<if $avery_fate isnot \"saved\" and  $avery_fate isnot \"ascended\" >>\n<<set $avery_mansion.kitchen_made to 0>>\n<</if>>\n<<if $avery_mansion.kitchen_made gte 3>>"
           }
         
         ]
@@ -67,24 +72,9 @@
         "modVersion": "1.0.0",
         "params": {
          "js": [
-          {
-           "from": "wikifier(\"farm_pigs\", -2);",
-           "to": "",
-           "fileName": "time.js"
-          },
-          {
-           "from": "wikifier(\"farm_pigs\", -1);",
-           "to": "",
-           "fileName": "time.js"
-          },
-           {
-           "from": "V.farm.kennel >= 1",
-           "to": "0",
-           "fileName": "time.js"
-          },
          {
            "from": "delete V.alex_to_bed;",
-           "to": "delete V.alex_to_bed;\nif (V.farm_stage >= 5 && V.farm.aggro != undefined){V.farm.aggro = 0;}\nif(0){ V.farm_attack_timer = 30;}\nwikifier(\"AutoClean_TakeFarmStock\");",
+           "to": "delete V.alex_to_bed;\nAutoCleanFarm()",
            "fileName": "time.js"
           },
             {
@@ -114,8 +104,18 @@
           },
           {
            "from": "if (V.bus === \"edencabin\") ",
-           "to": "if(V.edenHotSpring)",
+           "to": "if(1)",
            "fileName": "02-temperature.js"
+          },
+          {
+           "from": "if (V.avery_mansion.bedroom_state",
+           "to": "if(V.avery_fate === \"saved\" || V.avery_fate === \"ascended\"){\nV.avery_mansion.pool = 0;\nV.avery_mansion.kitchen = 0;\nV.avery_mansion.lounge = 0;\nV.avery_mansion.display = 0;\nV.avery_mansion.bedroom = 0;\nV.avery_mansion.bathroom = 0;\nV.avery_mansion.garden = 0;\nV.avery_mansion.dining = 0;\nV.avery_mansion.days_absent = 0;\n}\nif (V.avery_mansion.bedroom_state",
+           "fileName": "time.js"
+          },
+           {
+           "from": "V.avery_mansion.rage.dinner_missed++;",
+           "to": "AutoCleanFeedAvery();",
+           "fileName": "time.js"
           }
         ]
       }
